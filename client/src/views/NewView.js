@@ -32,12 +32,12 @@ NewView.prototype = {
     submit.innerText = "Submit";
     submit.onclick = function() {
       console.log( "hello" );
-      this.addCompany();
+      this.gatherInfo();
     }.bind( this );
     this.div.appendChild( submit );
   },
 
-  addCompany: function() {
+  gatherInfo: function() {
     var name = new ElementGetter( 'name' );
     var phone = new ElementGetter( 'phone' );
     var email = new ElementGetter( 'email' );
@@ -55,7 +55,14 @@ NewView.prototype = {
     var haveWeSpoken = new ElementGetter( 'haveWeSpoken' );
     var areTheyInterested = new ElementGetter( 'areTheyInterested' );
     var externalReference = new ElementGetter( 'externalReference' );
+
+    this.addCompanyToDB( name, phone, email, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference );
+  },
+
+  addCompanyToDB: function( name, phone, email, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference ) {
+    
   }
+
 }
 
 module.exports = NewView;
