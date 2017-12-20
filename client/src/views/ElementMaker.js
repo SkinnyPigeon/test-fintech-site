@@ -16,8 +16,8 @@ ElementMaker.prototype = {
     whatToMake.id = id;
     if( element === 'input' ) {
       whatToMake.placeholder = text;
-      if( additional === 'checkbox' ) {
-        whatToMake.type = 'checkbox';
+      if( additional ) {
+        whatToMake.type = additional;
         var checkText = document.createElement( 'p' );
         checkText.innerText = text;
         whereToPut.appendChild( checkText );
