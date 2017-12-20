@@ -1,10 +1,11 @@
-var ElementMaker = function( div, element, id, text ) {
+var ElementMaker = function( div, element, id, text, additional ) {
   this.div = div;
   this.element = element;
   this.id = id;
   this.text = text;
+  this.additional = additional;
 
-  this.make( this.div, this.element, this.id, this.text );
+  this.make( this.div, this.element, this.id, this.text, this.additional );
 };
 
 ElementMaker.prototype = {
@@ -14,11 +15,13 @@ ElementMaker.prototype = {
     var whatToMake = document.createElement( element );
     whatToMake.id = id;
     if( element === 'input' ) {
-      if( additional === 'checkbox' ) {
-        console.log( "AHJdskhakskjh")
-        whatToMake.type = 'checkbox';
-      }
       whatToMake.placeholder = text;
+      if( additional === 'checkbox' ) {
+        whatToMake.type = 'checkbox';
+        var checkText = document.createElement( 'p' );
+        checkText.innerText = text;
+        whereToPut.appendChild( checkText );
+      }
     } else if ( element === 'img' ) {
       whatToMake.src = text
     } else {
