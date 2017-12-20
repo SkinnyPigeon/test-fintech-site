@@ -215,7 +215,40 @@
 	  },
 	
 	  addCompanyToDB: function( name, phone, email, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference ) {
-	    
+	
+	    var request = new XMLHttpRequest();
+	    request.open( 'POST', this.url);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.withCredentials = true;
+	
+	    request.onload = () => {
+	      if( request.status === 201 ) {
+	        var trans = JSON.parse( request.responseText )
+	      }
+	      this.display();
+	    }
+	    var data = {
+	      company: {
+	        name: name, 
+	        phone: phone, 
+	        email: email, 
+	        address_line_1: addressLine1, 
+	        address_line_2: addressLine2, 
+	        address_city: addressCity, 
+	        address_region: addressRegion, 
+	        address_post_code: addressPostCode, 
+	        last_contact: lastContact, 
+	        past_work: pastWork, 
+	        tech_used: techUsed, 
+	        type_of_work: typeOfWork, 
+	        preferred_work: preferredWork, 
+	        have_we_met: haveWeMet, 
+	        have_we_spoken: haveWeSpoken, 
+	        are_they_interested: areTheyInterested, 
+	        external_reference: externalReference 
+	      }
+	    }
+	    request.send( JSON.stringify( data ));
 	  }
 	
 	}
