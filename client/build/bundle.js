@@ -56,21 +56,74 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var ElementMaker = __webpack_require__( 2 );
+	
 	var MainView = function() {
-	  this.start();
-	};
+	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
+	  this.companies = [];
+	
+	  this.getCompanies();
+	}
 	
 	MainView.prototype = {
 	
-	  start: function() {
-	    console.log( "Hello World" );
+	  getCompanies: function() {
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.companyUrl );
+	    request.setRequestHeader("Content-Type", "application/json")
+	    request.withCredentials = true;
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var companies = JSON.parse( request.responseText );
+	        this.companies = companies;
+	        this.show();
+	      }
+	    }
+	    request.send( null );
 	  },
 	
-	};
+	  show: function() {
+	    console.log( this.companies );
+	  }
+	}
 	
 	module.exports = MainView;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	var ElementMaker = function( div, element, id, text ) {
+	  this.div = div;
+	  this.element = element;
+	  this.id = id;
+	  this.text = text;
+	
+	  this.make( this.div, this.element, this.id, this.text );
+	};
+	
+	ElementMaker.prototype = {
+	
+	  make: function( div, element, id, text ) {
+	    var whereToPut = document.getElementById( div );
+	    var whatToMake = document.createElement( element );
+	    whatToMake.id = id;
+	    if( element === 'input' ) {
+	      whatToMake.placeholder = text;
+	    } else {
+	      whatToMake.innerText = text;
+	    };
+	    whereToPut.appendChild( whatToMake );
+	  }
+	};
+	
+	module.exports = ElementMaker;
+	
+	
+	
+
 
 /***/ }
 /******/ ]);
