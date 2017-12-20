@@ -88,12 +88,19 @@
 	  show: function() {
 	    console.log( this.companies );
 	
-	    var addButton = new ElementMaker( 'all-space', 'img', 'addButton', '../css/images/add.png' );
+	    var addButton = document.createElement( 'button' );
+	    addButton.innerText = "Add new...";
+	    addButton.onclick = function() {
+	      this.changeView();
+	    }.bind( this );
+	
+	    this.div.appendChild( addButton );
 	
 	  },
 	
 	  changeView: function() {
-	
+	    console.log( "Click" );
+	    var newView = new NewView();
 	  }
 	}
 	
@@ -114,11 +121,15 @@
 	
 	ElementMaker.prototype = {
 	
-	  make: function( div, element, id, text ) {
+	  make: function( div, element, id, text, additional ) {
 	    var whereToPut = document.getElementById( div );
 	    var whatToMake = document.createElement( element );
 	    whatToMake.id = id;
 	    if( element === 'input' ) {
+	      if( additional === 'checkbox' ) {
+	        console.log( "AHJdskhakskjh")
+	        whatToMake.type = 'checkbox';
+	      }
 	      whatToMake.placeholder = text;
 	    } else if ( element === 'img' ) {
 	      whatToMake.src = text
@@ -137,8 +148,10 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var ElementMaker = __webpack_require__( 2 );
+	
 	var NewView = function() {
 	  this.show();
 	}
@@ -146,6 +159,20 @@
 	NewView.prototype = {
 	  show: function() {
 	    console.log( "hello" );
+	    var name = new ElementMaker( 'new-space', 'input', 'name', 'Name...' );
+	    var phone = new ElementMaker( 'new-space', 'input', 'phone', 'Phone...' );
+	    var email = new ElementMaker( 'new-space', 'input', 'email', 'Email...' );
+	    var addressLine1 = new ElementMaker( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
+	    var addressLine2 = new ElementMaker( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
+	    var addressCity = new ElementMaker( 'new-space', 'input', 'addressCity', 'City...' );
+	    var addressRegion = new ElementMaker( 'new-space', 'input', 'addressRegion', 'Region...' );
+	    var addressPostCode = new ElementMaker( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+	    var lastContact = new ElementMaker( 'new-space', 'input', 'lastContact', 'Last Contact (YYYY-MM_DD )...' );
+	    var pastWork = new ElementMaker( 'new-space', 'input', 'pastWork', 'Previous Work...' );
+	    var techUsed = new ElementMaker( 'new-space', 'input', 'techUsed', 'Tech Used...' );
+	    var typeOfWork = new ElementMaker( 'new-space', 'input', 'typeOfWork', 'Type of work undetaken...' );
+	    var preferredWork = new ElementMaker( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+	    var haveWeMet = new ElementMaker( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
 	  },
 	}
 	

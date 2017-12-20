@@ -28,12 +28,19 @@ MainView.prototype = {
   show: function() {
     console.log( this.companies );
 
-    var addButton = new ElementMaker( 'all-space', 'img', 'addButton', '../css/images/add.png' );
+    var addButton = document.createElement( 'button' );
+    addButton.innerText = "Add new...";
+    addButton.onclick = function() {
+      this.changeView();
+    }.bind( this );
+
+    this.div.appendChild( addButton );
 
   },
 
   changeView: function() {
-
+    console.log( "Click" );
+    var newView = new NewView();
   }
 }
 

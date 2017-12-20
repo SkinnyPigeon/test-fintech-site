@@ -9,11 +9,15 @@ var ElementMaker = function( div, element, id, text ) {
 
 ElementMaker.prototype = {
 
-  make: function( div, element, id, text ) {
+  make: function( div, element, id, text, additional ) {
     var whereToPut = document.getElementById( div );
     var whatToMake = document.createElement( element );
     whatToMake.id = id;
     if( element === 'input' ) {
+      if( additional === 'checkbox' ) {
+        console.log( "AHJdskhakskjh")
+        whatToMake.type = 'checkbox';
+      }
       whatToMake.placeholder = text;
     } else if ( element === 'img' ) {
       whatToMake.src = text
