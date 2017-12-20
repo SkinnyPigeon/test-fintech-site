@@ -15,6 +15,8 @@ ElementMaker.prototype = {
     whatToMake.id = id;
     if( element === 'input' ) {
       whatToMake.placeholder = text;
+    } else if ( element === 'img' ) {
+      whatToMake.src = text
     } else {
       whatToMake.innerText = text;
     };

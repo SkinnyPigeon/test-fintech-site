@@ -59,8 +59,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var ElementMaker = __webpack_require__( 2 );
+	var NewView = __webpack_require__( 3 );
 	
 	var MainView = function() {
+	  this.div = document.getElementById( 'all-space' );
 	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
 	  this.companies = [];
 	
@@ -73,7 +75,6 @@
 	    var request = new XMLHttpRequest();
 	    request.open( 'GET', this.companyUrl );
 	    request.setRequestHeader("Content-Type", "application/json")
-	    request.withCredentials = true;
 	    request.onload = () => {
 	      if( request.status === 200 ) {
 	        var companies = JSON.parse( request.responseText );
@@ -86,6 +87,13 @@
 	
 	  show: function() {
 	    console.log( this.companies );
+	
+	    var addButton = new ElementMaker( 'all-space', 'img', 'addButton', '../css/images/add.png' );
+	
+	  },
+	
+	  changeView: function() {
+	
 	  }
 	}
 	
@@ -112,6 +120,8 @@
 	    whatToMake.id = id;
 	    if( element === 'input' ) {
 	      whatToMake.placeholder = text;
+	    } else if ( element === 'img' ) {
+	      whatToMake.src = text
 	    } else {
 	      whatToMake.innerText = text;
 	    };
@@ -124,6 +134,22 @@
 	
 	
 
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var NewView = function() {
+	  this.show();
+	}
+	
+	NewView.prototype = {
+	  show: function() {
+	    console.log( "hello" );
+	  },
+	}
+	
+	module.exports = NewView;
 
 /***/ }
 /******/ ]);
