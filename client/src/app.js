@@ -5,5 +5,5 @@ window.onload = function() {
 }
 
 var main = function() {
-  var MainView = new MainView();
+  var mainView = new MainView();
 }
