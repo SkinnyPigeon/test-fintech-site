@@ -1,6 +1,5 @@
 var ElementMaker = require( '../models/ElementMaker.js' );
 var ElementGetter = require( '../models/ElementGetter.js' );
-var MainView = require( './MainView.js' );
 
 var DetailView = function( company ) {
   this.company = company;
@@ -53,6 +52,7 @@ DetailView.prototype = {
     editButton.innerText = "Edit...";
     editButton.onclick = function() {
       this.edit( this.company.id );
+      this.clear();
     }.bind( this );
 
     var deleteButton = document.createElement( 'button' );
@@ -64,8 +64,7 @@ DetailView.prototype = {
     var backButton = document.createElement( 'button' );
     backButton.innerText = "Back...";
     backButton.onclick = function() {
-      this.clear();
-      var mainView = new MainView();
+      location.reload();
     }.bind( this );
 
     detailSpace.appendChild( editButton );
@@ -184,6 +183,10 @@ DetailView.prototype = {
   //     }
   //   }
   //   request.send( JSON.stringify( data ));
+  },
+
+  homePage: function() {
+    var mainView = new MainView();
   }
 
 }

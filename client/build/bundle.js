@@ -279,7 +279,6 @@
 
 	var ElementMaker = __webpack_require__( 7 );
 	var ElementGetter = __webpack_require__( 6 );
-	var MainView = __webpack_require__( 1 );
 	
 	var DetailView = function( company ) {
 	  this.company = company;
@@ -332,6 +331,7 @@
 	    editButton.innerText = "Edit...";
 	    editButton.onclick = function() {
 	      this.edit( this.company.id );
+	      this.clear();
 	    }.bind( this );
 	
 	    var deleteButton = document.createElement( 'button' );
@@ -343,8 +343,7 @@
 	    var backButton = document.createElement( 'button' );
 	    backButton.innerText = "Back...";
 	    backButton.onclick = function() {
-	      this.clear();
-	      var mainView = new MainView();
+	      location.reload();
 	    }.bind( this );
 	
 	    detailSpace.appendChild( editButton );
@@ -463,6 +462,10 @@
 	  //     }
 	  //   }
 	  //   request.send( JSON.stringify( data ));
+	  },
+	
+	  homePage: function() {
+	    var mainView = new MainView();
 	  }
 	
 	}
