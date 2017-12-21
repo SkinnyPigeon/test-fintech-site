@@ -53,6 +53,8 @@ ElementMaker.prototype = {
   edit: function( div, id, value, additional, text ) {
     var whereToPut = document.getElementById( div );
     var whatToMake = document.createElement( 'input' );
+    var howToPutIt = document.createElement( 'li' );
+
     whatToMake.id = id;
     switch( additional ) {
       case 'checkbox':
@@ -71,7 +73,8 @@ ElementMaker.prototype = {
         break; 
     }
     whatToMake.value = value;
-    whereToPut.appendChild( whatToMake );
+    howToPutIt.appendChild( whatToMake );
+    whereToPut.appendChild( howToPutIt );
   },
 
   makeListItem: function( div, id, value, additional ) {

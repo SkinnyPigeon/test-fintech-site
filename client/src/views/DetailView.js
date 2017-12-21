@@ -58,8 +58,8 @@ DetailView.prototype = {
     var editButton = document.createElement( 'button' );
     editButton.innerText = "Edit...";
     editButton.onclick = function() {
-      this.edit( this.company.id );
       this.clear();
+      this.edit( this.company.id );
     }.bind( this );
 
     var deleteButton = document.createElement( 'button' );
@@ -93,29 +93,47 @@ DetailView.prototype = {
 
   edit: function( id ) {
     console.log( this.company );
-    var elementMaker = new ElementMaker();
+    var basicMaker = new ElementMaker();
+    basicMaker.make( 'edit-space', 'ul', 'companyBasicDetails' );
+    basicMaker.makeText( 'companyBasicDetails', 'companyBasicDetails', 'Basic Details', 'h4' );
 
-    elementMaker.edit( 'edit-space', 'name', this.company.name );
-    elementMaker.edit( 'edit-space', 'phone', this.company.phone );
-    elementMaker.edit( 'edit-space', 'email', this.company.email );
-    elementMaker.edit( 'edit-space', 'contact', this.company.contact );
+    basicMaker.edit( 'companyBasicDetails', 'name', this.company.name );
+    basicMaker.edit( 'companyBasicDetails', 'phone', this.company.phone );
+    basicMaker.edit( 'companyBasicDetails', 'email', this.company.email );
+    basicMaker.edit( 'companyBasicDetails', 'contact', this.company.contact );
 
-    elementMaker.edit( 'edit-space', 'addressLine1', this.company.address_line_1 );
-    elementMaker.edit( 'edit-space', 'addressLine2', this.company.address_line_2 );
-    elementMaker.edit( 'edit-space', 'addressCity', this.company.address_city  );
-    elementMaker.edit( 'edit-space', 'addressRegion', this.company.address_region );
-    elementMaker.edit( 'edit-space', 'addressPostCode', this.company.address_postcode );
+    var addressMaker = new ElementMaker();
+    addressMaker.make( 'edit-space', 'ul', 'companyAddress' );
+    addressMaker.makeText( 'companyAddress', 'companyAddress', 'Company Address', 'h4' );
 
-    elementMaker.edit( 'edit-space', 'lastContact', this.company.last_contact, 'date', 'Last Contact: ' );
-    elementMaker.edit( 'edit-space', 'pastWork', this.company.past_work );
-    elementMaker.edit( 'edit-space', 'techUsed', this.company.tech_used );
-    elementMaker.edit( 'edit-space', 'typeOfWork', this.company.type_of_work );
-    elementMaker.edit( 'edit-space', 'preferredWork', this.company.preferred_work );
+    addressMaker.edit( 'companyAddress', 'addressLine1', this.company.address_line_1 );
+    addressMaker.edit( 'companyAddress', 'addressLine2', this.company.address_line_2 );
+    addressMaker.edit( 'companyAddress', 'addressCity', this.company.address_city  );
+    addressMaker.edit( 'companyAddress', 'addressRegion', this.company.address_region );
+    addressMaker.edit( 'companyAddress', 'addressPostCode', this.company.address_postcode );
 
-    elementMaker.edit( 'edit-space', 'haveWeSpoken', this.company.have_we_spoken, 'checkbox', 'Have we spoken?' );
-    elementMaker.edit( 'edit-space', 'haveWeMet', this.company.have_we_met, 'checkbox', 'Have we met?' );
-    elementMaker.edit( 'edit-space', 'areTheyInterested', this.company.are_they_interested, 'checkbox', 'Are they interested?' );
-    elementMaker.edit( 'edit-space', 'externalReference', this.company.external_reference, 'checkbox', 'External Reference?' );
+    var dateMaker = new ElementMaker();
+    dateMaker.make( 'edit-space', 'ul', 'lastContactDate' );
+    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
+    dateMaker.edit( 'lastContactDate', 'lastContact', this.company.last_contact, 'date', 'Last Contact: ' );
+
+    var detailMaker = new ElementMaker();
+    detailMaker.make( 'edit-space', 'ul', 'companyDetails' );
+    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
+
+    detailMaker.edit( 'companyDetails', 'pastWork', this.company.past_work );
+    detailMaker.edit( 'companyDetails', 'techUsed', this.company.tech_used );
+    detailMaker.edit( 'companyDetails', 'typeOfWork', this.company.type_of_work );
+    detailMaker.edit( 'companyDetails', 'preferredWork', this.company.preferred_work );
+
+    var checklistMaker = new ElementMaker();
+    checklistMaker.make( 'edit-space', 'ul', 'companyChecklist' );
+    checklistMaker.makeText( 'companyChecklist', 'companyChecklist', 'Company Check List', 'h4' );
+
+    checklistMaker.edit( 'companyChecklist', 'haveWeSpoken', this.company.have_we_spoken, 'checkbox', 'Have we spoken?' );
+    checklistMaker.edit( 'companyChecklist', 'haveWeMet', this.company.have_we_met, 'checkbox', 'Have we met?' );
+    checklistMaker.edit( 'companyChecklist', 'areTheyInterested', this.company.are_they_interested, 'checkbox', 'Are they interested?' );
+    checklistMaker.edit( 'companyChecklist', 'externalReference', this.company.external_reference, 'checkbox', 'External Reference?' );
 
     var editSpace = document.getElementById( 'edit-space' );
     var submitButton = document.createElement( 'button' );
