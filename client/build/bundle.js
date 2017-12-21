@@ -59,6 +59,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var ElementMaker = __webpack_require__( 2 );
+	var ElementGetter = __webpack_require__( 4 );
+	var DetailView = __webpack_require__( 5 );
 	var NewView = __webpack_require__( 3 );
 	
 	var MainView = function() {
@@ -87,9 +89,14 @@
 	
 	  show: function() {
 	    console.log( this.companies );
+	    var elementGetter = new ElementGetter();
 	
 	    for( var i = 0; i < this.companies.length; i++ ) {
 	      var elementMaker = new ElementMaker( 'all-space', 'ul', this.companies[i].id );
+	      var company = elementGetter.getElement( this.companies[i].id );
+	      company.onclick = function( e ) {
+	        this.showDetails( e.target.parentNode.id );
+	      }.bind( this );
 	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
 	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
 	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
@@ -103,6 +110,14 @@
 	
 	    this.div.appendChild( addButton );
 	
+	  },
+	
+	  showDetails: function( id ) {
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      if( this.companies[i].id === parseInt( id )) {
+	        var detailView = new DetailView( this.companies[i] );
+	      }
+	    }
 	  },
 	
 	  changeView: function() {
@@ -335,6 +350,24 @@
 	}
 	
 	module.exports = ElementGetter;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	var DetailView = function( company ) {
+	  this.company = company;
+	
+	  this.show();
+	}
+	
+	DetailView.prototype = {
+	  show: function() {
+	    console.log( this.company );
+	  }
+	}
+	
+	module.exports = DetailView;
 
 /***/ }
 /******/ ]);
