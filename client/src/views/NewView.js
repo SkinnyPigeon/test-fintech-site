@@ -38,24 +38,24 @@ NewView.prototype = {
 
   gatherInfo: function() {
     var elementGetter = new ElementGetter();
-    
-    var name = elementGetter.getElement( 'name' );
-    var phone = elementGetter.getElement( 'phone' );
-    var email = elementGetter.getElement( 'email' );
-    var addressLine1 = elementGetter.getElement( 'addressLine1' );
-    var addressLine2 = elementGetter.getElement( 'addressLine2' );
-    var addressCity = elementGetter.getElement( 'addressCity' );
-    var addressRegion = elementGetter.getElement( 'addressRegion' );
-    var addressPostCode = elementGetter.getElement( 'addressPostCode' );
-    var lastContact = elementGetter.getElement( 'lastContact' );
-    var pastWork = elementGetter.getElement( 'pastWork' );
-    var techUsed = elementGetter.getElement( 'techUsed' );
-    var typeOfWork = elementGetter.getElement( 'typeOfWork' );
-    var preferredWork = elementGetter.getElement( 'preferredWork' );
-    var haveWeMet = elementGetter.getElement( 'haveWeMet' );
-    var haveWeSpoken = elementGetter.getElement( 'haveWeSpoken' );
-    var areTheyInterested = elementGetter.getElement( 'areTheyInterested' );
-    var externalReference = elementGetter.getElement( 'externalReference' );
+
+    var name = elementGetter.getElementValue( 'name' );
+    var phone = elementGetter.getElementValue( 'phone' );
+    var email = elementGetter.getElementValue( 'email' );
+    var addressLine1 = elementGetter.getElementValue( 'addressLine1' );
+    var addressLine2 = elementGetter.getElementValue( 'addressLine2' );
+    var addressCity = elementGetter.getElementValue( 'addressCity' );
+    var addressRegion = elementGetter.getElementValue( 'addressRegion' );
+    var addressPostCode = elementGetter.getElementValue( 'addressPostCode' );
+    var lastContact = elementGetter.getElementValue( 'lastContact' );
+    var pastWork = elementGetter.getElementValue( 'pastWork' );
+    var techUsed = elementGetter.getElementValue( 'techUsed' );
+    var typeOfWork = elementGetter.getElementValue( 'typeOfWork' );
+    var preferredWork = elementGetter.getElementValue( 'preferredWork' );
+    var haveWeMet = elementGetter.getElementValue( 'haveWeMet' );
+    var haveWeSpoken = elementGetter.getElementValue( 'haveWeSpoken' );
+    var areTheyInterested = elementGetter.getElementValue( 'areTheyInterested' );
+    var externalReference = elementGetter.getElementValue( 'externalReference' );
 
     this.addCompanyToDB( name, phone, email, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference );
   },
@@ -70,7 +70,7 @@ NewView.prototype = {
       if( request.status === 201 ) {
         var companys = JSON.parse( request.responseText )
       }
-      // this.display();
+      this.resetForm();
     }
     var data = {
       company: {
@@ -94,6 +94,28 @@ NewView.prototype = {
       }
     }
     request.send( JSON.stringify( data ));
+  },
+
+  resetForm: function() {
+    var elementGetter = new ElementGetter();
+    
+    elementGetter.resetElement( 'name' );
+    elementGetter.resetElement( 'phone' );
+    elementGetter.resetElement( 'email' );
+    elementGetter.resetElement( 'addressLine1' );
+    elementGetter.resetElement( 'addressLine2' );
+    elementGetter.resetElement( 'addressCity' );
+    elementGetter.resetElement( 'addressRegion' );
+    elementGetter.resetElement( 'addressPostCode' );
+    elementGetter.resetElement( 'lastContact' );
+    elementGetter.resetElement( 'pastWork' );
+    elementGetter.resetElement( 'techUsed' );
+    elementGetter.resetElement( 'typeOfWork' );
+    elementGetter.resetElement( 'preferredWork' );
+    elementGetter.resetElement( 'haveWeMet' );
+    elementGetter.resetElement( 'haveWeSpoken' );
+    elementGetter.resetElement( 'areTheyInterested' );
+    elementGetter.resetElement( 'externalReference' );
   }
 
 }
