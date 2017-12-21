@@ -1,17 +1,14 @@
-var ElementGetter = function( id ) {
-  this.id = id;
-
-  this.getElement();
+var ElementGetter = function() {
+  
 }
 
 ElementGetter.prototype = {
-  getElement: function() {
-    var elementToGet = document.getElementById( this.id );
+  getElement: function( id ) {
+    var elementToGet = document.getElementById( id );
     var value = elementToGet.value;
     if( elementToGet.type === 'checkbox' ) {
       value = elementToGet.checked
     }
-    console.log( value );
     return value;
   }
 }

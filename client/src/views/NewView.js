@@ -3,13 +3,13 @@ var ElementGetter = require( './ElementGetter.js' );
 
 var NewView = function() {
   this.div = document.getElementById( 'new-space' );
+  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
 
   this.show();
 }
 
 NewView.prototype = {
   show: function() {
-    console.log( "hello" );
     var name = new ElementMaker( 'new-space', 'input', 'name', 'Name...' );
     var phone = new ElementMaker( 'new-space', 'input', 'phone', 'Phone...' );
     var email = new ElementMaker( 'new-space', 'input', 'email', 'Email...' );
@@ -31,30 +31,31 @@ NewView.prototype = {
     var submit = document.createElement( 'button' );
     submit.innerText = "Submit";
     submit.onclick = function() {
-      console.log( "hello" );
       this.gatherInfo();
     }.bind( this );
     this.div.appendChild( submit );
   },
 
   gatherInfo: function() {
-    var name = new ElementGetter( 'name' );
-    var phone = new ElementGetter( 'phone' );
-    var email = new ElementGetter( 'email' );
-    var addressLine1 = new ElementGetter( 'addressLine1' );
-    var addressLine2 = new ElementGetter( 'addressLine2' );
-    var addressCity = new ElementGetter( 'addressCity' );
-    var addressRegion = new ElementGetter( 'addressRegion' );
-    var addressPostCode = new ElementGetter( 'addressPostCode' );
-    var lastContact = new ElementGetter( 'lastContact' );
-    var pastWork = new ElementGetter( 'pastWork' );
-    var techUsed = new ElementGetter( 'techUsed' );
-    var typeOfWork = new ElementGetter( 'typeOfWork' );
-    var preferredWork = new ElementGetter( 'preferredWork' );
-    var haveWeMet = new ElementGetter( 'haveWeMet' );
-    var haveWeSpoken = new ElementGetter( 'haveWeSpoken' );
-    var areTheyInterested = new ElementGetter( 'areTheyInterested' );
-    var externalReference = new ElementGetter( 'externalReference' );
+    var elementGetter = new ElementGetter();
+    
+    var name = elementGetter.getElement( 'name' );
+    var phone = elementGetter.getElement( 'phone' );
+    var email = elementGetter.getElement( 'email' );
+    var addressLine1 = elementGetter.getElement( 'addressLine1' );
+    var addressLine2 = elementGetter.getElement( 'addressLine2' );
+    var addressCity = elementGetter.getElement( 'addressCity' );
+    var addressRegion = elementGetter.getElement( 'addressRegion' );
+    var addressPostCode = elementGetter.getElement( 'addressPostCode' );
+    var lastContact = elementGetter.getElement( 'lastContact' );
+    var pastWork = elementGetter.getElement( 'pastWork' );
+    var techUsed = elementGetter.getElement( 'techUsed' );
+    var typeOfWork = elementGetter.getElement( 'typeOfWork' );
+    var preferredWork = elementGetter.getElement( 'preferredWork' );
+    var haveWeMet = elementGetter.getElement( 'haveWeMet' );
+    var haveWeSpoken = elementGetter.getElement( 'haveWeSpoken' );
+    var areTheyInterested = elementGetter.getElement( 'areTheyInterested' );
+    var externalReference = elementGetter.getElement( 'externalReference' );
 
     this.addCompanyToDB( name, phone, email, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference );
   },
@@ -62,15 +63,14 @@ NewView.prototype = {
   addCompanyToDB: function( name, phone, email, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference ) {
 
     var request = new XMLHttpRequest();
-    request.open( 'POST', this.url);
+    request.open( 'POST', this.companyUrl);
     request.setRequestHeader("Content-Type", "application/json");
-    request.withCredentials = true;
 
     request.onload = () => {
       if( request.status === 201 ) {
-        var trans = JSON.parse( request.responseText )
+        var companys = JSON.parse( request.responseText )
       }
-      this.display();
+      // this.display();
     }
     var data = {
       company: {
@@ -81,7 +81,7 @@ NewView.prototype = {
         address_line_2: addressLine2, 
         address_city: addressCity, 
         address_region: addressRegion, 
-        address_post_code: addressPostCode, 
+        address_postcode: addressPostCode, 
         last_contact: lastContact, 
         past_work: pastWork, 
         tech_used: techUsed, 
