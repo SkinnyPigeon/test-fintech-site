@@ -14,6 +14,7 @@ DetailView.prototype = {
 
     var basicMaker = new ElementMaker();
     basicMaker.make( 'detail-space', 'ul', 'companyBasicDetails' );
+    basicMaker.makeText( 'companyBasicDetails', 'companyBasicDetails', 'Basic Details', 'h4' );
 
     basicMaker.makeList( this.company.name, 'companyBasicDetails', 'Name' );
     basicMaker.makeList( this.company.phone, 'companyBasicDetails', 'Phone');
@@ -22,6 +23,7 @@ DetailView.prototype = {
 
     var addressMaker = new ElementMaker();
     addressMaker.make( 'detail-space', 'ul', 'companyAddress' );
+    addressMaker.makeText( 'companyAddress', 'companyAddress', 'Company Address', 'h4' );
 
     addressMaker.makeList( this.company.address_line_1, 'companyAddress', 'Address Line 1' );
     addressMaker.makeList( this.company.address_line_2, 'companyAddress', 'Address Line 2' );
@@ -31,8 +33,12 @@ DetailView.prototype = {
 
     var detailMaker = new ElementMaker();
     detailMaker.make( 'detail-space', 'ul', 'companyDetails' );
+    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Last Contact Date', 'h4' );
 
     detailMaker.makeList( this.company.last_contact, 'companyDetails', 'Last Contact' );
+
+    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
+
     detailMaker.makeList( this.company.type_of_work, 'companyDetails', 'Type Of Work' );
     detailMaker.makeList( this.company.tech_used, 'companyDetails', 'Technology Used' );
     detailMaker.makeList( this.company.past_work, 'companyDetails', 'Past Work' );
@@ -40,6 +46,7 @@ DetailView.prototype = {
 
     var checklistMaker = new ElementMaker();
     checklistMaker.make( 'detail-space', 'ul', 'companyChecklist' );
+    checklistMaker.makeText( 'companyChecklist', 'companyChecklist', 'Company Check List', 'h4' );
 
     checklistMaker.makeList( this.company.have_we_spoken, 'companyChecklist', 'Have we spoken?' );
     checklistMaker.makeList( this.company.have_we_met, 'companyChecklist', 'Have we met?' );
