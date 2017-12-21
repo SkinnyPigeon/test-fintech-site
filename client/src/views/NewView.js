@@ -10,28 +10,34 @@ var NewView = function() {
 
 NewView.prototype = {
   show: function() {
-    var elementMaker = new ElementMaker();
-    elementMaker.make( 'new-space', 'input', 'name', 'Name...' );
-    elementMaker.make( 'new-space', 'input', 'phone', 'Phone...' );
-    elementMaker.make( 'new-space', 'input', 'email', 'Email...' );
-    elementMaker.make( 'new-space', 'input', 'contact', 'Point Of Contact...' );
+    this.clear();
 
-    elementMaker.make( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
-    elementMaker.make( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
-    elementMaker.make( 'new-space', 'input', 'addressCity', 'City...' );
-    elementMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
-    elementMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+    var basicMaker = new ElementMaker();
+    basicMaker.make( 'new-space', 'input', 'name', 'Name...' );
+    basicMaker.make( 'new-space', 'input', 'phone', 'Phone...' );
+    basicMaker.make( 'new-space', 'input', 'email', 'Email...' );
+    basicMaker.make( 'new-space', 'input', 'contact', 'Point Of Contact...' );
 
-    elementMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
-    elementMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
-    elementMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
-    elementMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
-    elementMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
 
-    elementMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-    elementMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-    elementMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-    elementMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+    var addressMaker = new ElementMaker();
+    addressMaker.make( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
+    addressMaker.make( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
+    addressMaker.make( 'new-space', 'input', 'addressCity', 'City...' );
+    addressMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
+    addressMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+
+    var detailMaker = new ElementMaker();
+    detailMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
+    detailMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
+    detailMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
+    detailMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
+    detailMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+
+    var checklistMaker = new ElementMaker();
+    checklistMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+    checklistMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+    checklistMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+    checklistMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
 
     var submit = document.createElement( 'button' );
     submit.innerText = "Submit";
@@ -39,6 +45,18 @@ NewView.prototype = {
       this.gatherInfo();
     }.bind( this );
     this.div.appendChild( submit );
+  },
+
+  clear: function() {
+    var allSpace = document.getElementById( "all-space" );
+    while( allSpace.hasChildNodes() ) {
+      allSpace.removeChild( allSpace.lastChild );
+    }
+
+    var detailSpace = document.getElementById( "detail-space" );
+    while( detailSpace.hasChildNodes() ) {
+      detailSpace.removeChild( detailSpace.lastChild );
+    }
   },
 
   gatherInfo: function() {
