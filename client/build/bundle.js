@@ -150,46 +150,53 @@
 	
 	    var basicMaker = new ElementMaker();
 	    basicMaker.make( 'new-space', 'ul', 'companyBasicDetails' );
+	    basicMaker.makeText( 'companyBasicDetails', 'companyBasicDetails', 'Basic Details', 'h4' );
 	
 	    basicMaker.makeListItem(  'companyBasicDetails', 'name', 'Name...'  );
-	    basicMaker.makeListItem( 'companyBasicDetails', 'lastContact', 'Last Contact...', 'date' );
+	    basicMaker.makeListItem( 'companyBasicDetails', 'phone', 'Phone...' );
+	    basicMaker.makeListItem( 'companyBasicDetails', 'email', 'Email...' );
+	    basicMaker.makeListItem( 'companyBasicDetails', 'contact', 'Point Of Contact...' );
 	
+	    var addressMaker = new ElementMaker();
+	    addressMaker.make( 'new-space', 'ul', 'companyAddress' );
+	    addressMaker.makeText( 'companyAddress', 'companyAddress', 'Company Address', 'h4' );
 	
-	    // basicMaker.makeList( this.company.name, 'companyBasicDetails', 'Name' );
+	    addressMaker.makeListItem( 'companyAddress', 'addressLine1', 'Address Line 1' );
+	    addressMaker.makeListItem( 'companyAddress', 'addressLine2', 'Address Line 2...' );
+	    addressMaker.makeListItem( 'companyAddress', 'addressCity', 'City...' );
+	    addressMaker.makeListItem( 'companyAddress', 'addressRegion', 'Region...' );
+	    addressMaker.makeListItem( 'companyAddress', 'addressPostCode', 'Post Code...' );
 	
+	    var dateMaker = new ElementMaker();
+	    dateMaker.make( 'new-space', 'ul', 'lastContactDate' );
+	    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
 	
-	    // var basicMaker = new ElementMaker();
-	    // basicMaker.make( 'new-space', 'input', 'name', 'Name...' );
-	    // basicMaker.make( 'new-space', 'input', 'phone', 'Phone...' );
-	    // basicMaker.make( 'new-space', 'input', 'email', 'Email...' );
-	    // basicMaker.make( 'new-space', 'input', 'contact', 'Point Of Contact...' );
+	    dateMaker.makeListItem( 'lastContactDate', 'lastContact', 'Last Contact...', 'date' );
 	
-	    // var addressMaker = new ElementMaker();
-	    // addressMaker.make( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
-	    // addressMaker.make( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
-	    // addressMaker.make( 'new-space', 'input', 'addressCity', 'City...' );
-	    // addressMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
-	    // addressMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+	    var detailMaker = new ElementMaker();
+	    detailMaker.make( 'new-space', 'ul', 'companyDetails' );
+	    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
 	
-	    // var detailMaker = new ElementMaker();
-	    // detailMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
-	    // detailMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
-	    // detailMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
-	    // detailMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
-	    // detailMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+	    detailMaker.makeListItem( 'companyDetails', 'pastWork', 'Previous Work...' );
+	    detailMaker.makeListItem( 'companyDetails', 'techUsed', 'Tech Used...' );
+	    detailMaker.makeListItem( 'companyDetails', 'typeOfWork', 'Type Of Work Undertaken...' );
+	    detailMaker.makeListItem( 'companyDetails', 'preferredWork', 'Preferred Work...' );
 	
-	    // var checklistMaker = new ElementMaker();
-	    // checklistMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-	    // checklistMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-	    // checklistMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-	    // checklistMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+	    var checklistMaker = new ElementMaker();
+	    checklistMaker.make( 'new-space', 'ul', 'companyChecklist' );
+	    checklistMaker.makeText( 'companyChecklist', 'companyChecklist', 'Company Check List', 'h4' );
 	
-	    // var submit = document.createElement( 'button' );
-	    // submit.innerText = "Submit";
-	    // submit.onclick = function() {
-	    //   this.gatherInfo();
-	    // }.bind( this );
-	    // this.div.appendChild( submit );
+	    checklistMaker.makeListItem( 'companyChecklist', 'haveWeMet', 'Have We Met?', 'checkbox' );
+	    checklistMaker.makeListItem( 'companyChecklist', 'haveWeSpoken', 'Have We Spoken?', 'checkbox' );
+	    checklistMaker.makeListItem( 'companyChecklist', 'areTheyInterested', 'Are They Interested?', 'checkbox' );
+	    checklistMaker.makeListItem( 'companyChecklist', 'externalReference', 'External References?', 'checkbox' );
+	
+	    var submit = document.createElement( 'button' );
+	    submit.innerText = "Submit";
+	    submit.onclick = function() {
+	      this.gatherInfo();
+	    }.bind( this );
+	    this.div.appendChild( submit );
 	  },
 	
 	  clear: function() {
@@ -642,6 +649,15 @@
 	
 	    howToPutIt.appendChild( whatToMake );
 	    whereToPut.appendChild( howToPutIt );
+	  },
+	
+	  makeText: function( div, id, text, style ) {
+	    var whereToPut = document.getElementById( div );
+	    var whatToMake = document.createElement( style );
+	    whatToMake.id = id;
+	
+	    whatToMake.innerText = text;
+	    whereToPut.appendChild( whatToMake );
 	  }
 	};
 	

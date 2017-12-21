@@ -99,6 +99,15 @@ ElementMaker.prototype = {
 
     howToPutIt.appendChild( whatToMake );
     whereToPut.appendChild( howToPutIt );
+  },
+
+  makeText: function( div, id, text, style ) {
+    var whereToPut = document.getElementById( div );
+    var whatToMake = document.createElement( style );
+    whatToMake.id = id;
+
+    whatToMake.innerText = text;
+    whereToPut.appendChild( whatToMake );
   }
 };
 
