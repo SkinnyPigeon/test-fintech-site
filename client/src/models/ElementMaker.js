@@ -72,6 +72,33 @@ ElementMaker.prototype = {
     }
     whatToMake.value = value;
     whereToPut.appendChild( whatToMake );
+  },
+
+  makeListItem: function( div, id, value, additional ) {
+    var whereToPut = document.getElementById( div );
+    var whatToMake = document.createElement( 'input' );
+    var howToPutIt = document.createElement( 'li' );
+
+    whatToMake.id = id;
+
+    switch( additional ) {
+      case 'checkbox':
+        whatToMake.type = additional;
+        var additionalText = document.createElement( 'p' );
+        additionalText.innerText = value;
+        whereToPut.appendChild( additionalText );
+        break;
+      case 'date':
+        whatToMake.type = additional;
+        var additionalText = document.createElement( 'p' );
+        additionalText.innerText = value;
+        whereToPut.appendChild( additionalText );
+        break; 
+    }
+    whatToMake.placeholder = value;
+
+    howToPutIt.appendChild( whatToMake );
+    whereToPut.appendChild( howToPutIt );
   }
 };
 
