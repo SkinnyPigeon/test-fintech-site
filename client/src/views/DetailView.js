@@ -1,3 +1,6 @@
+var ElementMaker = require( '../models/ElementMaker.js' );
+var ElementGetter = require( '../models/ElementGetter.js' );
+
 var DetailView = function( company ) {
   this.company = company;
 

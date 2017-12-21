@@ -58,8 +58,8 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ElementMaker = __webpack_require__( 2 );
-	var ElementGetter = __webpack_require__( 4 );
+	var ElementMaker = __webpack_require__( 7 );
+	var ElementGetter = __webpack_require__( 6 );
 	var DetailView = __webpack_require__( 5 );
 	var NewView = __webpack_require__( 3 );
 	
@@ -129,68 +129,12 @@
 	module.exports = MainView;
 
 /***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ElementGetter = __webpack_require__( 4 );
-	
-	var ElementMaker = function( div, element, id, text, additional ) {
-	  this.div = div;
-	  this.element = element;
-	  this.id = id;
-	  this.text = text;
-	  this.additional = additional;
-	
-	  this.make( this.div, this.element, this.id, this.text, this.additional );
-	};
-	
-	ElementMaker.prototype = {
-	
-	  make: function( div, element, id, text, additional ) {
-	    var whereToPut = document.getElementById( div );
-	    var whatToMake = document.createElement( element );
-	    whatToMake.id = id;
-	    if( element === 'input' ) {
-	      whatToMake.placeholder = text;
-	      if( additional ) {
-	        whatToMake.type = additional;
-	        var checkText = document.createElement( 'p' );
-	        checkText.innerText = text;
-	        whereToPut.appendChild( checkText );
-	      }
-	    } else if ( element === 'img' ) {
-	      whatToMake.src = text
-	    } else if ( element === 'ul' ) {
-	      whereToPut.appendChild( whatToMake );
-	      return;
-	    } else {
-	      whatToMake.innerText = text;
-	    };
-	    whereToPut.appendChild( whatToMake );
-	  },
-	
-	  makeList: function( text, ul ) {
-	    var elementGetter = new ElementGetter();
-	    var unorderedList = elementGetter.getElement( ul );
-	    var whatToMake = document.createElement( 'li' );
-	
-	    whatToMake.innerText = text;
-	    unorderedList.appendChild( whatToMake );
-	  }
-	};
-	
-	module.exports = ElementMaker;
-	
-	
-	
-
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ElementMaker = __webpack_require__( 2 );
-	var ElementGetter = __webpack_require__( 4 );
+	var ElementMaker = __webpack_require__( 7 );
+	var ElementGetter = __webpack_require__( 6 );
 	
 	var NewView = function() {
 	  this.div = document.getElementById( 'new-space' );
@@ -289,7 +233,7 @@
 	
 	  resetForm: function() {
 	    var elementGetter = new ElementGetter();
-	    
+	
 	    elementGetter.resetElement( 'name' );
 	    elementGetter.resetElement( 'phone' );
 	    elementGetter.resetElement( 'email' );
@@ -314,7 +258,29 @@
 	module.exports = NewView;
 
 /***/ },
-/* 4 */
+/* 4 */,
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ElementMaker = __webpack_require__( 7 );
+	var ElementGetter = __webpack_require__( 6 );
+	
+	var DetailView = function( company ) {
+	  this.company = company;
+	
+	  this.show();
+	}
+	
+	DetailView.prototype = {
+	  show: function() {
+	    console.log( this.company );
+	  }
+	}
+	
+	module.exports = DetailView;
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	var ElementGetter = function() {
@@ -352,22 +318,61 @@
 	module.exports = ElementGetter;
 
 /***/ },
-/* 5 */
-/***/ function(module, exports) {
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var DetailView = function( company ) {
-	  this.company = company;
+	var ElementGetter = __webpack_require__( 6 );
 	
-	  this.show();
-	}
+	var ElementMaker = function( div, element, id, text, additional ) {
+	  this.div = div;
+	  this.element = element;
+	  this.id = id;
+	  this.text = text;
+	  this.additional = additional;
 	
-	DetailView.prototype = {
-	  show: function() {
-	    console.log( this.company );
+	  this.make( this.div, this.element, this.id, this.text, this.additional );
+	};
+	
+	ElementMaker.prototype = {
+	
+	  make: function( div, element, id, text, additional ) {
+	    var whereToPut = document.getElementById( div );
+	    var whatToMake = document.createElement( element );
+	    whatToMake.id = id;
+	    if( element === 'input' ) {
+	      whatToMake.placeholder = text;
+	      if( additional ) {
+	        whatToMake.type = additional;
+	        var checkText = document.createElement( 'p' );
+	        checkText.innerText = text;
+	        whereToPut.appendChild( checkText );
+	      }
+	    } else if ( element === 'img' ) {
+	      whatToMake.src = text
+	    } else if ( element === 'ul' ) {
+	      whereToPut.appendChild( whatToMake );
+	      return;
+	    } else {
+	      whatToMake.innerText = text;
+	    };
+	    whereToPut.appendChild( whatToMake );
+	  },
+	
+	  makeList: function( text, ul ) {
+	    var elementGetter = new ElementGetter();
+	    var unorderedList = elementGetter.getElement( ul );
+	    var whatToMake = document.createElement( 'li' );
+	
+	    whatToMake.innerText = text;
+	    unorderedList.appendChild( whatToMake );
 	  }
-	}
+	};
 	
-	module.exports = DetailView;
+	module.exports = ElementMaker;
+	
+	
+	
+
 
 /***/ }
 /******/ ]);
