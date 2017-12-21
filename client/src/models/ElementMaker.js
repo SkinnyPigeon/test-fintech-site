@@ -36,16 +36,20 @@ ElementMaker.prototype = {
     }
   },
 
-  makeList: function( text, ul, additional ) {
+  makeList: function( text, ul, extraText ) {
     var elementGetter = new ElementGetter();
     var unorderedList = elementGetter.getElement( ul );
     var whatToMake = document.createElement( 'li' );
 
-    if( additional ) {
-      whatToMake.innerText = additional + ": " + text;
+    if( extraText ) {
+      whatToMake.innerText = extraText + ": " + text;
     } else {
       whatToMake.innerText = text;
     }
+
+    // if( additional ) {
+    //   whatToMake.innerText = extraText + ': ' + additional
+    // }
     unorderedList.appendChild( whatToMake );
   },
 

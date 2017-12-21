@@ -311,6 +311,7 @@
 	    var detailMaker = new ElementMaker();
 	    detailMaker.make( 'detail-space', 'ul', 'companyDetails' );
 	
+	    detailMaker.makeList( this.company.last_contact, 'lastContact', 'Last Contact' );
 	    detailMaker.makeList( this.company.type_of_work, 'companyDetails', 'Type Of Work' );
 	    detailMaker.makeList( this.company.tech_used, 'companyDetails', 'Technology Used' );
 	    detailMaker.makeList( this.company.past_work, 'companyDetails', 'Past Work' );
@@ -346,27 +347,26 @@
 	    var elementMaker = new ElementMaker();
 	
 	    elementMaker.edit( 'edit-space', 'name', this.company.name );
+	    elementMaker.edit( 'edit-space', 'phone', this.company.phone );
+	    elementMaker.edit( 'edit-space', 'email', this.company.email );
+	    elementMaker.edit( 'edit-space', 'contact', this.company.contact );
 	
-	    // elementMaker.make( 'new-space', 'input', 'phone', this.company.name, false, true );
-	    // elementMaker.make( 'new-space', 'input', 'email', this.company.name, false, true  );
-	    // elementMaker.make( 'new-space', 'input', 'contact', this.company.name, false, true );
+	    elementMaker.edit( 'edit-space', 'addressLine1', this.company.address_line_1 );
+	    elementMaker.edit( 'edit-space', 'addressLine2', this.company.address_line_2 );
+	    elementMaker.edit( 'edit-space', 'addressCity', this.company.address_city  );
+	    elementMaker.edit( 'edit-space', 'addressRegion', this.company.address_region );
+	    elementMaker.edit( 'edit-space', 'addressPostCode', this.company.address_postcode );
 	
-	    // elementMaker.make( 'new-space', 'input', 'addressLine1', this.company.name, false, true );
-	    // elementMaker.make( 'new-space', 'input', 'addressLine2', this.company.name, false, true );
-	    // elementMaker.make( 'new-space', 'input', 'addressCity', this.company.name, false, true );
-	    // elementMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
-	    // elementMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+	    elementMaker.edit( 'edit-space', 'lastContact', this.company.last_contact, 'date' );
+	    elementMaker.edit( 'edit-space', 'pastWork', this.company.past_work );
+	    elementMaker.edit( 'edit-space', 'techUsed', this.company.tech_used );
+	    elementMaker.edit( 'edit-space', 'typeOfWork', this.company.type_of_work );
+	    elementMaker.edit( 'edit-space', 'preferredWork', this.company.preferred_work );
 	
-	    // elementMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
-	    // elementMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
-	    // elementMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
-	    // elementMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
-	    // elementMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
-	
-	    // elementMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-	    // elementMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-	    // elementMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-	    // elementMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+	    // elementMaker.edit( 'edit-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+	    // elementMaker.edit( 'edit-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+	    // elementMaker.edit( 'edit-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+	    // elementMaker.edit( 'edit-space', 'input', 'externalReference', 'External References?', 'checkbox' );
 	
 	
 	
@@ -531,16 +531,20 @@
 	    }
 	  },
 	
-	  makeList: function( text, ul, additional ) {
+	  makeList: function( text, ul, extraText ) {
 	    var elementGetter = new ElementGetter();
 	    var unorderedList = elementGetter.getElement( ul );
 	    var whatToMake = document.createElement( 'li' );
 	
-	    if( additional ) {
-	      whatToMake.innerText = additional + ": " + text;
+	    if( extraText ) {
+	      whatToMake.innerText = extraText + ": " + text;
 	    } else {
 	      whatToMake.innerText = text;
 	    }
+	
+	    // if( additional ) {
+	    //   whatToMake.innerText = extraText + ': ' + additional
+	    // }
 	    unorderedList.appendChild( whatToMake );
 	  },
 	
