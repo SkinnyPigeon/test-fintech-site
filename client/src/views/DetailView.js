@@ -57,7 +57,29 @@ DetailView.prototype = {
   },
 
   edit: function() {
-    console.log( 'click' );
+    console.log( this.company );
+    var name = new ElementMaker( 'edit-space', 'input', 'name', this.company.name, false, true );
+    // var phone = new ElementMaker( 'new-space', 'input', 'phone', this.company.phone, 'edit' );
+    // var email = new ElementMaker( 'new-space', 'input', 'email', this.company.email, 'edit' );
+    // var contact = new ElementMaker( 'new-space', 'input', 'contact', this.company.contact, 'edit' );
+
+    // var addressLine1 = new ElementMaker( 'new-space', 'input', 'addressLine1', this.company.address_line_1, 'edit' );
+    // var addressLine2 = new ElementMaker( 'new-space', 'input', 'addressLine2', this.company.address_line_2, 'edit' );
+    // var addressCity = new ElementMaker( 'new-space', 'input', 'addressCity', this.company.address_city, 'edit' );
+    // var addressRegion = new ElementMaker( 'new-space', 'input', 'addressRegion', this.company.address_region, 'edit' );
+    // var addressPostCode = new ElementMaker( 'new-space', 'input', 'addressPostCode', this.company.address_postcode, 'edit' );
+
+    // var lastContact = new ElementMaker( 'new-space', 'input', 'lastContact', this.company.last_contact, 'edit' );
+    // lastContact.type = 'date';
+    // var pastWork = new ElementMaker( 'new-space', 'input', 'pastWork', this.company.past_work, 'edit' );
+    // var techUsed = new ElementMaker( 'new-space', 'input', 'techUsed', this.company.tech_used, 'edit' );
+    // var typeOfWork = new ElementMaker( 'new-space', 'input', 'typeOfWork', this.company.type_of_work, 'edit' );
+    // var preferredWork = new ElementMaker( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+
+    // var haveWeMet = new ElementMaker( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+    // var haveWeSpoken = new ElementMaker( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+    // var areTheyInterested = new ElementMaker( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+    // var externalReference = new ElementMaker( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
   }
 }
 

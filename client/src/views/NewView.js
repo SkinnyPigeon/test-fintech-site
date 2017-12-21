@@ -13,7 +13,7 @@ NewView.prototype = {
     var name = new ElementMaker( 'new-space', 'input', 'name', 'Name...' );
     var phone = new ElementMaker( 'new-space', 'input', 'phone', 'Phone...' );
     var email = new ElementMaker( 'new-space', 'input', 'email', 'Email...' );
-    var email = new ElementMaker( 'new-space', 'input', 'contact', 'Point Of Contact...' );
+    var contact = new ElementMaker( 'new-space', 'input', 'contact', 'Point Of Contact...' );
 
     var addressLine1 = new ElementMaker( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
     var addressLine2 = new ElementMaker( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
@@ -46,7 +46,7 @@ NewView.prototype = {
     var name = elementGetter.getElementValue( 'name' );
     var phone = elementGetter.getElementValue( 'phone' );
     var email = elementGetter.getElementValue( 'email' );
-    var email = elementGetter.getElementValue( 'contact' );
+    var contact = elementGetter.getElementValue( 'contact' );
 
     var addressLine1 = elementGetter.getElementValue( 'addressLine1' );
     var addressLine2 = elementGetter.getElementValue( 'addressLine2' );
@@ -124,7 +124,7 @@ NewView.prototype = {
     elementGetter.resetElement( 'techUsed' );
     elementGetter.resetElement( 'typeOfWork' );
     elementGetter.resetElement( 'preferredWork' );
-    
+
     elementGetter.resetElement( 'haveWeMet' );
     elementGetter.resetElement( 'haveWeSpoken' );
     elementGetter.resetElement( 'areTheyInterested' );

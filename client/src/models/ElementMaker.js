@@ -12,10 +12,21 @@ var ElementMaker = function( div, element, id, text, additional ) {
 
 ElementMaker.prototype = {
 
-  make: function( div, element, id, text, additional ) {
+  make: function( div, element, id, text, additional, edit ) {
     var whereToPut = document.getElementById( div );
     var whatToMake = document.createElement( element );
     whatToMake.id = id;
+    if( edit ) {
+      // if( additional ) {
+      //   whatToMake.type = additional
+      //   var checkText = document.createElement( 'p' );
+      //   checkText.innerText = text;
+      //   whereToPut.appendChild( checkText );
+      // }
+      whatToMake.value = text;
+      whereToPut.appendChild( whatToMake );
+      return;
+    }
     if( element === 'input' ) {
       whatToMake.placeholder = text;
       if( additional ) {
