@@ -88,6 +88,13 @@
 	  show: function() {
 	    console.log( this.companies );
 	
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var elementMaker = new ElementMaker( 'all-space', 'ul', this.companies[i].id );
+	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
+	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
+	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
+	    }
+	
 	    var addButton = document.createElement( 'button' );
 	    addButton.innerText = "Add new...";
 	    addButton.onclick = function() {
@@ -108,8 +115,10 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var ElementGetter = __webpack_require__( 4 );
+	
 	var ElementMaker = function( div, element, id, text, additional ) {
 	  this.div = div;
 	  this.element = element;
@@ -136,10 +145,22 @@
 	      }
 	    } else if ( element === 'img' ) {
 	      whatToMake.src = text
+	    } else if ( element === 'ul' ) {
+	      whereToPut.appendChild( whatToMake );
+	      return;
 	    } else {
 	      whatToMake.innerText = text;
 	    };
 	    whereToPut.appendChild( whatToMake );
+	  },
+	
+	  makeList: function( text, ul ) {
+	    var elementGetter = new ElementGetter();
+	    var unorderedList = elementGetter.getElement( ul );
+	    var whatToMake = document.createElement( 'li' );
+	
+	    whatToMake.innerText = text;
+	    unorderedList.appendChild( whatToMake );
 	  }
 	};
 	
@@ -286,6 +307,12 @@
 	}
 	
 	ElementGetter.prototype = {
+	
+	  getElement: function( id ) {
+	    var elementToGet = document.getElementById( id );
+	    return elementToGet;
+	  },
+	
 	  getElementValue: function( id ) {
 	    var elementToGet = document.getElementById( id );
 	    var value = elementToGet.value;

@@ -3,6 +3,12 @@ var ElementGetter = function() {
 }
 
 ElementGetter.prototype = {
+
+  getElement: function( id ) {
+    var elementToGet = document.getElementById( id );
+    return elementToGet;
+  },
+
   getElementValue: function( id ) {
     var elementToGet = document.getElementById( id );
     var value = elementToGet.value;

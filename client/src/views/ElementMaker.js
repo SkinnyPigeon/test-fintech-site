@@ -1,3 +1,5 @@
+var ElementGetter = require( './ElementGetter.js' );
+
 var ElementMaker = function( div, element, id, text, additional ) {
   this.div = div;
   this.element = element;
@@ -24,10 +26,22 @@ ElementMaker.prototype = {
       }
     } else if ( element === 'img' ) {
       whatToMake.src = text
+    } else if ( element === 'ul' ) {
+      whereToPut.appendChild( whatToMake );
+      return;
     } else {
       whatToMake.innerText = text;
     };
     whereToPut.appendChild( whatToMake );
+  },
+
+  makeList: function( text, ul ) {
+    var elementGetter = new ElementGetter();
+    var unorderedList = elementGetter.getElement( ul );
+    var whatToMake = document.createElement( 'li' );
+
+    whatToMake.innerText = text;
+    unorderedList.appendChild( whatToMake );
   }
 };
 
