@@ -279,6 +279,7 @@
 
 	var ElementMaker = __webpack_require__( 7 );
 	var ElementGetter = __webpack_require__( 6 );
+	var MainView = __webpack_require__( 1 );
 	
 	var DetailView = function( company ) {
 	  this.company = company;
@@ -311,11 +312,19 @@
 	    var detailMaker = new ElementMaker();
 	    detailMaker.make( 'detail-space', 'ul', 'companyDetails' );
 	
-	    detailMaker.makeList( this.company.last_contact, 'lastContact', 'Last Contact' );
+	    detailMaker.makeList( this.company.last_contact, 'companyDetails', 'Last Contact' );
 	    detailMaker.makeList( this.company.type_of_work, 'companyDetails', 'Type Of Work' );
 	    detailMaker.makeList( this.company.tech_used, 'companyDetails', 'Technology Used' );
 	    detailMaker.makeList( this.company.past_work, 'companyDetails', 'Past Work' );
 	    detailMaker.makeList( this.company.preferred_work, 'companyDetails', 'Preferred Work' );
+	
+	    var checklistMaker = new ElementMaker();
+	    checklistMaker.make( 'detail-space', 'ul', 'companyChecklist' );
+	
+	    checklistMaker.makeList( this.company.have_we_spoken, 'companyChecklist', 'Have we spoken?' );
+	    checklistMaker.makeList( this.company.have_we_met, 'companyChecklist', 'Have we met?' );
+	    checklistMaker.makeList( this.company.are_they_interested, 'companyChecklist', 'Are they interested?' );
+	    checklistMaker.makeList( this.company.external_reference, 'companyChecklist', 'External Reference?' );
 	
 	    var detailSpace = document.getElementById( 'detail-space' );
 	
@@ -331,11 +340,24 @@
 	      this.edit();
 	    }.bind( this );
 	
+	    var backButton = document.createElement( 'button' );
+	    backButton.innerText = "Back...";
+	    backButton.onclick = function() {
+	      this.clear();
+	      var mainView = new MainView();
+	    }.bind( this );
+	
 	    detailSpace.appendChild( editButton );
 	    detailSpace.appendChild( deleteButton );
+	    detailSpace.appendChild( backButton );
 	  },
 	
 	  clear: function() {
+	    var allSpace = document.getElementById( "all-space" );
+	    while( allSpace.hasChildNodes() ) {
+	      allSpace.removeChild( allSpace.lastChild );
+	    }
+	
 	    var detailSpace = document.getElementById( "detail-space" );
 	    while( detailSpace.hasChildNodes() ) {
 	      detailSpace.removeChild( detailSpace.lastChild );
@@ -357,20 +379,17 @@
 	    elementMaker.edit( 'edit-space', 'addressRegion', this.company.address_region );
 	    elementMaker.edit( 'edit-space', 'addressPostCode', this.company.address_postcode );
 	
-	    elementMaker.edit( 'edit-space', 'lastContact', this.company.last_contact, 'date' );
+	    elementMaker.edit( 'edit-space', 'lastContact', this.company.last_contact, 'date', 'Last Contact: ' );
 	    elementMaker.edit( 'edit-space', 'pastWork', this.company.past_work );
 	    elementMaker.edit( 'edit-space', 'techUsed', this.company.tech_used );
 	    elementMaker.edit( 'edit-space', 'typeOfWork', this.company.type_of_work );
 	    elementMaker.edit( 'edit-space', 'preferredWork', this.company.preferred_work );
 	
-	    // elementMaker.edit( 'edit-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-	    // elementMaker.edit( 'edit-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-	    // elementMaker.edit( 'edit-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-	    // elementMaker.edit( 'edit-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+	    elementMaker.edit( 'edit-space', 'haveWeSpoken', this.company.have_we_spoken, 'checkbox', 'Have we spoken?' );
+	    elementMaker.edit( 'edit-space', 'haveWeMet', this.company.have_we_met, 'checkbox', 'Have we met?' );
+	    elementMaker.edit( 'edit-space', 'areTheyInterested', this.company.are_they_interested, 'checkbox', 'Are they interested?' );
+	    elementMaker.edit( 'edit-space', 'externalReference', this.company.external_reference, 'checkbox', 'External Reference?' );
 	
-	
-	
-	    
 	    var editSpace = document.getElementById( 'edit-space' );
 	    var submitButton = document.createElement( 'button' );
 	    submitButton.innerText = 'submit';
@@ -538,13 +557,10 @@
 	
 	    if( extraText ) {
 	      whatToMake.innerText = extraText + ": " + text;
+	      console.log( whatToMake.innerText );
 	    } else {
 	      whatToMake.innerText = text;
 	    }
-	
-	    // if( additional ) {
-	    //   whatToMake.innerText = extraText + ': ' + additional
-	    // }
 	    unorderedList.appendChild( whatToMake );
 	  },
 	
