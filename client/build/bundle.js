@@ -332,7 +332,6 @@
 	
 	    detailSpace.appendChild( editButton );
 	    detailSpace.appendChild( deleteButton );
-	
 	  },
 	
 	  clear: function() {
@@ -345,7 +344,32 @@
 	  edit: function( id ) {
 	    console.log( this.company );
 	    var elementMaker = new ElementMaker();
-	    elementMaker.make( 'edit-space', 'input', 'name', this.company.name, false, true );
+	
+	    elementMaker.edit( 'edit-space', 'name', this.company.name );
+	
+	    // elementMaker.make( 'new-space', 'input', 'phone', this.company.name, false, true );
+	    // elementMaker.make( 'new-space', 'input', 'email', this.company.name, false, true  );
+	    // elementMaker.make( 'new-space', 'input', 'contact', this.company.name, false, true );
+	
+	    // elementMaker.make( 'new-space', 'input', 'addressLine1', this.company.name, false, true );
+	    // elementMaker.make( 'new-space', 'input', 'addressLine2', this.company.name, false, true );
+	    // elementMaker.make( 'new-space', 'input', 'addressCity', this.company.name, false, true );
+	    // elementMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
+	    // elementMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+	
+	    // elementMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
+	    // elementMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
+	    // elementMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
+	    // elementMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
+	    // elementMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+	
+	    // elementMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+	    // elementMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+	    // elementMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+	    // elementMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+	
+	
+	
 	    
 	    var editSpace = document.getElementById( 'edit-space' );
 	    var submitButton = document.createElement( 'button' );
@@ -361,7 +385,7 @@
 	    var elementGetter = new ElementGetter();
 	
 	    var name = elementGetter.getElementValue( 'name' );
-	    console.log( name );
+	    console.log( name )
 	    // var phone = elementGetter.getElementValue( 'phone' );
 	    // var email = elementGetter.getElementValue( 'email' );
 	    // var contact = elementGetter.getElementValue( 'contact' );
@@ -472,51 +496,10 @@
 	var ElementGetter = __webpack_require__( 6 );
 	
 	var ElementMaker = function() {
-	  // div, element, id, text, additional 
-	  // this.div = div;
-	  // this.element = element;
-	  // this.id = id;
-	  // this.text = text;
-	  // this.additional = additional;
-	
-	  // this.make( this.div, this.element, this.id, this.text, this.additional );
+	 
 	};
 	
 	ElementMaker.prototype = {
-	
-	  // make: function( div, element, id, text, additional, edit ) {
-	  //   var whereToPut = document.getElementById( div );
-	  //   var whatToMake = document.createElement( element );
-	  //   whatToMake.id = id;
-	  //   if( edit ) {
-	  //     // if( additional ) {
-	  //     //   whatToMake.type = additional
-	  //     //   var checkText = document.createElement( 'p' );
-	  //     //   checkText.innerText = text;
-	  //     //   whereToPut.appendChild( checkText );
-	  //     // }
-	  //     whatToMake.value = text;
-	  //     whereToPut.appendChild( whatToMake );
-	  //     return;
-	  //   }
-	  //   if( element === 'input' ) {
-	  //     whatToMake.placeholder = text;
-	  //     if( additional ) {
-	  //       whatToMake.type = additional;
-	  //       var checkText = document.createElement( 'p' );
-	  //       checkText.innerText = text;
-	  //       whereToPut.appendChild( checkText );
-	  //     }
-	  //   } else if ( element === 'img' ) {
-	  //     whatToMake.src = text
-	  //   } else if ( element === 'ul' ) {
-	  //     whereToPut.appendChild( whatToMake );
-	  //     return;
-	  //   } else {
-	  //     whatToMake.innerText = text;
-	  //   };
-	  //   whereToPut.appendChild( whatToMake );
-	  // },
 	
 	  make: function( div, element, id, text, additional, edit ) {
 	    var whereToPut = document.getElementById( div );
@@ -559,6 +542,30 @@
 	      whatToMake.innerText = text;
 	    }
 	    unorderedList.appendChild( whatToMake );
+	  },
+	
+	  edit: function( div, id, value, additional, text ) {
+	    var whereToPut = document.getElementById( div );
+	    var whatToMake = document.createElement( 'input' );
+	    whatToMake.id = id;
+	    switch( additional ) {
+	      case 'checkbox':
+	        whatToMake.type = additional;
+	        var additionalText = document.createElement( 'p' );
+	        additionalText.innerText = text;
+	        whereToPut.appendChild( additionalText );
+	        whatToMake.checked = value;
+	        break;
+	      case 'date':
+	        whatToMake.type = additional;
+	        var additionalText = document.createElement( 'p' );
+	        additionalText.innerText = text;
+	        whereToPut.appendChild( additionalText );
+	        whatToMake.value = value;
+	        break; 
+	    }
+	    whatToMake.value = value;
+	    whereToPut.appendChild( whatToMake );
 	  }
 	};
 	

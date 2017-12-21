@@ -53,7 +53,6 @@ DetailView.prototype = {
 
     detailSpace.appendChild( editButton );
     detailSpace.appendChild( deleteButton );
-
   },
 
   clear: function() {
@@ -66,7 +65,32 @@ DetailView.prototype = {
   edit: function( id ) {
     console.log( this.company );
     var elementMaker = new ElementMaker();
-    elementMaker.make( 'edit-space', 'input', 'name', this.company.name, false, true );
+
+    elementMaker.edit( 'edit-space', 'name', this.company.name );
+
+    // elementMaker.make( 'new-space', 'input', 'phone', this.company.name, false, true );
+    // elementMaker.make( 'new-space', 'input', 'email', this.company.name, false, true  );
+    // elementMaker.make( 'new-space', 'input', 'contact', this.company.name, false, true );
+
+    // elementMaker.make( 'new-space', 'input', 'addressLine1', this.company.name, false, true );
+    // elementMaker.make( 'new-space', 'input', 'addressLine2', this.company.name, false, true );
+    // elementMaker.make( 'new-space', 'input', 'addressCity', this.company.name, false, true );
+    // elementMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
+    // elementMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+
+    // elementMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
+    // elementMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
+    // elementMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
+    // elementMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
+    // elementMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+
+    // elementMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+    // elementMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+    // elementMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+    // elementMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+
+
+
     
     var editSpace = document.getElementById( 'edit-space' );
     var submitButton = document.createElement( 'button' );
@@ -82,7 +106,7 @@ DetailView.prototype = {
     var elementGetter = new ElementGetter();
 
     var name = elementGetter.getElementValue( 'name' );
-    console.log( name );
+    console.log( name )
     // var phone = elementGetter.getElementValue( 'phone' );
     // var email = elementGetter.getElementValue( 'email' );
     // var contact = elementGetter.getElementValue( 'contact' );
