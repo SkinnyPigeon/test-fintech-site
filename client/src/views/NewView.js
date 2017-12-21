@@ -10,27 +10,28 @@ var NewView = function() {
 
 NewView.prototype = {
   show: function() {
-    var name = new ElementMaker( 'new-space', 'input', 'name', 'Name...' );
-    var phone = new ElementMaker( 'new-space', 'input', 'phone', 'Phone...' );
-    var email = new ElementMaker( 'new-space', 'input', 'email', 'Email...' );
-    var contact = new ElementMaker( 'new-space', 'input', 'contact', 'Point Of Contact...' );
+    var elementMaker = new ElementMaker();
+    elementMaker.make( 'new-space', 'input', 'name', 'Name...' );
+    elementMaker.make( 'new-space', 'input', 'phone', 'Phone...' );
+    elementMaker.make( 'new-space', 'input', 'email', 'Email...' );
+    elementMaker.make( 'new-space', 'input', 'contact', 'Point Of Contact...' );
 
-    var addressLine1 = new ElementMaker( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
-    var addressLine2 = new ElementMaker( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
-    var addressCity = new ElementMaker( 'new-space', 'input', 'addressCity', 'City...' );
-    var addressRegion = new ElementMaker( 'new-space', 'input', 'addressRegion', 'Region...' );
-    var addressPostCode = new ElementMaker( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+    elementMaker.make( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
+    elementMaker.make( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
+    elementMaker.make( 'new-space', 'input', 'addressCity', 'City...' );
+    elementMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
+    elementMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
 
-    var lastContact = new ElementMaker( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
-    var pastWork = new ElementMaker( 'new-space', 'input', 'pastWork', 'Previous Work...' );
-    var techUsed = new ElementMaker( 'new-space', 'input', 'techUsed', 'Tech Used...' );
-    var typeOfWork = new ElementMaker( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
-    var preferredWork = new ElementMaker( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+    elementMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
+    elementMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
+    elementMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
+    elementMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
+    elementMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
 
-    var haveWeMet = new ElementMaker( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-    var haveWeSpoken = new ElementMaker( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-    var areTheyInterested = new ElementMaker( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-    var externalReference = new ElementMaker( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+    elementMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+    elementMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+    elementMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+    elementMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
 
     var submit = document.createElement( 'button' );
     submit.innerText = "Submit";

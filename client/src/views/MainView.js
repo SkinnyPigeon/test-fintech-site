@@ -32,7 +32,8 @@ MainView.prototype = {
     var elementGetter = new ElementGetter();
 
     for( var i = 0; i < this.companies.length; i++ ) {
-      var elementMaker = new ElementMaker( 'all-space', 'ul', this.companies[i].id );
+      var elementMaker = new ElementMaker( );
+      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
       var company = elementGetter.getElement( this.companies[i].id );
       company.onclick = function( e ) {
         this.showDetails( e.target.parentNode.id );

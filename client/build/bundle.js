@@ -92,7 +92,8 @@
 	    var elementGetter = new ElementGetter();
 	
 	    for( var i = 0; i < this.companies.length; i++ ) {
-	      var elementMaker = new ElementMaker( 'all-space', 'ul', this.companies[i].id );
+	      var elementMaker = new ElementMaker( );
+	      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
 	      var company = elementGetter.getElement( this.companies[i].id );
 	      company.onclick = function( e ) {
 	        this.showDetails( e.target.parentNode.id );
@@ -145,27 +146,28 @@
 	
 	NewView.prototype = {
 	  show: function() {
-	    var name = new ElementMaker( 'new-space', 'input', 'name', 'Name...' );
-	    var phone = new ElementMaker( 'new-space', 'input', 'phone', 'Phone...' );
-	    var email = new ElementMaker( 'new-space', 'input', 'email', 'Email...' );
-	    var contact = new ElementMaker( 'new-space', 'input', 'contact', 'Point Of Contact...' );
+	    var elementMaker = new ElementMaker();
+	    elementMaker.make( 'new-space', 'input', 'name', 'Name...' );
+	    elementMaker.make( 'new-space', 'input', 'phone', 'Phone...' );
+	    elementMaker.make( 'new-space', 'input', 'email', 'Email...' );
+	    elementMaker.make( 'new-space', 'input', 'contact', 'Point Of Contact...' );
 	
-	    var addressLine1 = new ElementMaker( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
-	    var addressLine2 = new ElementMaker( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
-	    var addressCity = new ElementMaker( 'new-space', 'input', 'addressCity', 'City...' );
-	    var addressRegion = new ElementMaker( 'new-space', 'input', 'addressRegion', 'Region...' );
-	    var addressPostCode = new ElementMaker( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
+	    elementMaker.make( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
+	    elementMaker.make( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
+	    elementMaker.make( 'new-space', 'input', 'addressCity', 'City...' );
+	    elementMaker.make( 'new-space', 'input', 'addressRegion', 'Region...' );
+	    elementMaker.make( 'new-space', 'input', 'addressPostCode', 'Post Code...' );
 	
-	    var lastContact = new ElementMaker( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
-	    var pastWork = new ElementMaker( 'new-space', 'input', 'pastWork', 'Previous Work...' );
-	    var techUsed = new ElementMaker( 'new-space', 'input', 'techUsed', 'Tech Used...' );
-	    var typeOfWork = new ElementMaker( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
-	    var preferredWork = new ElementMaker( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+	    elementMaker.make( 'new-space', 'input', 'lastContact', 'Last Contact...', 'date' );
+	    elementMaker.make( 'new-space', 'input', 'pastWork', 'Previous Work...' );
+	    elementMaker.make( 'new-space', 'input', 'techUsed', 'Tech Used...' );
+	    elementMaker.make( 'new-space', 'input', 'typeOfWork', 'Type of work undertaken...' );
+	    elementMaker.make( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
 	
-	    var haveWeMet = new ElementMaker( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-	    var haveWeSpoken = new ElementMaker( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-	    var areTheyInterested = new ElementMaker( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-	    var externalReference = new ElementMaker( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+	    elementMaker.make( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
+	    elementMaker.make( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
+	    elementMaker.make( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
+	    elementMaker.make( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
 	
 	    var submit = document.createElement( 'button' );
 	    submit.innerText = "Submit";
@@ -460,50 +462,75 @@
 
 	var ElementGetter = __webpack_require__( 6 );
 	
-	var ElementMaker = function( div, element, id, text, additional ) {
-	  this.div = div;
-	  this.element = element;
-	  this.id = id;
-	  this.text = text;
-	  this.additional = additional;
+	var ElementMaker = function() {
+	  // div, element, id, text, additional 
+	  // this.div = div;
+	  // this.element = element;
+	  // this.id = id;
+	  // this.text = text;
+	  // this.additional = additional;
 	
-	  this.make( this.div, this.element, this.id, this.text, this.additional );
+	  // this.make( this.div, this.element, this.id, this.text, this.additional );
 	};
 	
 	ElementMaker.prototype = {
+	
+	  // make: function( div, element, id, text, additional, edit ) {
+	  //   var whereToPut = document.getElementById( div );
+	  //   var whatToMake = document.createElement( element );
+	  //   whatToMake.id = id;
+	  //   if( edit ) {
+	  //     // if( additional ) {
+	  //     //   whatToMake.type = additional
+	  //     //   var checkText = document.createElement( 'p' );
+	  //     //   checkText.innerText = text;
+	  //     //   whereToPut.appendChild( checkText );
+	  //     // }
+	  //     whatToMake.value = text;
+	  //     whereToPut.appendChild( whatToMake );
+	  //     return;
+	  //   }
+	  //   if( element === 'input' ) {
+	  //     whatToMake.placeholder = text;
+	  //     if( additional ) {
+	  //       whatToMake.type = additional;
+	  //       var checkText = document.createElement( 'p' );
+	  //       checkText.innerText = text;
+	  //       whereToPut.appendChild( checkText );
+	  //     }
+	  //   } else if ( element === 'img' ) {
+	  //     whatToMake.src = text
+	  //   } else if ( element === 'ul' ) {
+	  //     whereToPut.appendChild( whatToMake );
+	  //     return;
+	  //   } else {
+	  //     whatToMake.innerText = text;
+	  //   };
+	  //   whereToPut.appendChild( whatToMake );
+	  // },
 	
 	  make: function( div, element, id, text, additional, edit ) {
 	    var whereToPut = document.getElementById( div );
 	    var whatToMake = document.createElement( element );
 	    whatToMake.id = id;
-	    if( edit ) {
-	      // if( additional ) {
-	      //   whatToMake.type = additional
-	      //   var checkText = document.createElement( 'p' );
-	      //   checkText.innerText = text;
-	      //   whereToPut.appendChild( checkText );
-	      // }
-	      whatToMake.value = text;
-	      whereToPut.appendChild( whatToMake );
-	      return;
+	
+	    switch( element ) {
+	      case 'ul':
+	        whereToPut.appendChild( whatToMake );
+	        break;
+	      case 'input':
+	        whatToMake.placeholder = text;
+	        if( additional ) {
+	          whatToMake.type = additional;
+	          var additionalText = document.createElement( 'p' );
+	          additionalText.innerText = text;
+	        }
+	        whereToPut.appendChild( whatToMake );
+	        break;
+	      default:
+	        whatToMake.innerText = text;
+	        whereToPut.appendChild( whatToMake );
 	    }
-	    if( element === 'input' ) {
-	      whatToMake.placeholder = text;
-	      if( additional ) {
-	        whatToMake.type = additional;
-	        var checkText = document.createElement( 'p' );
-	        checkText.innerText = text;
-	        whereToPut.appendChild( checkText );
-	      }
-	    } else if ( element === 'img' ) {
-	      whatToMake.src = text
-	    } else if ( element === 'ul' ) {
-	      whereToPut.appendChild( whatToMake );
-	      return;
-	    } else {
-	      whatToMake.innerText = text;
-	    };
-	    whereToPut.appendChild( whatToMake );
 	  },
 	
 	  makeList: function( text, ul, additional ) {
