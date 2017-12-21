@@ -310,7 +310,7 @@
 	
 	    var detailMaker = new ElementMaker();
 	    detailMaker.make( 'detail-space', 'ul', 'companyDetails' );
-	    
+	
 	    detailMaker.makeList( this.company.type_of_work, 'companyDetails', 'Type Of Work' );
 	    detailMaker.makeList( this.company.tech_used, 'companyDetails', 'Technology Used' );
 	    detailMaker.makeList( this.company.past_work, 'companyDetails', 'Past Work' );
@@ -344,7 +344,8 @@
 	
 	  edit: function( id ) {
 	    console.log( this.company );
-	    var name = new ElementMaker( 'edit-space', 'input', 'name', this.company.name, false, true );
+	    var elementMaker = new ElementMaker();
+	    elementMaker.make( 'edit-space', 'input', 'name', this.company.name, false, true );
 	    
 	    var editSpace = document.getElementById( 'edit-space' );
 	    var submitButton = document.createElement( 'button' );
@@ -356,9 +357,11 @@
 	  },
 	
 	  gatherInfo: function( id ) {
+	    console.log( id );
 	    var elementGetter = new ElementGetter();
 	
-	    // var name = elementGetter.getElementValue( 'name' );
+	    var name = elementGetter.getElementValue( 'name' );
+	    console.log( name );
 	    // var phone = elementGetter.getElementValue( 'phone' );
 	    // var email = elementGetter.getElementValue( 'email' );
 	    // var contact = elementGetter.getElementValue( 'contact' );
@@ -525,6 +528,11 @@
 	        whereToPut.appendChild( whatToMake );
 	        break;
 	      case 'input':
+	        if( edit ) {
+	          whatToMake.value = text;
+	          whereToPut.appendChild( whatToMake );
+	          return;
+	        }
 	        whatToMake.placeholder = text;
 	        if( additional ) {
 	          whatToMake.type = additional;

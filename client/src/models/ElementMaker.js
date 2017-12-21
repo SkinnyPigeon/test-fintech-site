@@ -57,6 +57,11 @@ ElementMaker.prototype = {
         whereToPut.appendChild( whatToMake );
         break;
       case 'input':
+        if( edit ) {
+          whatToMake.value = text;
+          whereToPut.appendChild( whatToMake );
+          return;
+        }
         whatToMake.placeholder = text;
         if( additional ) {
           whatToMake.type = additional;
