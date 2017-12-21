@@ -3,6 +3,7 @@ var ElementGetter = require( '../models/ElementGetter.js' );
 
 var DetailView = function( company ) {
   this.company = company;
+  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
 
   this.show();
 }
@@ -35,7 +36,7 @@ DetailView.prototype = {
     var editButton = document.createElement( 'button' );
     editButton.innerText = "Edit...";
     editButton.onclick = function() {
-      this.edit();
+      this.edit( this.company.id );
     }.bind( this );
 
     var deleteButton = document.createElement( 'button' );
@@ -56,31 +57,83 @@ DetailView.prototype = {
     }
   },
 
-  edit: function() {
+  edit: function( id ) {
     console.log( this.company );
     var name = new ElementMaker( 'edit-space', 'input', 'name', this.company.name, false, true );
-    // var phone = new ElementMaker( 'new-space', 'input', 'phone', this.company.phone, 'edit' );
-    // var email = new ElementMaker( 'new-space', 'input', 'email', this.company.email, 'edit' );
-    // var contact = new ElementMaker( 'new-space', 'input', 'contact', this.company.contact, 'edit' );
+    
+    var editSpace = document.getElementById( 'edit-space' );
+    var submitButton = document.createElement( 'button' );
+    submitButton.innerText = 'submit';
+    submitButton.onclick = function() {
+      this.gatherInfo( id );
+    }.bind( this )
+    editSpace.appendChild( submitButton );
+  },
 
-    // var addressLine1 = new ElementMaker( 'new-space', 'input', 'addressLine1', this.company.address_line_1, 'edit' );
-    // var addressLine2 = new ElementMaker( 'new-space', 'input', 'addressLine2', this.company.address_line_2, 'edit' );
-    // var addressCity = new ElementMaker( 'new-space', 'input', 'addressCity', this.company.address_city, 'edit' );
-    // var addressRegion = new ElementMaker( 'new-space', 'input', 'addressRegion', this.company.address_region, 'edit' );
-    // var addressPostCode = new ElementMaker( 'new-space', 'input', 'addressPostCode', this.company.address_postcode, 'edit' );
+  gatherInfo: function( id ) {
+    var elementGetter = new ElementGetter();
 
-    // var lastContact = new ElementMaker( 'new-space', 'input', 'lastContact', this.company.last_contact, 'edit' );
-    // lastContact.type = 'date';
-    // var pastWork = new ElementMaker( 'new-space', 'input', 'pastWork', this.company.past_work, 'edit' );
-    // var techUsed = new ElementMaker( 'new-space', 'input', 'techUsed', this.company.tech_used, 'edit' );
-    // var typeOfWork = new ElementMaker( 'new-space', 'input', 'typeOfWork', this.company.type_of_work, 'edit' );
-    // var preferredWork = new ElementMaker( 'new-space', 'input', 'preferredWork', 'Preferred Work...' );
+    // var name = elementGetter.getElementValue( 'name' );
+    // var phone = elementGetter.getElementValue( 'phone' );
+    // var email = elementGetter.getElementValue( 'email' );
+    // var contact = elementGetter.getElementValue( 'contact' );
 
-    // var haveWeMet = new ElementMaker( 'new-space', 'input', 'haveWeMet', 'Have we met?', 'checkbox' );
-    // var haveWeSpoken = new ElementMaker( 'new-space', 'input', 'haveWeSpoken', 'Have we spoken?', 'checkbox' );
-    // var areTheyInterested = new ElementMaker( 'new-space', 'input', 'areTheyInterested', 'Are they interested?', 'checkbox' );
-    // var externalReference = new ElementMaker( 'new-space', 'input', 'externalReference', 'External References?', 'checkbox' );
+    // var addressLine1 = elementGetter.getElementValue( 'addressLine1' );
+    // var addressLine2 = elementGetter.getElementValue( 'addressLine2' );
+    // var addressCity = elementGetter.getElementValue( 'addressCity' );
+    // var addressRegion = elementGetter.getElementValue( 'addressRegion' );
+    // var addressPostCode = elementGetter.getElementValue( 'addressPostCode' );
+
+    // var lastContact = elementGetter.getElementValue( 'lastContact' );
+    // var pastWork = elementGetter.getElementValue( 'pastWork' );
+    // var techUsed = elementGetter.getElementValue( 'techUsed' );
+    // var typeOfWork = elementGetter.getElementValue( 'typeOfWork' );
+    // var preferredWork = elementGetter.getElementValue( 'preferredWork' );
+
+    // var haveWeMet = elementGetter.getElementValue( 'haveWeMet' );
+    // var haveWeSpoken = elementGetter.getElementValue( 'haveWeSpoken' );
+    // var areTheyInterested = elementGetter.getElementValue( 'areTheyInterested' );
+    // var externalReference = elementGetter.getElementValue( 'externalReference' );
+
+    // this.updateDB( id, name, phone, email, contact, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference );
+  },
+
+  updateDB: function( id, name, phone, email, contact, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference ) {
+  //   var request = new XMLHttpRequest();
+  //   request.open( 'PUT', this.url + id );
+  //   request.setRequestHeader( "Content-type", "application/json" );
+  //   request.onload = () => {
+  //     if( request.status === 200 ) {
+  //       var companys = JSON.parse( request.responseText )
+  //     }
+  //     // this.resetForm();
+  //     console.log( 'hello asjkdahsdl')
+  //   }
+  //   var data = {
+  //     company: {
+  //       name: name, 
+  //       phone: phone, 
+  //       email: email, 
+  //       contact: contact,
+  //       address_line_1: addressLine1, 
+  //       address_line_2: addressLine2, 
+  //       address_city: addressCity, 
+  //       address_region: addressRegion, 
+  //       address_postcode: addressPostCode, 
+  //       last_contact: lastContact, 
+  //       past_work: pastWork, 
+  //       tech_used: techUsed, 
+  //       type_of_work: typeOfWork, 
+  //       preferred_work: preferredWork, 
+  //       have_we_met: haveWeMet, 
+  //       have_we_spoken: haveWeSpoken, 
+  //       are_they_interested: areTheyInterested, 
+  //       external_reference: externalReference 
+  //     }
+  //   }
+  //   request.send( JSON.stringify( data ));
   }
+
 }
 
 module.exports = DetailView;
