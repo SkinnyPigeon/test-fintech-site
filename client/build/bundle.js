@@ -378,7 +378,7 @@
 	    var deleteButton = document.createElement( 'button' );
 	    deleteButton.innerText = "Delete...";
 	    deleteButton.onclick = function() {
-	      this.edit();
+	      this.delete( this.company.id );
 	    }.bind( this );
 	
 	    var backButton = document.createElement( 'button' );
@@ -522,8 +522,18 @@
 	    request.send( JSON.stringify( data ));
 	  },
 	
-	  homePage: function() {
-	    var mainView = new MainView();
+	  delete: function( id ) {
+	    var request = new XMLHttpRequest();
+	    request.open( 'DELETE', this.url + '/' + id);
+	    request.setRequestHeader("Content-Type", "application/json");
+	
+	    request.onload = () => {
+	      if( request.status === 204 ) {
+	        console.log( 'Deleted' );
+	      }
+	    }
+	    request.send();
+	
 	  }
 	
 	}
