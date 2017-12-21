@@ -62,6 +62,7 @@ ElementMaker.prototype = {
           whatToMake.type = additional;
           var additionalText = document.createElement( 'p' );
           additionalText.innerText = text;
+          whereToPut.appendChild( additionalText );
         }
         whereToPut.appendChild( whatToMake );
         break;
