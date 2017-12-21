@@ -124,65 +124,64 @@ DetailView.prototype = {
     var elementGetter = new ElementGetter();
 
     var name = elementGetter.getElementValue( 'name' );
-    console.log( name )
-    // var phone = elementGetter.getElementValue( 'phone' );
-    // var email = elementGetter.getElementValue( 'email' );
-    // var contact = elementGetter.getElementValue( 'contact' );
+    var phone = elementGetter.getElementValue( 'phone' );
+    var email = elementGetter.getElementValue( 'email' );
+    var contact = elementGetter.getElementValue( 'contact' );
 
-    // var addressLine1 = elementGetter.getElementValue( 'addressLine1' );
-    // var addressLine2 = elementGetter.getElementValue( 'addressLine2' );
-    // var addressCity = elementGetter.getElementValue( 'addressCity' );
-    // var addressRegion = elementGetter.getElementValue( 'addressRegion' );
-    // var addressPostCode = elementGetter.getElementValue( 'addressPostCode' );
+    var addressLine1 = elementGetter.getElementValue( 'addressLine1' );
+    var addressLine2 = elementGetter.getElementValue( 'addressLine2' );
+    var addressCity = elementGetter.getElementValue( 'addressCity' );
+    var addressRegion = elementGetter.getElementValue( 'addressRegion' );
+    var addressPostCode = elementGetter.getElementValue( 'addressPostCode' );
 
-    // var lastContact = elementGetter.getElementValue( 'lastContact' );
-    // var pastWork = elementGetter.getElementValue( 'pastWork' );
-    // var techUsed = elementGetter.getElementValue( 'techUsed' );
-    // var typeOfWork = elementGetter.getElementValue( 'typeOfWork' );
-    // var preferredWork = elementGetter.getElementValue( 'preferredWork' );
+    var lastContact = elementGetter.getElementValue( 'lastContact' );
+    var pastWork = elementGetter.getElementValue( 'pastWork' );
+    var techUsed = elementGetter.getElementValue( 'techUsed' );
+    var typeOfWork = elementGetter.getElementValue( 'typeOfWork' );
+    var preferredWork = elementGetter.getElementValue( 'preferredWork' );
 
-    // var haveWeMet = elementGetter.getElementValue( 'haveWeMet' );
-    // var haveWeSpoken = elementGetter.getElementValue( 'haveWeSpoken' );
-    // var areTheyInterested = elementGetter.getElementValue( 'areTheyInterested' );
-    // var externalReference = elementGetter.getElementValue( 'externalReference' );
+    var haveWeMet = elementGetter.getElementValue( 'haveWeMet' );
+    var haveWeSpoken = elementGetter.getElementValue( 'haveWeSpoken' );
+    var areTheyInterested = elementGetter.getElementValue( 'areTheyInterested' );
+    var externalReference = elementGetter.getElementValue( 'externalReference' );
 
-    // this.updateDB( id, name, phone, email, contact, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference );
+    this.updateDB( id, name, phone, email, contact, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference );
   },
 
   updateDB: function( id, name, phone, email, contact, addressLine1, addressLine2, addressCity, addressRegion, addressPostCode, lastContact, pastWork, techUsed, typeOfWork, preferredWork, haveWeMet, haveWeSpoken, areTheyInterested, externalReference ) {
-  //   var request = new XMLHttpRequest();
-  //   request.open( 'PUT', this.url + id );
-  //   request.setRequestHeader( "Content-type", "application/json" );
-  //   request.onload = () => {
-  //     if( request.status === 200 ) {
-  //       var companys = JSON.parse( request.responseText )
-  //     }
-  //     // this.resetForm();
-  //     console.log( 'hello asjkdahsdl')
-  //   }
-  //   var data = {
-  //     company: {
-  //       name: name, 
-  //       phone: phone, 
-  //       email: email, 
-  //       contact: contact,
-  //       address_line_1: addressLine1, 
-  //       address_line_2: addressLine2, 
-  //       address_city: addressCity, 
-  //       address_region: addressRegion, 
-  //       address_postcode: addressPostCode, 
-  //       last_contact: lastContact, 
-  //       past_work: pastWork, 
-  //       tech_used: techUsed, 
-  //       type_of_work: typeOfWork, 
-  //       preferred_work: preferredWork, 
-  //       have_we_met: haveWeMet, 
-  //       have_we_spoken: haveWeSpoken, 
-  //       are_they_interested: areTheyInterested, 
-  //       external_reference: externalReference 
-  //     }
-  //   }
-  //   request.send( JSON.stringify( data ));
+
+    var request = new XMLHttpRequest();
+    request.open( 'PUT', this.companyUrl + '/' + id );
+    request.setRequestHeader( "Content-type", "application/json" );
+    request.onload = () => {
+      if( request.status === 200 ) {
+        var companys = JSON.parse( request.responseText )
+        location.reload();
+      }
+    }
+    var data = {
+      company: {
+        name: name, 
+        phone: phone, 
+        email: email, 
+        contact: contact,
+        address_line_1: addressLine1, 
+        address_line_2: addressLine2, 
+        address_city: addressCity, 
+        address_region: addressRegion, 
+        address_postcode: addressPostCode, 
+        last_contact: lastContact, 
+        past_work: pastWork, 
+        tech_used: techUsed, 
+        type_of_work: typeOfWork, 
+        preferred_work: preferredWork, 
+        have_we_met: haveWeMet, 
+        have_we_spoken: haveWeSpoken, 
+        are_they_interested: areTheyInterested, 
+        external_reference: externalReference 
+      }
+    }
+    request.send( JSON.stringify( data ));
   },
 
   homePage: function() {

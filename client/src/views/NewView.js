@@ -18,7 +18,6 @@ NewView.prototype = {
     basicMaker.make( 'new-space', 'input', 'email', 'Email...' );
     basicMaker.make( 'new-space', 'input', 'contact', 'Point Of Contact...' );
 
-
     var addressMaker = new ElementMaker();
     addressMaker.make( 'new-space', 'input', 'addressLine1', 'Address Line 1...' );
     addressMaker.make( 'new-space', 'input', 'addressLine2', 'Address Line 2...' );
