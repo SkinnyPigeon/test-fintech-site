@@ -35,12 +35,16 @@ ElementMaker.prototype = {
     whereToPut.appendChild( whatToMake );
   },
 
-  makeList: function( text, ul ) {
+  makeList: function( text, ul, additional ) {
     var elementGetter = new ElementGetter();
     var unorderedList = elementGetter.getElement( ul );
     var whatToMake = document.createElement( 'li' );
 
-    whatToMake.innerText = text;
+    if( additional ) {
+      whatToMake.innerText = additional + ": " + text;
+    } else {
+      whatToMake.innerText = text;
+    }
     unorderedList.appendChild( whatToMake );
   }
 };
