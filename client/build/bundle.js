@@ -524,16 +524,15 @@
 	
 	  delete: function( id ) {
 	    var request = new XMLHttpRequest();
-	    request.open( 'DELETE', this.url + '/' + id);
+	    request.open( 'DELETE', this.companyUrl + '/' + id);
 	    request.setRequestHeader("Content-Type", "application/json");
 	
 	    request.onload = () => {
 	      if( request.status === 204 ) {
-	        console.log( 'Deleted' );
+	        location.reload();
 	      }
 	    }
 	    request.send();
-	
 	  }
 	
 	}
