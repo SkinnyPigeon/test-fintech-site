@@ -285,6 +285,13 @@
 	    addressMaker.makeList( this.company.address_region, 'companyAddress' );
 	    addressMaker.makeList( this.company.address_postcode, 'companyAddress' );
 	
+	    var detailMaker = new ElementMaker( 'detail-space', 'ul', 'companyDetails' );
+	    detailMaker.makeList( this.company.type_of_work, 'companyDetails' );
+	    detailMaker.makeList( this.company.tech_used, 'companyDetails' );
+	    detailMaker.makeList( this.company.past_work, 'companyDetails' );
+	    detailMaker.makeList( this.company.preferred_work, 'companyDetails' );
+	
+	
 	    console.log( this.company );
 	  }
 	}
