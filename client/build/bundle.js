@@ -835,10 +835,28 @@
 	
 	    var searchSpace = document.getElementById( 'search-space' );
 	    var targetButton = document.createElement( 'img' );
+	    targetButton.id = 'targetButton';
+	    targetButton.src = './css/images/tick.png';
 	    targetButton.onclick = function() {
 	      this.targetSearch();
-	    }
+	    }.bind( this );
 	
+	    searchSpace.appendChild( targetButton );
+	
+	    elementMaker.make( 'search-space', 'ul', 'generalSearch' );
+	    elementMaker.makeText( 'generalSearch', 'generalSearch', 'General Search', 'h4' );
+	
+	    elementMaker.makeListItem(  'generalSearch', 'name', 'What to search...'  );
+	
+	    var searchSpace = document.getElementById( 'search-space' );
+	    var generalButton = document.createElement( 'img' );
+	    generalButton.id = 'generalButton';
+	    generalButton.src = './css/images/tick.png';
+	    generalButton.onclick = function() {
+	      this.generalSearch();
+	    }.bind( this );
+	
+	    searchSpace.appendChild( generalButton );
 	  },
 	
 	  clear: function() {
@@ -860,7 +878,15 @@
 	    while( searchSpace.hasChildNodes() ) {
 	      searchSpace.removeChild( searchSpace.lastChild );
 	    }
-	  }
+	  },
+	
+	  targetSearch: function() {
+	    console.log( 'target')
+	  },
+	
+	  generalSearch: function() {
+	    console.log( 'General')
+	  },
 	
 	}
 	

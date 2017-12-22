@@ -70,7 +70,21 @@ ul {
   cursor: pointer;
 }
 
+#targetButton {
+  max-width: 3.3em;
+}
 
+#targetButton:hover {
+  cursor: pointer;
+}
+
+#generalButton {
+  max-width: 3.3em;
+}
+
+#generalButton:hover {
+  cursor: pointer;
+}
 
 
 
