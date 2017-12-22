@@ -235,6 +235,20 @@
 	    unorderedList.appendChild( whatToMake );
 	  },
 	
+	  makeHeavyList: function( text, ul, extraText ) {
+	    var elementGetter = new ElementGetter();
+	    var unorderedList = elementGetter.getElement( ul );
+	    var whatToMake = document.createElement( 'h4' );
+	
+	    if( extraText ) {
+	      whatToMake.innerText = extraText + ": " + text;
+	      console.log( whatToMake.innerText );
+	    } else {
+	      whatToMake.innerText = text;
+	    }
+	    unorderedList.appendChild( whatToMake );
+	  },
+	
 	  edit: function( div, id, value, additional, text ) {
 	    var whereToPut = document.getElementById( div );
 	    var whatToMake = document.createElement( 'input' );
@@ -18284,8 +18298,11 @@
 	      var elementMaker = new ElementMaker( );
 	      elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
 	      var comment = elementGetter.getElement( this.comments[i].id );
-	      var commentAuthor = elementMaker.makeList( this.comments[i].author, this.comments[i].id );
+	      var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
 	      var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
+	      var br = document.createElement('br');
+	      var brSpace = document.getElementById( 'comment-space' );
+	      brSpace.appendChild( br );
 	    }
 	
 	  },

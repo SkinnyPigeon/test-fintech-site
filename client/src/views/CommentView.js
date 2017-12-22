@@ -66,8 +66,11 @@ CommentView.prototype = {
       var elementMaker = new ElementMaker( );
       elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
       var comment = elementGetter.getElement( this.comments[i].id );
-      var commentAuthor = elementMaker.makeList( this.comments[i].author, this.comments[i].id );
+      var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
       var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
+      var br = document.createElement('br');
+      var brSpace = document.getElementById( 'comment-space' );
+      brSpace.appendChild( br );
     }
 
   },

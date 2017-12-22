@@ -50,6 +50,20 @@ ElementMaker.prototype = {
     unorderedList.appendChild( whatToMake );
   },
 
+  makeHeavyList: function( text, ul, extraText ) {
+    var elementGetter = new ElementGetter();
+    var unorderedList = elementGetter.getElement( ul );
+    var whatToMake = document.createElement( 'h4' );
+
+    if( extraText ) {
+      whatToMake.innerText = extraText + ": " + text;
+      console.log( whatToMake.innerText );
+    } else {
+      whatToMake.innerText = text;
+    }
+    unorderedList.appendChild( whatToMake );
+  },
+
   edit: function( div, id, value, additional, text ) {
     var whereToPut = document.getElementById( div );
     var whatToMake = document.createElement( 'input' );
