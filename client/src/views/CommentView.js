@@ -140,7 +140,7 @@ CommentView.prototype = {
     request.send( JSON.stringify( data ));
   },
 
-  showComment: function(id) {
+  showComment: function( id ) {
     for( var i = 0; i < this.comments.length; i++ ) {
       if( this.comments[i].id === parseInt( id )) {
         var detailCommentView = new DetailCommentView( this.comments[i] );

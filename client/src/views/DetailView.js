@@ -119,7 +119,6 @@ DetailView.prototype = {
   },
 
   edit: function( id ) {
-    console.log( this.company );
     var basicMaker = new ElementMaker();
     basicMaker.make( 'edit-space', 'ul', 'companyBasicDetails' );
     basicMaker.makeText( 'companyBasicDetails', 'companyBasicDetails', 'Basic Details', 'h4' );
