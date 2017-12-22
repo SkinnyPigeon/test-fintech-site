@@ -64,6 +64,10 @@ NewView.prototype = {
   },
 
   clear: function() {
+    var newSpace = document.getElementById( "new-space" );
+    while( newSpace.hasChildNodes() ) {
+      newSpace.removeChild( newSpace.lastChild );
+    }
     var allSpace = document.getElementById( "all-space" );
     while( allSpace.hasChildNodes() ) {
       allSpace.removeChild( allSpace.lastChild );

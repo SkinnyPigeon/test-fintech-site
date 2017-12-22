@@ -9,11 +9,26 @@ var MainView = function() {
   this.div = document.getElementById( 'all-space' );
   this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
   this.companies = [];
-
+  this.displayNav();
   this.getCompanies();
 }
 
 MainView.prototype = {
+
+  displayNav: function() {
+    var nav = new NavView();
+    var elementGetter = new ElementGetter();
+
+    var plusButton = elementGetter.getElement( 'add' );
+    plusButton.onclick = function() {
+      this.newView();
+    }.bind( this );
+
+    var listButton = elementGetter.getElement( 'list' );
+    listButton.onclick = function() {
+      this.getCompanies();
+    }.bind( this );
+  },
 
   getCompanies: function() {
     var request = new XMLHttpRequest();
@@ -30,6 +45,7 @@ MainView.prototype = {
   },
 
   show: function() {
+    this.clear();
     console.log( this.companies );
     var elementGetter = new ElementGetter();
 
@@ -45,14 +61,22 @@ MainView.prototype = {
       var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
     }
 
-    var addButton = document.createElement( 'button' );
-    addButton.innerText = "Add new...";
-    addButton.onclick = function() {
-      this.changeView();
-    }.bind( this );
+  },
 
-    this.div.appendChild( addButton );
+  clear: function() {
+    var newSpace = document.getElementById( "new-space" );
+    while( newSpace.hasChildNodes() ) {
+      newSpace.removeChild( newSpace.lastChild );
+    }
+    var allSpace = document.getElementById( "all-space" );
+    while( allSpace.hasChildNodes() ) {
+      allSpace.removeChild( allSpace.lastChild );
+    }
 
+    var detailSpace = document.getElementById( "detail-space" );
+    while( detailSpace.hasChildNodes() ) {
+      detailSpace.removeChild( detailSpace.lastChild );
+    }
   },
 
   showDetails: function( id ) {
@@ -63,8 +87,7 @@ MainView.prototype = {
     }
   },
 
-  changeView: function() {
-    console.log( "Click" );
+  newView: function() {
     var newView = new NewView();
   }
 }

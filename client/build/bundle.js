@@ -69,11 +69,26 @@
 	  this.div = document.getElementById( 'all-space' );
 	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
 	  this.companies = [];
-	
+	  this.displayNav();
 	  this.getCompanies();
 	}
 	
 	MainView.prototype = {
+	
+	  displayNav: function() {
+	    var nav = new NavView();
+	    var elementGetter = new ElementGetter();
+	
+	    var plusButton = elementGetter.getElement( 'add' );
+	    plusButton.onclick = function() {
+	      this.newView();
+	    }.bind( this );
+	
+	    var listButton = elementGetter.getElement( 'list' );
+	    listButton.onclick = function() {
+	      this.getCompanies();
+	    }.bind( this );
+	  },
 	
 	  getCompanies: function() {
 	    var request = new XMLHttpRequest();
@@ -90,6 +105,7 @@
 	  },
 	
 	  show: function() {
+	    this.clear();
 	    console.log( this.companies );
 	    var elementGetter = new ElementGetter();
 	
@@ -105,14 +121,22 @@
 	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
 	    }
 	
-	    var addButton = document.createElement( 'button' );
-	    addButton.innerText = "Add new...";
-	    addButton.onclick = function() {
-	      this.changeView();
-	    }.bind( this );
+	  },
 	
-	    this.div.appendChild( addButton );
+	  clear: function() {
+	    var newSpace = document.getElementById( "new-space" );
+	    while( newSpace.hasChildNodes() ) {
+	      newSpace.removeChild( newSpace.lastChild );
+	    }
+	    var allSpace = document.getElementById( "all-space" );
+	    while( allSpace.hasChildNodes() ) {
+	      allSpace.removeChild( allSpace.lastChild );
+	    }
 	
+	    var detailSpace = document.getElementById( "detail-space" );
+	    while( detailSpace.hasChildNodes() ) {
+	      detailSpace.removeChild( detailSpace.lastChild );
+	    }
 	  },
 	
 	  showDetails: function( id ) {
@@ -123,8 +147,7 @@
 	    }
 	  },
 	
-	  changeView: function() {
-	    console.log( "Click" );
+	  newView: function() {
 	    var newView = new NewView();
 	  }
 	}
@@ -202,6 +225,10 @@
 	  },
 	
 	  clear: function() {
+	    var newSpace = document.getElementById( "new-space" );
+	    while( newSpace.hasChildNodes() ) {
+	      newSpace.removeChild( newSpace.lastChild );
+	    }
 	    var allSpace = document.getElementById( "all-space" );
 	    while( allSpace.hasChildNodes() ) {
 	      allSpace.removeChild( allSpace.lastChild );
@@ -709,14 +736,47 @@
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var ElementMaker = __webpack_require__( 7 );
+	var ElementGetter = __webpack_require__( 6 );
+	
 	var NavView = function() {
-	  
+	  this.show();
 	}
 	
 	NavView.prototype = {
+	  show: function() {
+	    var elementGetter = new ElementGetter();
+	    var elementMaker = new ElementMaker();
 	
+	    var titleSpace = elementGetter.getElement( 'title-space' );
+	    var logo = document.createElement( 'img' );
+	    logo.id = 'logo';
+	    logo.src = './css/images/logo.png';
+	    titleSpace.appendChild( logo );
+	
+	    var navSpace = elementGetter.getElement( 'nav-space' );
+	    var navList = document.createElement( 'ul' );
+	    navList.id = 'navList';
+	
+	    var home = document.createElement( 'img' );
+	    home.id = 'home';
+	    home.src = './css/images/home.png';
+	    navList.appendChild( home );
+	
+	    var list = document.createElement( 'img' );
+	    list.id = 'list';
+	    list.src = './css/images/list.png';
+	    navList.appendChild( list );
+	
+	    var add = document.createElement( 'img' );
+	    add.id = 'add';
+	    add.src = './css/images/add.png';
+	    navList.appendChild( add );
+	
+	    navSpace.appendChild( navList );
+	  }
 	}
 	
 	module.exports = NavView;
