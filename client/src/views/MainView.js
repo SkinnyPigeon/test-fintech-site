@@ -93,6 +93,11 @@ MainView.prototype = {
     while( editSpace.hasChildNodes() ) {
       editSpace.removeChild( editSpace.lastChild );
     }
+
+    var commentSpace = document.getElementById( "comment-space" );
+    while( commentSpace.hasChildNodes() ) {
+      commentSpace.removeChild( commentSpace.lastChild );
+    }
   },
 
   showDetails: function( id ) {

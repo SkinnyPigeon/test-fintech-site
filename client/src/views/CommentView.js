@@ -1,12 +1,18 @@
-var HomeView = function() {
-  this.show();
+var CommentView = function( id ) {
+  this.id = id;
+  this.comments = [];
+
+  this.getComments(id);
 }
 
-HomeView.prototype = {
+CommentView.prototype = {
+  getComments: function(id) {
+    this.show();
+  },
 
   show: function() {
-
-  },
+    this.clear();
+  }
 
   clear: function() {
     var newSpace = document.getElementById( "new-space" );
@@ -37,7 +43,7 @@ HomeView.prototype = {
     while( commentSpace.hasChildNodes() ) {
       commentSpace.removeChild( commentSpace.lastChild );
     }
-  },
+  }
 }
 
-module.exports = HomeView;
+module.exports = CommentView;

@@ -153,6 +153,11 @@
 	    while( editSpace.hasChildNodes() ) {
 	      editSpace.removeChild( editSpace.lastChild );
 	    }
+	
+	    var commentSpace = document.getElementById( "comment-space" );
+	    while( commentSpace.hasChildNodes() ) {
+	      commentSpace.removeChild( commentSpace.lastChild );
+	    }
 	  },
 	
 	  showDetails: function( id ) {
@@ -506,6 +511,11 @@
 	    while( editSpace.hasChildNodes() ) {
 	      editSpace.removeChild( editSpace.lastChild );
 	    }
+	    
+	    var commentSpace = document.getElementById( "comment-space" );
+	    while( commentSpace.hasChildNodes() ) {
+	      commentSpace.removeChild( commentSpace.lastChild );
+	    }
 	  },
 	
 	  edit: function( id ) {
@@ -652,6 +662,7 @@
 	
 	  comment: function( id ) {
 	    console.log( id );
+	    var comments = new CommentView( id );
 	  }
 	
 	}
@@ -753,6 +764,11 @@
 	    var editSpace = document.getElementById( "edit-space" );
 	    while( editSpace.hasChildNodes() ) {
 	      editSpace.removeChild( editSpace.lastChild );
+	    }
+	
+	    var commentSpace = document.getElementById( "comment-space" );
+	    while( commentSpace.hasChildNodes() ) {
+	      commentSpace.removeChild( commentSpace.lastChild );
 	    }
 	  },
 	
@@ -931,6 +947,11 @@
 	    while( editSpace.hasChildNodes() ) {
 	      editSpace.removeChild( editSpace.lastChild );
 	    }
+	
+	    var commentSpace = document.getElementById( "comment-space" );
+	    while( commentSpace.hasChildNodes() ) {
+	      commentSpace.removeChild( commentSpace.lastChild );
+	    }
 	  },
 	
 	  targetSearch: function() {
@@ -1062,6 +1083,11 @@
 	    var editSpace = document.getElementById( "edit-space" );
 	    while( editSpace.hasChildNodes() ) {
 	      editSpace.removeChild( editSpace.lastChild );
+	    }
+	
+	    var commentSpace = document.getElementById( "comment-space" );
+	    while( commentSpace.hasChildNodes() ) {
+	      commentSpace.removeChild( commentSpace.lastChild );
 	    }
 	  },
 	

@@ -109,6 +109,11 @@ DetailView.prototype = {
     while( editSpace.hasChildNodes() ) {
       editSpace.removeChild( editSpace.lastChild );
     }
+    
+    var commentSpace = document.getElementById( "comment-space" );
+    while( commentSpace.hasChildNodes() ) {
+      commentSpace.removeChild( commentSpace.lastChild );
+    }
   },
 
   edit: function( id ) {
@@ -255,6 +260,7 @@ DetailView.prototype = {
 
   comment: function( id ) {
     console.log( id );
+    var comments = new CommentView( id );
   }
 
 }
