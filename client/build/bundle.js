@@ -60,6 +60,8 @@
 
 	var ElementMaker = __webpack_require__( 7 );
 	var ElementGetter = __webpack_require__( 6 );
+	
+	var NavView = __webpack_require__( 8 );
 	var DetailView = __webpack_require__( 5 );
 	var NewView = __webpack_require__( 3 );
 	
@@ -682,6 +684,7 @@
 	        whereToPut.appendChild( additionalText );
 	        break; 
 	    }
+	
 	    whatToMake.placeholder = value;
 	
 	    howToPutIt.appendChild( whatToMake );
@@ -703,6 +706,20 @@
 	
 	
 
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	var NavView = function() {
+	  
+	}
+	
+	NavView.prototype = {
+	
+	}
+	
+	module.exports = NavView;
 
 /***/ }
 /******/ ]);

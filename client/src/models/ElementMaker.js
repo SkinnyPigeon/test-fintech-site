@@ -98,6 +98,7 @@ ElementMaker.prototype = {
         whereToPut.appendChild( additionalText );
         break; 
     }
+
     whatToMake.placeholder = value;
 
     howToPutIt.appendChild( whatToMake );

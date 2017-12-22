@@ -1,5 +1,7 @@
 var ElementMaker = require( '../models/ElementMaker.js' );
 var ElementGetter = require( '../models/ElementGetter.js' );
+
+var NavView = require( './NavView.js' );
 var DetailView = require( './DetailView.js' );
 var NewView = require( './NewView.js' );
 
