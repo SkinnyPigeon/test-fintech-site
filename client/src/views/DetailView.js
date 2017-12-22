@@ -68,15 +68,8 @@ DetailView.prototype = {
       this.delete( this.company.id );
     }.bind( this );
 
-    var backButton = document.createElement( 'button' );
-    backButton.innerText = "Back...";
-    backButton.onclick = function() {
-      location.reload();
-    }.bind( this );
-
     detailSpace.appendChild( editButton );
     detailSpace.appendChild( deleteButton );
-    detailSpace.appendChild( backButton );
   },
 
   clear: function() {

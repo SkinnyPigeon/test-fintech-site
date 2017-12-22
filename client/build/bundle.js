@@ -460,15 +460,8 @@
 	      this.delete( this.company.id );
 	    }.bind( this );
 	
-	    var backButton = document.createElement( 'button' );
-	    backButton.innerText = "Back...";
-	    backButton.onclick = function() {
-	      location.reload();
-	    }.bind( this );
-	
 	    detailSpace.appendChild( editButton );
 	    detailSpace.appendChild( deleteButton );
-	    detailSpace.appendChild( backButton );
 	  },
 	
 	  clear: function() {
@@ -956,8 +949,13 @@
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
+	var ElementGetter = __webpack_require__( 3 );
+	var ElementMaker = __webpack_require__( 2 );
+	
+	var DetailView = __webpack_require__( 5 );
+	
 	var ResultsView = function( companies ) {
 	  this.companies = companies;
 	  this.show();
@@ -968,6 +966,19 @@
 	  show: function() {
 	    this.clear();
 	    console.log( this.companies );
+	    var elementGetter = new ElementGetter();
+	
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var elementMaker = new ElementMaker( );
+	      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
+	      var company = elementGetter.getElement( this.companies[i].id );
+	      company.onclick = function( e ) {
+	        this.showDetails( e.target.parentNode.id );
+	      }.bind( this );
+	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
+	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
+	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
+	    }
 	  },
 	  
 	  clear: function() {
@@ -988,6 +999,14 @@
 	    var searchSpace = document.getElementById( "search-space" );
 	    while( searchSpace.hasChildNodes() ) {
 	      searchSpace.removeChild( searchSpace.lastChild );
+	    }
+	  },
+	
+	  showDetails: function( id ) {
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      if( this.companies[i].id === parseInt( id )) {
+	        var detailView = new DetailView( this.companies[i] );
+	      }
 	    }
 	  }
 	
