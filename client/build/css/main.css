@@ -28,6 +28,35 @@ ul {
   float: right;
 }
 
+/*Details*/
+
+ul#companyBasicDetails {
+  float: left;
+  display: inline-block;
+  top: 0;
+}
+
+ul#companyAddress {
+  float: right;
+  clear: right;
+}
+
+ul#companyDetails {
+  float: left;
+}
+
+ul#lastContactDate {
+  float: right;
+  clear: right;
+  padding-left: 0;
+  max-width: 10em;
+}
+
+ul#companyChecklist {
+  clear: both;
+}
+
+
 /*Images from Nav Bar*/
 
 #title-space img {
@@ -71,7 +100,7 @@ ul {
 }
 
 #targetButton {
-  max-width: 3.3em;
+  max-width: 2.5em;
 }
 
 #targetButton:hover {
@@ -79,7 +108,7 @@ ul {
 }
 
 #generalButton {
-  max-width: 3.3em;
+  max-width: 2.5em;
 }
 
 #generalButton:hover {
@@ -115,6 +144,14 @@ ul {
 }
 
 #cancel:hover {
+  cursor: pointer;
+}
+
+#comment {
+  max-width: 2.5em;
+}
+
+#comment:hover {
   cursor: pointer;
 }
 

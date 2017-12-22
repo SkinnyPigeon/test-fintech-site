@@ -31,12 +31,15 @@ DetailView.prototype = {
     addressMaker.makeList( this.company.address_region, 'companyAddress', 'Region' );
     addressMaker.makeList( this.company.address_postcode, 'companyAddress', 'Post Code' );
 
+
+    var dateMaker = new ElementMaker();
+    dateMaker.make( 'detail-space', 'ul', 'lastContactDate' );
+    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
+
+    dateMaker.makeList( this.company.last_contact, 'lastContactDate', 'Last Contact' );
+
     var detailMaker = new ElementMaker();
     detailMaker.make( 'detail-space', 'ul', 'companyDetails' );
-    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Last Contact Date', 'h4' );
-
-    detailMaker.makeList( this.company.last_contact, 'companyDetails', 'Last Contact' );
-
     detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
 
     detailMaker.makeList( this.company.type_of_work, 'companyDetails', 'Type Of Work' );
@@ -70,8 +73,16 @@ DetailView.prototype = {
       this.delete( this.company.id );
     }.bind( this );
 
+    var commentButton = document.createElement( 'img' );
+    commentButton.id = 'comment';
+    commentButton.src = '../css/images/comment.png';
+    commentButton.onclick = function() {
+      this.comment( this.company.id );
+    }.bind( this );
+
     detailSpace.appendChild( editButton );
     detailSpace.appendChild( deleteButton );
+    detailSpace.appendChild( commentButton );
   },
 
   clear: function() {
@@ -240,6 +251,10 @@ DetailView.prototype = {
       }
     }
     request.send();
+  },
+
+  comment: function( id ) {
+    console.log( id );
   }
 
 }
