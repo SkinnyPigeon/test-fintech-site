@@ -818,6 +818,8 @@
 	
 	var SearchView = function( companies ) {
 	  this.companies = companies;
+	  this.resultIndexes = [];
+	  this.resultCompanies = [];
 	  this.show();
 	}
 	
@@ -881,22 +883,55 @@
 	  },
 	
 	  targetSearch: function() {
+	    this.resultCompanies = [];
+	
 	    var elementGetter = new ElementGetter();
 	    var name = elementGetter.getElementValue( 'name' );
 	    var city = elementGetter.getElementValue( 'city' );
 	    var tech = elementGetter.getElementValue( 'tech' );
 	
-	    var nameArray = name.split(/[' ,]+/);
-	    for ( var i = 0; i < this.companies.length; i++ ) {
-	      var nameToCheck = this.companies[i].name.split(/[' ,]+/);
+	    var nameArray = name.toUpperCase().split(/[' ,]+/);
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var nameToCheck = this.companies[i].name.toUpperCase().split(/[' ,]+/);
 	      var results = _.intersection( nameArray, nameToCheck );
-	      console.log( results );
+	      if( results.length > 0 ) {
+	        this.resultIndexes.push( i );
+	      }
 	    }
+	
+	    var cityArray = city.toUpperCase().split(/[' ,]+/);
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var cityToCheck = this.companies[i].address_city.toUpperCase().split(/[' ,]+/);
+	      var results = _.intersection( cityArray, cityToCheck );
+	      if( results.length > 0 ) {
+	        this.resultIndexes.push( i );
+	      }
+	    }
+	
+	    var techArray = tech.toUpperCase().split(/[' ,]+/);
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var techToCheck = this.companies[i].tech_used.toUpperCase().split(/[' ,]+/);
+	      var results = _.intersection( techArray, techToCheck );
+	      if( results.length > 0 ) {
+	        this.resultIndexes.push( i );
+	      }
+	    }
+	
+	    this.resultIndexes = _.uniq( this.resultIndexes );
+	    for( var i = 0; i < this.resultIndexes.length; i++ ) {
+	      this.resultCompanies.push( this.companies[this.resultIndexes[i]] );
+	    }
+	
+	    this.showResults();
 	  },
 	
 	  generalSearch: function() {
 	    console.log( 'General')
 	  },
+	
+	  showResults: function() {
+	    var results = new ResultsView( this.resultCompanies );
+	  }
 	
 	}
 	
