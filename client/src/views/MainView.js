@@ -88,6 +88,11 @@ MainView.prototype = {
     while( searchSpace.hasChildNodes() ) {
       searchSpace.removeChild( searchSpace.lastChild );
     }
+
+    var editSpace = document.getElementById( "edit-space" );
+    while( editSpace.hasChildNodes() ) {
+      editSpace.removeChild( editSpace.lastChild );
+    }
   },
 
   showDetails: function( id ) {

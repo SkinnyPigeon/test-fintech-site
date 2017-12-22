@@ -55,15 +55,17 @@ DetailView.prototype = {
 
     var detailSpace = document.getElementById( 'detail-space' );
 
-    var editButton = document.createElement( 'button' );
-    editButton.innerText = "Edit...";
+    var editButton = document.createElement( 'img' );
+    editButton.id = 'edit';
+    editButton.src = '../css/images/edit.png';
     editButton.onclick = function() {
       this.clear();
       this.edit( this.company.id );
     }.bind( this );
 
-    var deleteButton = document.createElement( 'button' );
-    deleteButton.innerText = "Delete...";
+    var deleteButton = document.createElement( 'img' );
+    deleteButton.id = 'delete';
+    deleteButton.src = '../css/images/delete.png';
     deleteButton.onclick = function() {
       this.delete( this.company.id );
     }.bind( this );
@@ -73,6 +75,10 @@ DetailView.prototype = {
   },
 
   clear: function() {
+    var newSpace = document.getElementById( "new-space" );
+    while( newSpace.hasChildNodes() ) {
+      newSpace.removeChild( newSpace.lastChild );
+    }
     var allSpace = document.getElementById( "all-space" );
     while( allSpace.hasChildNodes() ) {
       allSpace.removeChild( allSpace.lastChild );
@@ -81,6 +87,16 @@ DetailView.prototype = {
     var detailSpace = document.getElementById( "detail-space" );
     while( detailSpace.hasChildNodes() ) {
       detailSpace.removeChild( detailSpace.lastChild );
+    }
+
+    var searchSpace = document.getElementById( "search-space" );
+    while( searchSpace.hasChildNodes() ) {
+      searchSpace.removeChild( searchSpace.lastChild );
+    }
+
+    var editSpace = document.getElementById( "edit-space" );
+    while( editSpace.hasChildNodes() ) {
+      editSpace.removeChild( editSpace.lastChild );
     }
   },
 

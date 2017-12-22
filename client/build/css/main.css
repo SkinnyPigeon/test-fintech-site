@@ -86,7 +86,21 @@ ul {
   cursor: pointer;
 }
 
+#edit {
+  max-width: 3.3em;
+}
 
+#edit:hover {
+  cursor: pointer;
+}
+
+#delete {
+  max-width: 3.3em;
+}
+
+#delete:hover {
+  cursor: pointer;
+}
 
 
 
