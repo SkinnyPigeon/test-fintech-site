@@ -1,6 +1,8 @@
 var ElementMaker = require( '../models/ElementMaker.js' );
 var ElementGetter = require( '../models/ElementGetter.js' );
 
+var _ = require( 'lodash' );
+
 var ResultsView = require( './ResultsView.js' );
 
 var SearchView = function( companies ) {
@@ -72,7 +74,13 @@ SearchView.prototype = {
     var name = elementGetter.getElementValue( 'name' );
     var city = elementGetter.getElementValue( 'city' );
     var tech = elementGetter.getElementValue( 'tech' );
-    console.log( name)
+
+    var nameArray = name.split(/[' ,]+/);
+    for ( var i = 0; i < this.companies.length; i++ ) {
+      var nameToCheck = this.companies[i].name.split(/[' ,]+/);
+      var results = _.intersection( nameArray, nameToCheck );
+      console.log( results );
+    }
   },
 
   generalSearch: function() {
