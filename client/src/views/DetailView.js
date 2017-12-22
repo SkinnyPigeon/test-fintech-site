@@ -145,12 +145,23 @@ DetailView.prototype = {
     checklistMaker.edit( 'companyChecklist', 'externalReference', this.company.external_reference, 'checkbox', 'External Reference?' );
 
     var editSpace = document.getElementById( 'edit-space' );
-    var submitButton = document.createElement( 'button' );
-    submitButton.innerText = 'submit';
+
+    var submitButton = document.createElement( 'img' );
+    submitButton.id = 'submit';
+    submitButton.src = '../css/images/tick.png';
     submitButton.onclick = function() {
       this.gatherInfo( id );
     }.bind( this )
+
+    var cancelButton = document.createElement( 'img' );
+    cancelButton.id = 'cancel';
+    cancelButton.src = '../css/images/cancel.png';
+    cancelButton.onclick = function() {
+      this.show();
+    }.bind( this );
+
     editSpace.appendChild( submitButton );
+    editSpace.appendChild( cancelButton );
   },
 
   gatherInfo: function( id ) {

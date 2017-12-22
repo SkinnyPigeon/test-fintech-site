@@ -102,6 +102,21 @@ ul {
   cursor: pointer;
 }
 
+#submit {
+  max-width: 3.3em;
+}
+
+#submit:hover {
+  cursor: pointer;
+}
+
+#cancel {
+  max-width: 3.3em;
+}
+
+#cancel:hover {
+  cursor: pointer;
+}
 
 
 
