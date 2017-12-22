@@ -1,6 +1,8 @@
 var ElementMaker = require( '../models/ElementMaker.js' );
 var ElementGetter = require( '../models/ElementGetter.js' );
 
+var CommentView = require( './CommentView.js' );
+
 var DetailView = function( company ) {
   this.company = company;
   this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
@@ -109,7 +111,7 @@ DetailView.prototype = {
     while( editSpace.hasChildNodes() ) {
       editSpace.removeChild( editSpace.lastChild );
     }
-    
+
     var commentSpace = document.getElementById( "comment-space" );
     while( commentSpace.hasChildNodes() ) {
       commentSpace.removeChild( commentSpace.lastChild );
