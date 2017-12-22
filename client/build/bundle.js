@@ -705,12 +705,13 @@
 	    checklistMaker.makeListItem( 'companyChecklist', 'areTheyInterested', 'Are They Interested?', 'checkbox' );
 	    checklistMaker.makeListItem( 'companyChecklist', 'externalReference', 'External References?', 'checkbox' );
 	
-	    var submit = document.createElement( 'button' );
-	    submit.innerText = "Submit";
-	    submit.onclick = function() {
-	      this.gatherInfo();
-	    }.bind( this );
-	    this.div.appendChild( submit );
+	    var submitButton = document.createElement( 'img' );
+	    submitButton.id = 'submit';
+	    submitButton.src = '../css/images/tick.png';
+	    submitButton.onclick = function() {
+	      this.gatherInfo( id );
+	    }.bind( this )
+	    this.div.appendChild( submitButton );
 	  },
 	
 	
