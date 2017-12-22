@@ -94,6 +94,11 @@ NewView.prototype = {
     while( commentSpace.hasChildNodes() ) {
       commentSpace.removeChild( commentSpace.lastChild );
     }
+
+    var homeSpace = document.getElementById( "home-space" );
+    while( homeSpace.hasChildNodes() ) {
+      homeSpace.removeChild( homeSpace.lastChild );
+    }
   },
 
   gatherInfo: function() {

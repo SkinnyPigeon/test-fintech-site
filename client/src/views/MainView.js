@@ -6,49 +6,12 @@ var DetailView = require( './DetailView.js' );
 var NewView = require( './NewView.js' );
 var SearchView = require( './SearchView.js' );
 
-var MainView = function() {
-  this.div = document.getElementById( 'all-space' );
-  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
-  this.companies = [];
-  this.displayNav();
-  this.getCompanies();
+var MainView = function( companies ) {
+  this.companies = companies;
+  this.show();
 }
 
 MainView.prototype = {
-
-  displayNav: function() {
-    var nav = new NavView();
-    var elementGetter = new ElementGetter();
-
-    var plusButton = elementGetter.getElement( 'add' );
-    plusButton.onclick = function() {
-      this.newView();
-    }.bind( this );
-
-    var listButton = elementGetter.getElement( 'list' );
-    listButton.onclick = function() {
-      this.getCompanies();
-    }.bind( this );
-
-    var searchButton = elementGetter.getElement( 'search' );
-    searchButton.onclick = function() {
-      this.searchView();
-    }.bind( this );
-  },
-
-  getCompanies: function() {
-    var request = new XMLHttpRequest();
-    request.open( 'GET', this.companyUrl );
-    request.setRequestHeader("Content-Type", "application/json")
-    request.onload = () => {
-      if( request.status === 200 ) {
-        var companies = JSON.parse( request.responseText );
-        this.companies = companies;
-        this.show();
-      }
-    }
-    request.send( null );
-  },
 
   show: function() {
     this.clear();
@@ -66,7 +29,6 @@ MainView.prototype = {
       var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
       var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
     }
-
   },
 
   clear: function() {
@@ -97,6 +59,11 @@ MainView.prototype = {
     var commentSpace = document.getElementById( "comment-space" );
     while( commentSpace.hasChildNodes() ) {
       commentSpace.removeChild( commentSpace.lastChild );
+    }
+
+    var homeSpace = document.getElementById( 'home-space' );
+    while( homeSpace.hasChildNodes() ) {
+      homeSpace.removeChild( homeSpace.lastChild );
     }
   },
 

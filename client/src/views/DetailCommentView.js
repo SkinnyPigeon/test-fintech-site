@@ -1,8 +1,6 @@
 var ElementMaker = require( '../models/ElementMaker.js' );
 var ElementGetter = require( '../models/ElementGetter.js' );
 
-// var CommentView = require( './CommentView.js' );
-
 var DetailCommentView = function( comment ) {
   this.comment = comment;
   this.commentUrl = "https://fintech-db-test.herokuapp.com/comments";
@@ -71,6 +69,11 @@ DetailCommentView.prototype = {
     var commentSpace = document.getElementById( "comment-space" );
     while( commentSpace.hasChildNodes() ) {
       commentSpace.removeChild( commentSpace.lastChild );
+    }
+
+    var homeSpace = document.getElementById( "home-space" );
+    while( homeSpace.hasChildNodes() ) {
+      homeSpace.removeChild( homeSpace.lastChild );
     }
   },
 
