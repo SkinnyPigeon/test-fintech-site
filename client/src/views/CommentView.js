@@ -115,10 +115,10 @@ CommentView.prototype = {
     var author = elementGetter.getElementValue( 'author' );
     var text = elementGetter.getElementValue( 'text' );
 
-    this.addCompanyToDB( author, text, this.id );
+    this.addCommentToDB( author, text, this.id );
   },
 
-  addCompanyToDB: function( author, text, id ) {
+  addCommentToDB: function( author, text, id ) {
 
     var request = new XMLHttpRequest();
     request.open( 'POST', this.commentUrl);

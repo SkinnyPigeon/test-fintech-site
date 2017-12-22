@@ -143,7 +143,47 @@ DetailCommentView.prototype = {
       }
     }
     request.send();
-  }, 
+  },
+
+  displayDeleted: function() {
+    this.clear();
+
+    var deleteSpace = document.getElementById( 'comment-space' );
+    var deleteMessage = document.createElement( 'h3' );
+    deleteMessage.id = 'deleteMessage';
+    deleteMessage.innerText = 'Comment Deleted. Click below to undo';
+
+    var undo = document.createElement( 'img' );
+    undo.id = 'undo';
+    undo.src = '../css/images/undo.png';
+    undo.onclick = function() {
+      this.undo();
+    }.bind( this );
+
+    deleteSpace.appendChild( deleteMessage );
+    deleteSpace.appendChild( undo );
+  },
+
+  undo: function() {
+    var request = new XMLHttpRequest();
+    request.open( 'POST', this.commentUrl);
+    request.setRequestHeader("Content-Type", "application/json");
+
+    request.onload = () => {
+      if( request.status === 201 ) {
+        var comments = JSON.parse( request.responseText )
+        this.show();
+      }
+    }
+    var data = {
+      comment: {
+        author: this.comment.author, 
+        text: this.comment.text, 
+        company_id: this.comment.company_id
+      }
+    }
+    request.send( JSON.stringify( data ));
+  } 
 
 }
 
