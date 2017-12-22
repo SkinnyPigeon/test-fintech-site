@@ -848,7 +848,7 @@
 	    elementMaker.make( 'search-space', 'ul', 'generalSearch' );
 	    elementMaker.makeText( 'generalSearch', 'generalSearch', 'General Search', 'h4' );
 	
-	    elementMaker.makeListItem(  'generalSearch', 'name', 'What to search...'  );
+	    elementMaker.makeListItem(  'generalSearch', 'general', 'What to search...'  );
 	
 	    var searchSpace = document.getElementById( 'search-space' );
 	    var generalButton = document.createElement( 'img' );
@@ -926,7 +926,24 @@
 	  },
 	
 	  generalSearch: function() {
-	    console.log( 'General')
+	    var elementGetter = new ElementGetter();
+	    var general = elementGetter.getElementValue( 'general' );
+	    var generalArray = general.toUpperCase().split(/[' ,]+/);
+	    for( i = 0; i < this.companies.length; i++ ) {
+	      for( value in this.companies[i] ) {
+	        var words = String( this.companies[i][value] );
+	        var wordsToCheck = words.toUpperCase().split(/[' ,]+/);
+	        var results = _.intersection( generalArray, wordsToCheck );
+	        if( results.length > 0 ) {
+	          this.resultIndexes.push( i );
+	        }
+	      }
+	    }
+	    this.resultIndexes = _.uniq( this.resultIndexes );
+	    for( var i = 0; i < this.resultIndexes.length; i++ ) {
+	      this.resultCompanies.push( this.companies[this.resultIndexes[i]] );
+	    }
+	    this.showResults();
 	  },
 	
 	  showResults: function() {
@@ -943,10 +960,15 @@
 
 	var ResultsView = function( companies ) {
 	  this.companies = companies;
+	  this.show();
 	}
 	
 	ResultsView.prototype = {
 	
+	  show: function() {
+	    this.clear();
+	    console.log( this.companies );
+	  },
 	  
 	  clear: function() {
 	    var newSpace = document.getElementById( "new-space" );

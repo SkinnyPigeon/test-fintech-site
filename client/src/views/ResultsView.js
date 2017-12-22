@@ -1,9 +1,14 @@
 var ResultsView = function( companies ) {
   this.companies = companies;
+  this.show();
 }
 
 ResultsView.prototype = {
 
+  show: function() {
+    this.clear();
+    console.log( this.companies );
+  },
   
   clear: function() {
     var newSpace = document.getElementById( "new-space" );
