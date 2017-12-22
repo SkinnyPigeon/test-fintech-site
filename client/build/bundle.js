@@ -62,6 +62,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var NavView = __webpack_require__( 4 );
 	var DetailView = __webpack_require__( 5 );
@@ -94,39 +95,7 @@
 	  },
 	
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( 'home-space' );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  showDetails: function( id ) {
@@ -385,6 +354,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var CommentView = __webpack_require__( 11 );
 	
@@ -473,39 +443,7 @@
 	  },
 	
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( "home-space" );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  edit: function( id ) {
@@ -665,6 +603,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var NewView = function() {
 	  this.div = document.getElementById( 'new-space' );
@@ -731,39 +670,7 @@
 	
 	
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( "home-space" );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  gatherInfo: function() {
@@ -867,6 +774,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var _ = __webpack_require__( 9 );
 	
@@ -918,39 +826,7 @@
 	  },
 	
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( "home-space" );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  targetSearch: function() {
@@ -1031,6 +907,7 @@
 
 	var ElementGetter = __webpack_require__( 3 );
 	var ElementMaker = __webpack_require__( 2 );
+	var Clear = __webpack_require__( 14 );
 	
 	var DetailView = __webpack_require__( 5 );
 	
@@ -1060,39 +937,7 @@
 	  },
 	  
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( "home-space" );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  showDetails: function( id ) {
@@ -18220,6 +18065,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var DetailCommentView = __webpack_require__( 12 );
 	
@@ -18299,39 +18145,7 @@
 	  },
 	
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( "home-space" );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  gatherInfo: function() {
@@ -18382,6 +18196,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var DetailCommentView = function( comment ) {
 	  this.comment = comment;
@@ -18424,39 +18239,7 @@
 	  },
 	
 	  clear: function() {
-	    var newSpace = document.getElementById( "new-space" );
-	    while( newSpace.hasChildNodes() ) {
-	      newSpace.removeChild( newSpace.lastChild );
-	    }
-	    var allSpace = document.getElementById( "all-space" );
-	    while( allSpace.hasChildNodes() ) {
-	      allSpace.removeChild( allSpace.lastChild );
-	    }
-	
-	    var detailSpace = document.getElementById( "detail-space" );
-	    while( detailSpace.hasChildNodes() ) {
-	      detailSpace.removeChild( detailSpace.lastChild );
-	    }
-	
-	    var searchSpace = document.getElementById( "search-space" );
-	    while( searchSpace.hasChildNodes() ) {
-	      searchSpace.removeChild( searchSpace.lastChild );
-	    }
-	
-	    var editSpace = document.getElementById( "edit-space" );
-	    while( editSpace.hasChildNodes() ) {
-	      editSpace.removeChild( editSpace.lastChild );
-	    }
-	
-	    var commentSpace = document.getElementById( "comment-space" );
-	    while( commentSpace.hasChildNodes() ) {
-	      commentSpace.removeChild( commentSpace.lastChild );
-	    }
-	
-	    var homeSpace = document.getElementById( "home-space" );
-	    while( homeSpace.hasChildNodes() ) {
-	      homeSpace.removeChild( homeSpace.lastChild );
-	    }
+	    new Clear();
 	  },
 	
 	  edit: function( id ) {
@@ -18580,6 +18363,7 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 14 );
 	
 	var NavView = __webpack_require__( 4 );
 	var MainView = __webpack_require__( 1 );
@@ -18640,6 +18424,48 @@
 	  },
 	
 	  clear: function() {
+	    new Clear();
+	  },
+	
+	  getCompanies: function() {
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.companyUrl );
+	    request.setRequestHeader("Content-Type", "application/json")
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var companies = JSON.parse( request.responseText );
+	        this.companies = companies;
+	        this.show();
+	      }
+	    }
+	    request.send( null );
+	  },
+	
+	  newView: function() {
+	    var newView = new NewView();
+	  },
+	
+	  searchView: function() {
+	    var searchView = new SearchView( this.companies );
+	  },
+	
+	  companyView: function() {
+	    var companyView = new MainView( this.companies );
+	  }
+	}
+	
+	module.exports = HomeView;
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	var Clear = function() {
+	  this.run();
+	}
+	
+	Clear.prototype = {
+	  run: function() {
 	    var newSpace = document.getElementById( "new-space" );
 	    while( newSpace.hasChildNodes() ) {
 	      newSpace.removeChild( newSpace.lastChild );
@@ -18673,36 +18499,10 @@
 	    while( homeSpace.hasChildNodes() ) {
 	      homeSpace.removeChild( homeSpace.lastChild );
 	    }
-	  },
-	
-	  getCompanies: function() {
-	    var request = new XMLHttpRequest();
-	    request.open( 'GET', this.companyUrl );
-	    request.setRequestHeader("Content-Type", "application/json")
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var companies = JSON.parse( request.responseText );
-	        this.companies = companies;
-	        this.show();
-	      }
-	    }
-	    request.send( null );
-	  },
-	
-	  newView: function() {
-	    var newView = new NewView();
-	  },
-	
-	  searchView: function() {
-	    var searchView = new SearchView( this.companies );
-	  },
-	
-	  companyView: function() {
-	    var companyView = new MainView( this.companies );
 	  }
 	}
 	
-	module.exports = HomeView;
+	module.exports = Clear;
 
 /***/ }
 /******/ ]);
