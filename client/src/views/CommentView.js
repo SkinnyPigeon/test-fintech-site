@@ -1,6 +1,8 @@
 var ElementMaker = require( '../models/ElementMaker.js' );
 var ElementGetter = require( '../models/ElementGetter.js' );
 
+var DetailCommentView = require( './DetailCommentView.js' );
+
 var CommentView = function( id ) {
   this.id = id;
   this.comments = [];
@@ -59,13 +61,14 @@ CommentView.prototype = {
   },
 
   showComments: function() {
-
     var elementGetter = new ElementGetter();
-
     for( var i = 0; i < this.comments.length; i++ ) {
       var elementMaker = new ElementMaker( );
       elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
       var comment = elementGetter.getElement( this.comments[i].id );
+      comment.onclick = function( e ) {
+        this.showComment( e.target.parentNode.id );
+      }.bind( this );
       var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
       var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
       var br = document.createElement('br');
@@ -136,6 +139,14 @@ CommentView.prototype = {
     }
     request.send( JSON.stringify( data ));
   },
+
+  showComment: function(id) {
+    for( var i = 0; i < this.comments.length; i++ ) {
+      if( this.comments[i].id === parseInt( id )) {
+        var detailCommentView = new DetailCommentView( this.comments[i] );
+      }
+    }
+  }
 }
 
 module.exports = CommentView;
