@@ -38,13 +38,44 @@ ul {
   max-width: 4em;
 }
 
-#list {
+#home {
+  max-width: 4em;
+}
+
+#home:hover {
+  cursor: pointer;
+}
+
+#list{
   max-width: 3em;
+}
+
+#list:hover {
+  cursor: pointer;
 }
 
 #add {
   max-width: 4em;
 }
+
+#add:hover {
+  cursor: pointer;
+}
+
+#search {
+  max-width: 3.3em;
+}
+
+#search:hover {
+  cursor: pointer;
+}
+
+
+
+
+
+
+
 
 /*Colors 
 Red - db1d2b

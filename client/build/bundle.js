@@ -64,6 +64,7 @@
 	var NavView = __webpack_require__( 8 );
 	var DetailView = __webpack_require__( 5 );
 	var NewView = __webpack_require__( 3 );
+	var SearchView = __webpack_require__( 9 );
 	
 	var MainView = function() {
 	  this.div = document.getElementById( 'all-space' );
@@ -87,6 +88,11 @@
 	    var listButton = elementGetter.getElement( 'list' );
 	    listButton.onclick = function() {
 	      this.getCompanies();
+	    }.bind( this );
+	
+	    var searchButton = elementGetter.getElement( 'search' );
+	    searchButton.onclick = function() {
+	      this.searchView();
 	    }.bind( this );
 	  },
 	
@@ -137,6 +143,11 @@
 	    while( detailSpace.hasChildNodes() ) {
 	      detailSpace.removeChild( detailSpace.lastChild );
 	    }
+	
+	    var searchSpace = document.getElementById( "search-space" );
+	    while( searchSpace.hasChildNodes() ) {
+	      searchSpace.removeChild( searchSpace.lastChild );
+	    }
 	  },
 	
 	  showDetails: function( id ) {
@@ -149,6 +160,10 @@
 	
 	  newView: function() {
 	    var newView = new NewView();
+	  },
+	
+	  searchView: function() {
+	    var searchView = new SearchView( this.companies );
 	  }
 	}
 	
@@ -224,6 +239,7 @@
 	    this.div.appendChild( submit );
 	  },
 	
+	
 	  clear: function() {
 	    var newSpace = document.getElementById( "new-space" );
 	    while( newSpace.hasChildNodes() ) {
@@ -237,6 +253,11 @@
 	    var detailSpace = document.getElementById( "detail-space" );
 	    while( detailSpace.hasChildNodes() ) {
 	      detailSpace.removeChild( detailSpace.lastChild );
+	    }
+	
+	    var searchSpace = document.getElementById( "search-space" );
+	    while( searchSpace.hasChildNodes() ) {
+	      searchSpace.removeChild( searchSpace.lastChild );
 	    }
 	  },
 	
@@ -775,11 +796,111 @@
 	    add.src = './css/images/add.png';
 	    navList.appendChild( add );
 	
+	    var search = document.createElement( 'img' );
+	    search.id = 'search';
+	    search.src = './css/images/search.png';
+	    navList.appendChild( search );
+	
 	    navSpace.appendChild( navList );
 	  }
 	}
 	
 	module.exports = NavView;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ElementMaker = __webpack_require__( 7 );
+	var ElementGetter = __webpack_require__( 6 );
+	
+	var ResultsView = __webpack_require__( 10 );
+	
+	var SearchView = function( companies ) {
+	  this.companies = companies;
+	  this.show();
+	}
+	
+	SearchView.prototype = {
+	
+	  show: function() {
+	    this.clear();
+	    var elementMaker = new ElementMaker();
+	    elementMaker.make( 'search-space', 'ul', 'directSearch' );
+	    elementMaker.makeText( 'directSearch', 'directSearch', 'Targetted Search', 'h4' );
+	
+	    elementMaker.makeListItem(  'directSearch', 'name', 'Name...'  );
+	    elementMaker.makeListItem( 'directSearch', 'city', 'City...' );
+	    elementMaker.makeListItem( 'directSearch', 'tech', 'Technology...' );
+	
+	    var searchSpace = document.getElementById( 'search-space' );
+	    var targetButton = document.createElement( 'img' );
+	    targetButton.onclick = function() {
+	      this.targetSearch();
+	    }
+	
+	  },
+	
+	  clear: function() {
+	    var newSpace = document.getElementById( "new-space" );
+	    while( newSpace.hasChildNodes() ) {
+	      newSpace.removeChild( newSpace.lastChild );
+	    }
+	    var allSpace = document.getElementById( "all-space" );
+	    while( allSpace.hasChildNodes() ) {
+	      allSpace.removeChild( allSpace.lastChild );
+	    }
+	
+	    var detailSpace = document.getElementById( "detail-space" );
+	    while( detailSpace.hasChildNodes() ) {
+	      detailSpace.removeChild( detailSpace.lastChild );
+	    }
+	
+	    var searchSpace = document.getElementById( "search-space" );
+	    while( searchSpace.hasChildNodes() ) {
+	      searchSpace.removeChild( searchSpace.lastChild );
+	    }
+	  }
+	
+	}
+	
+	module.exports = SearchView;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	var ResultsView = function( companies ) {
+	  this.companies = companies;
+	}
+	
+	ResultsView.prototype = {
+	
+	  
+	  clear: function() {
+	    var newSpace = document.getElementById( "new-space" );
+	    while( newSpace.hasChildNodes() ) {
+	      newSpace.removeChild( newSpace.lastChild );
+	    }
+	    var allSpace = document.getElementById( "all-space" );
+	    while( allSpace.hasChildNodes() ) {
+	      allSpace.removeChild( allSpace.lastChild );
+	    }
+	
+	    var detailSpace = document.getElementById( "detail-space" );
+	    while( detailSpace.hasChildNodes() ) {
+	      detailSpace.removeChild( detailSpace.lastChild );
+	    }
+	
+	    var searchSpace = document.getElementById( "search-space" );
+	    while( searchSpace.hasChildNodes() ) {
+	      searchSpace.removeChild( searchSpace.lastChild );
+	    }
+	  }
+	
+	}
+	
+	module.exports = ResultsView;
 
 /***/ }
 /******/ ]);

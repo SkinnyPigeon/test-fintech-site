@@ -4,6 +4,7 @@ var ElementGetter = require( '../models/ElementGetter.js' );
 var NavView = require( './NavView.js' );
 var DetailView = require( './DetailView.js' );
 var NewView = require( './NewView.js' );
+var SearchView = require( './SearchView.js' );
 
 var MainView = function() {
   this.div = document.getElementById( 'all-space' );
@@ -27,6 +28,11 @@ MainView.prototype = {
     var listButton = elementGetter.getElement( 'list' );
     listButton.onclick = function() {
       this.getCompanies();
+    }.bind( this );
+
+    var searchButton = elementGetter.getElement( 'search' );
+    searchButton.onclick = function() {
+      this.searchView();
     }.bind( this );
   },
 
@@ -77,6 +83,11 @@ MainView.prototype = {
     while( detailSpace.hasChildNodes() ) {
       detailSpace.removeChild( detailSpace.lastChild );
     }
+
+    var searchSpace = document.getElementById( "search-space" );
+    while( searchSpace.hasChildNodes() ) {
+      searchSpace.removeChild( searchSpace.lastChild );
+    }
   },
 
   showDetails: function( id ) {
@@ -89,6 +100,10 @@ MainView.prototype = {
 
   newView: function() {
     var newView = new NewView();
+  },
+
+  searchView: function() {
+    var searchView = new SearchView( this.companies );
   }
 }
 

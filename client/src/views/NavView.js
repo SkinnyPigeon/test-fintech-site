@@ -35,6 +35,11 @@ NavView.prototype = {
     add.src = './css/images/add.png';
     navList.appendChild( add );
 
+    var search = document.createElement( 'img' );
+    search.id = 'search';
+    search.src = './css/images/search.png';
+    navList.appendChild( search );
+
     navSpace.appendChild( navList );
   }
 }
