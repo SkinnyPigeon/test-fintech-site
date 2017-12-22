@@ -881,7 +881,11 @@
 	  },
 	
 	  targetSearch: function() {
-	    console.log( 'target')
+	    var elementGetter = new ElementGetter();
+	    var name = elementGetter.getElementValue( 'name' );
+	    var city = elementGetter.getElementValue( 'city' );
+	    var tech = elementGetter.getElementValue( 'tech' );
+	    console.log( name)
 	  },
 	
 	  generalSearch: function() {
