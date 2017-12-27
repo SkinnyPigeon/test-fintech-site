@@ -97,6 +97,7 @@
 	  clear: function() {
 	    var clear = new Clear('all-space');
 	    clear.hide();
+	    clear.wipe();
 	  },
 	
 	  showDetails: function( id ) {
@@ -454,8 +455,14 @@
 	    clear.hide();
 	  },
 	
+	  clearDetails: function() {
+	    var clear = new Clear('all-space');
+	    clear.hide();
+	    clear.wipe();
+	  },
+	
 	  back: function() {
-	    this.clear();
+	    this.clearDetails();
 	    var clear = new Clear('all-space');
 	    clear.hide();
 	  },
@@ -18502,9 +18509,11 @@
 	
 	  wipe: function() {
 	    for( var i = 0; i < this.spaces.length; i++ ) {
-	      var spaceToWipe = document.getElementById( this.spaces[i] );
-	      while( spaceToWipe.hasChildNodes() ) {
-	        spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+	      if( this.spaces[i] !== this.toShow ) {
+	        var spaceToWipe = document.getElementById( this.spaces[i] );
+	        while( spaceToWipe.hasChildNodes() ) {
+	          spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+	        }
 	      }
 	    }
 	  }

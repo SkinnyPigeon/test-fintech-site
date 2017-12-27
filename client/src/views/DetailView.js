@@ -100,8 +100,14 @@ DetailView.prototype = {
     clear.hide();
   },
 
+  clearDetails: function() {
+    var clear = new Clear('all-space');
+    clear.hide();
+    clear.wipe();
+  },
+
   back: function() {
-    this.clear();
+    this.clearDetails();
     var clear = new Clear('all-space');
     clear.hide();
   },
