@@ -30,7 +30,9 @@ ResultsView.prototype = {
   },
   
   clear: function() {
-    new Clear();
+    var clear = new Clear( 'all-space' );
+    clear.wipe();
+    clear.hide();
   },
 
   showDetails: function( id ) {

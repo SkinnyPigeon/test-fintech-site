@@ -275,7 +275,11 @@ DetailView.prototype = {
   comment: function( id ) {
     console.log( id );
     var comments = new CommentView( id );
-  }
+  },
+
+  // returnCompany: function() {
+  //   return this.company;
+  // }
 
 }
 

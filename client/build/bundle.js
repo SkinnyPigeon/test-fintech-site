@@ -72,7 +72,7 @@
 	var MainView = function( companies ) {
 	  this.companies = companies;
 	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
-	  
+	
 	  this.show();
 	}
 	
@@ -106,6 +106,13 @@
 	    for( var i = 0; i < this.companies.length; i++ ) {
 	      if( this.companies[i].id === parseInt( id )) {
 	        var detailView = new DetailView( this.companies[i] );
+	        // var space = document.getElementById( 'extra-space' );
+	        // var button = document.createElement( 'button' );
+	        // button.innerText = "AHJSDKHASKDS";
+	        // button.onclick = function() {
+	        //   this.companies[i] = detailView.returnCompany();
+	        // }
+	        // space.appendChild( button );
 	      }
 	    }
 	  },
@@ -646,7 +653,11 @@
 	  comment: function( id ) {
 	    console.log( id );
 	    var comments = new CommentView( id );
-	  }
+	  },
+	
+	  // returnCompany: function() {
+	  //   return this.company;
+	  // }
 	
 	}
 	
@@ -996,7 +1007,9 @@
 	  },
 	  
 	  clear: function() {
-	    new Clear();
+	    var clear = new Clear( 'all-space' );
+	    clear.wipe();
+	    clear.hide();
 	  },
 	
 	  showDetails: function( id ) {
@@ -18437,7 +18450,7 @@
 	
 	  this.displayNav();
 	  this.show();
-	  // this.getCompanies();
+	  this.getCompanies();
 	}
 	
 	HomeView.prototype = {
@@ -18462,6 +18475,7 @@
 	    listButton.onclick = function() {
 	      this.clear();
 	      this.getCompanies();
+	      this.companyView();
 	    }.bind( this );
 	
 	    var searchButton = elementGetter.getElement( 'search' );
@@ -18503,9 +18517,6 @@
 	      if( request.status === 200 ) {
 	        var companies = JSON.parse( request.responseText );
 	        this.companies = companies;
-	        // this.show();
-	        // this.clear();
-	        this.companyView();
 	      }
 	    }
 	    request.send( null );

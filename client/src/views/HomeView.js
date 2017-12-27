@@ -15,7 +15,7 @@ var HomeView = function() {
 
   this.displayNav();
   this.show();
-  // this.getCompanies();
+  this.getCompanies();
 }
 
 HomeView.prototype = {
@@ -40,6 +40,7 @@ HomeView.prototype = {
     listButton.onclick = function() {
       this.clear();
       this.getCompanies();
+      this.companyView();
     }.bind( this );
 
     var searchButton = elementGetter.getElement( 'search' );
@@ -81,9 +82,6 @@ HomeView.prototype = {
       if( request.status === 200 ) {
         var companies = JSON.parse( request.responseText );
         this.companies = companies;
-        // this.show();
-        // this.clear();
-        this.companyView();
       }
     }
     request.send( null );
