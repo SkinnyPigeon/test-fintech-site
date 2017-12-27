@@ -52,7 +52,7 @@ SearchView.prototype = {
   },
 
   clear: function() {
-    new Clear();
+    new Clear('search-space');
   },
 
   targetSearch: function() {

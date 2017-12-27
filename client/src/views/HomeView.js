@@ -62,7 +62,9 @@ HomeView.prototype = {
   },
 
   clear: function() {
-    new Clear('home-space');
+    var clear = new Clear('home-space');
+    clear.wipe();
+    clear.hide();
   },
 
   getCompanies: function() {

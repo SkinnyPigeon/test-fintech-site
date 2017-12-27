@@ -67,7 +67,7 @@ NewView.prototype = {
 
 
   clear: function() {
-    new Clear();
+    new Clear('new-space');
   },
 
   gatherInfo: function() {
