@@ -432,7 +432,7 @@
 	    checklistMaker.makeList( this.company.external_reference, 'companyChecklist', 'External Reference?' );
 	
 	    var buttonList = document.createElement( 'ul' );
-	
+	    buttonList.id = 'buttonList';
 	
 	    var backButton = document.createElement( 'img' );
 	    backButton.id = 'back';

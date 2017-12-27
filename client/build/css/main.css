@@ -115,8 +115,30 @@ ul#companyChecklistEdit li {
   margin-bottom: 0.5em;
 }
 
+ul#companyChecklist {
+  clear: both;
+}
+
+ul#companyChecklist p {
+  max-width: 20%;
+  min-width: 20%;
+  float: left;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  clear: left;
+}
+
+ul#companyChecklist li {
+  margin-bottom: 0.5em;
+}
+
 #home-space {
   text-align: center;
+}
+
+#buttonList {
+  padding-left: 0;
+  margin-left: 3.3%;
 }
 
 
