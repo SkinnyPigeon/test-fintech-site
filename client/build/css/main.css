@@ -11,6 +11,13 @@ body, html  {
   border-bottom: 1px solid black;
 }
 
+body {
+  background-image: url('./images/swirl.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 20%;
+}
+
 #nav-space {
   margin-right: 1%;
 }
