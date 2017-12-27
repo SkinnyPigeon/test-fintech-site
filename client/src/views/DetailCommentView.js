@@ -12,7 +12,7 @@ var DetailCommentView = function( comment ) {
 DetailCommentView.prototype = {
 
   show: function() {
-    this.clear();
+    this.clear( 'single-comment-space' );
 
     var commentMaker = new ElementMaker();
     commentMaker.make( 'single-comment-space', 'ul', 'singleCommentDetails' );
@@ -27,7 +27,7 @@ DetailCommentView.prototype = {
     editButton.id = 'edit';
     editButton.src = '../css/images/edit.png';
     editButton.onclick = function() {
-      this.clear();
+      this.clear( 'single-comment-space' );
       this.edit( this.comment.id );
     }.bind( this );
 
@@ -42,8 +42,8 @@ DetailCommentView.prototype = {
     commentSpace.appendChild( deleteButton );
   },
 
-  clear: function() {
-    var clear = new Clear( 'single-comment-space' );
+  clear: function( space ) {
+    var clear = new Clear( space );
     clear.hide();
     clear.wipe();
   },
@@ -62,7 +62,7 @@ DetailCommentView.prototype = {
     submitButton.id = 'submit';
     submitButton.src = '../css/images/tick.png';
     submitButton.onclick = function() {
-      this.clear();
+      this.clear( 'edit-comment-space' );
       this.gatherInfo( id );
     }.bind( this )
 
@@ -70,7 +70,7 @@ DetailCommentView.prototype = {
     cancelButton.id = 'cancel';
     cancelButton.src = '../css/images/cancel.png';
     cancelButton.onclick = function() {
-      this.clear();
+      this.clear( 'edit-comment-space' );
       this.show();
     }.bind( this );
 
