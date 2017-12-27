@@ -15,13 +15,13 @@ DetailCommentView.prototype = {
     this.clear();
 
     var commentMaker = new ElementMaker();
-    commentMaker.make( 'comment-space', 'ul', 'commentDetails' );
-    commentMaker.makeText( 'commentDetails', 'commentDetails', 'Comment', 'h4' );
+    commentMaker.make( 'single-comment-space', 'ul', 'singleCommentDetails' );
+    commentMaker.makeText( 'singleCommentDetails', 'singleCommentDetails', 'Comment', 'h4' );
 
-    commentMaker.makeList( this.comment.author, 'commentDetails', 'Author' );
-    commentMaker.makeList( this.comment.text, 'commentDetails', 'Comment');
+    commentMaker.makeList( this.comment.author, 'singleCommentDetails', 'Author' );
+    commentMaker.makeList( this.comment.text, 'singleCommentDetails', 'Comment');
 
-    var commentSpace = document.getElementById( 'comment-space' );
+    var commentSpace = document.getElementById( 'single-comment-space' );
 
     var editButton = document.createElement( 'img' );
     editButton.id = 'edit';
@@ -43,23 +43,26 @@ DetailCommentView.prototype = {
   },
 
   clear: function() {
-    new Clear();
+    var clear = new Clear( 'single-comment-space' );
+    clear.hide();
+    clear.wipe();
   },
 
   edit: function( id ) {
     var commentEdit = new ElementMaker();
-    commentEdit.make( 'comment-space', 'ul', 'commentDetails' );
-    commentEdit.makeText( 'commentDetails', 'commentDetails', 'Edit Comment', 'h4' );
+    commentEdit.make( 'edit-comment-space', 'ul', 'editCommentDetails' );
+    commentEdit.makeText( 'editCommentDetails', 'editCommentDetails', 'Edit Comment', 'h4' );
 
-    commentEdit.edit( 'commentDetails', 'author', this.comment.author );
-    commentEdit.edit( 'commentDetails', 'text', this.comment.text );
+    commentEdit.edit( 'editCommentDetails', 'author', this.comment.author );
+    commentEdit.edit( 'editCommentDetails', 'text', this.comment.text );
 
-    var editSpace = document.getElementById( 'comment-space' );
+    var editSpace = document.getElementById( 'edit-comment-space' );
 
     var submitButton = document.createElement( 'img' );
     submitButton.id = 'submit';
     submitButton.src = '../css/images/tick.png';
     submitButton.onclick = function() {
+      this.clear();
       this.gatherInfo( id );
     }.bind( this )
 
@@ -67,6 +70,7 @@ DetailCommentView.prototype = {
     cancelButton.id = 'cancel';
     cancelButton.src = '../css/images/cancel.png';
     cancelButton.onclick = function() {
+      this.clear();
       this.show();
     }.bind( this );
 

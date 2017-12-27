@@ -34,8 +34,8 @@ CommentView.prototype = {
   },
 
   show: function() {
-    this.clear();
     console.log( this.comments );
+    this.clear();
     var commentMaker = new ElementMaker();
     commentMaker.make( 'comment-space', 'ul', 'commentDetails' );
     commentMaker.makeText( 'commentDetails', 'commentDetails', 'Enter Comments', 'h4' );
@@ -62,6 +62,7 @@ CommentView.prototype = {
   },
 
   showComments: function() {
+    // this.clear();
     var elementGetter = new ElementGetter();
     for( var i = 0; i < this.comments.length; i++ ) {
       var elementMaker = new ElementMaker( );
@@ -80,7 +81,11 @@ CommentView.prototype = {
   },
 
   clear: function() {
-    new Clear();
+    var clearAll = new Clear();
+    clearAll.wipe();
+    var clear = new Clear( 'comment-space' );
+    clear.wipe();
+    clear.hide();
   },
 
   gatherInfo: function() {
@@ -89,6 +94,10 @@ CommentView.prototype = {
     var author = elementGetter.getElementValue( 'author' );
     var text = elementGetter.getElementValue( 'text' );
 
+    if(( !author ) || ( !text )) {
+      this.displayWarning( author, text );
+      return;
+    }
     this.addCommentToDB( author, text, this.id );
   },
 
@@ -119,6 +128,22 @@ CommentView.prototype = {
       if( this.comments[i].id === parseInt( id )) {
         var detailCommentView = new DetailCommentView( this.comments[i] );
       }
+    }
+  },
+
+  displayWarning: function( author, text ) {
+    var warnSpace = document.getElementById( "warn-space" );
+    warnSpace.id = "warn-space";
+    warnSpace.innerText = "";
+    if( !author ) {
+      var authorWarning = document.createElement( "p" );
+      authorWarning.innerText = "Please add an author";
+      warnSpace.appendChild( authorWarning );
+    }
+    if( !text ) {
+      var textWarning = document.createElement( "p" );
+      textWarning.innerText = "Please add a comment";
+      warnSpace.appendChild( textWarning );
     }
   }
 }

@@ -273,7 +273,6 @@ DetailView.prototype = {
   },
 
   comment: function( id ) {
-    console.log( id );
     var comments = new CommentView( id );
   },
 

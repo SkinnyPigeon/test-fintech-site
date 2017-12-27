@@ -1,6 +1,6 @@
 var Clear = function( toShow ) {
   this.toShow = toShow;
-  this.spaces = [ "new-space", "all-space", "detail-space", "search-space", "edit-space","comment-space", "home-space" ];
+  this.spaces = [ "new-space", "all-space", "detail-space", "search-space", "edit-space","comment-space", "home-space", "edit-comment-space", "single-comment-space", "warn-space" ];
 }
 
 Clear.prototype = {
