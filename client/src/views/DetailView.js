@@ -216,9 +216,6 @@ DetailView.prototype = {
     request.onload = () => {
       if( request.status === 200 ) {
         var companys = JSON.parse( request.responseText )
-        // location.reload();
-        // this.clearDetails();
-        // this.show();
         this.getCompany( id );
       }
     }

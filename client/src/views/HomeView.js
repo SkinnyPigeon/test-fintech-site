@@ -14,7 +14,8 @@ var HomeView = function() {
   this.companies = [];
 
   this.displayNav();
-  this.getCompanies();
+  this.show();
+  // this.getCompanies();
 }
 
 HomeView.prototype = {
@@ -26,7 +27,7 @@ HomeView.prototype = {
     var homeButton = elementGetter.getElement( 'home' );
     homeButton.onclick = function() {
       this.clear();
-      this.getCompanies();
+      this.show();
     }.bind( this );
 
     var plusButton = elementGetter.getElement( 'add' );
@@ -38,7 +39,7 @@ HomeView.prototype = {
     var listButton = elementGetter.getElement( 'list' );
     listButton.onclick = function() {
       this.clear();
-      this.companyView();
+      this.getCompanies();
     }.bind( this );
 
     var searchButton = elementGetter.getElement( 'search' );
@@ -51,7 +52,6 @@ HomeView.prototype = {
   show: function() {
     this.clear();
     var homeSpace = document.getElementById( 'home-space' );
-    // homeSpace.style.display = 'block';
     var homeHeader = document.createElement( 'h3' );
     homeHeader.innerText = "Welcome to the Sopra Steria test FinTech DB"
     var homeText = document.createElement( 'h4' );
@@ -81,7 +81,9 @@ HomeView.prototype = {
       if( request.status === 200 ) {
         var companies = JSON.parse( request.responseText );
         this.companies = companies;
-        this.show();
+        // this.show();
+        // this.clear();
+        this.companyView();
       }
     }
     request.send( null );
