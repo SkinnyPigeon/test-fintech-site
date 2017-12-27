@@ -96,7 +96,6 @@
 	
 	  clear: function() {
 	    var clear = new Clear('all-space');
-	    // clear.wipe();
 	    clear.hide();
 	  },
 	
@@ -415,6 +414,12 @@
 	    checklistMaker.makeList( this.company.are_they_interested, 'companyChecklist', 'Are they interested?' );
 	    checklistMaker.makeList( this.company.external_reference, 'companyChecklist', 'External Reference?' );
 	
+	    var backButton = document.createElement( 'img' );
+	    backButton.id = 'back';
+	    backButton.src = '../css/images/back.png';
+	    backButton.onclick = function() {
+	      this.back();
+	    }.bind( this );
 	
 	    var editButton = document.createElement( 'img' );
 	    editButton.id = 'edit';
@@ -438,6 +443,7 @@
 	      this.comment( this.company.id );
 	    }.bind( this );
 	
+	    detailSpace.appendChild( backButton );
 	    detailSpace.appendChild( editButton );
 	    detailSpace.appendChild( deleteButton );
 	    detailSpace.appendChild( commentButton );
@@ -445,7 +451,12 @@
 	
 	  clear: function() {
 	    var clear = new Clear('detail-space');
-	    // clear.wipe();
+	    clear.hide();
+	  },
+	
+	  back: function() {
+	    this.clear();
+	    var clear = new Clear('all-space');
 	    clear.hide();
 	  },
 	
@@ -617,7 +628,7 @@
 	
 	NewView.prototype = {
 	  show: function() {
-	    // this.clear();
+	    this.clear();
 	
 	    var basicMaker = new ElementMaker();
 	    basicMaker.make( 'new-space', 'ul', 'companyBasicDetails' );
@@ -674,7 +685,6 @@
 	
 	  clear: function() {
 	    var clear = new Clear('new-space');
-	    clear.wipe();
 	    clear.hide();
 	  },
 	

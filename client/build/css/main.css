@@ -166,6 +166,14 @@ ul#companyChecklist {
   cursor: pointer;
 }
 
+#back {
+  max-width: 2.5em;
+}
+
+#back:hover {
+  cursor: pointer;
+}
+
 
 
 /*Colors 

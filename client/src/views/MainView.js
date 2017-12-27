@@ -34,7 +34,6 @@ MainView.prototype = {
 
   clear: function() {
     var clear = new Clear('all-space');
-    // clear.wipe();
     clear.hide();
   },
 
