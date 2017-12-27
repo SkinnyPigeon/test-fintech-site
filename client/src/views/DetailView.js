@@ -34,13 +34,6 @@ DetailView.prototype = {
     addressMaker.makeList( this.company.address_region, 'companyAddress', 'Region' );
     addressMaker.makeList( this.company.address_postcode, 'companyAddress', 'Post Code' );
 
-
-    var dateMaker = new ElementMaker();
-    dateMaker.make( 'detail-space', 'ul', 'lastContactDate' );
-    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
-
-    dateMaker.makeList( this.company.last_contact, 'lastContactDate', 'Last Contact' );
-
     var detailMaker = new ElementMaker();
     detailMaker.make( 'detail-space', 'ul', 'companyDetails' );
     detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
@@ -49,6 +42,12 @@ DetailView.prototype = {
     detailMaker.makeList( this.company.tech_used, 'companyDetails', 'Technology Used' );
     detailMaker.makeList( this.company.past_work, 'companyDetails', 'Past Work' );
     detailMaker.makeList( this.company.preferred_work, 'companyDetails', 'Preferred Work' );
+
+    var dateMaker = new ElementMaker();
+    dateMaker.make( 'detail-space', 'ul', 'lastContactDate' );
+    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
+
+    dateMaker.makeList( this.company.last_contact, 'lastContactDate', 'Last Contact' );
 
     var checklistMaker = new ElementMaker();
     checklistMaker.make( 'detail-space', 'ul', 'companyChecklist' );

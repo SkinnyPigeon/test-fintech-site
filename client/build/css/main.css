@@ -34,21 +34,24 @@ ul#companyBasicDetails {
   float: left;
   display: inline-block;
   top: 0;
+  max-width: 50%;
+  min-width: 50%;
 }
 
 ul#companyAddress {
-  float: right;
+  float: left;
   clear: right;
 }
 
 ul#companyDetails {
   float: left;
+  max-width: 50%;
+  min-width: 50%;
 }
 
 ul#lastContactDate {
-  float: right;
+  float: left;
   clear: right;
-  padding-left: 0;
   max-width: 10em;
 }
 
@@ -166,5 +169,5 @@ ul#companyChecklist {
 
 
 /*Colors 
-Red - db1d2b
-Orange - f47216*/
+Red - DB1D2B
+Orange - F47216*/
