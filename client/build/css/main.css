@@ -3,7 +3,7 @@ body, html  {
   height: 100%;
   font-family: 'Roboto', sans-serif;
   color: #1D2B38;
-  background: #E8EDED;
+  background: #F6F8F8;
   z-index: -2;
 }
 
@@ -11,7 +11,7 @@ body, html  {
   min-height: 6em;
   max-height: 6em;
   margin: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #1D2B38;
 }
 
 body {

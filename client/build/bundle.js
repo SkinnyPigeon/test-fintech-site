@@ -903,18 +903,18 @@
 	    var city = elementGetter.getElementValue( 'city' );
 	    var tech = elementGetter.getElementValue( 'tech' );
 	
-	    var nameArray = name.toUpperCase().split(/[' ,]+/);
+	    var nameArray = name.toUpperCase().split(/[' ,-]+/);
 	    for( var i = 0; i < this.companies.length; i++ ) {
-	      var nameToCheck = this.companies[i].name.toUpperCase().split(/[' ,]+/);
+	      var nameToCheck = this.companies[i].name.toUpperCase().split(/[' ,-/]+/);
 	      var results = _.intersection( nameArray, nameToCheck );
 	      if( results.length > 0 ) {
 	        this.resultIndexes.push( i );
 	      }
 	    }
 	
-	    var cityArray = city.toUpperCase().split(/[' ,]+/);
+	    var cityArray = city.toUpperCase().split(/[' ,/]+/);
 	    for( var i = 0; i < this.companies.length; i++ ) {
-	      var cityToCheck = this.companies[i].address_city.toUpperCase().split(/[' ,]+/);
+	      var cityToCheck = this.companies[i].address_city.toUpperCase().split(/[' ,-/]+/);
 	      var results = _.intersection( cityArray, cityToCheck );
 	      if( results.length > 0 ) {
 	        this.resultIndexes.push( i );
@@ -923,7 +923,7 @@
 	
 	    var techArray = tech.toUpperCase().split(/[' ,]+/);
 	    for( var i = 0; i < this.companies.length; i++ ) {
-	      var techToCheck = this.companies[i].tech_used.toUpperCase().split(/[' ,]+/);
+	      var techToCheck = this.companies[i].tech_used.toUpperCase().split(/[' ,-/]+/);
 	      var results = _.intersection( techArray, techToCheck );
 	      if( results.length > 0 ) {
 	        this.resultIndexes.push( i );
