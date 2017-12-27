@@ -66,6 +66,8 @@ HomeView.prototype = {
   },
 
   clear: function() {
+    var clearHome = new Clear();
+    clearHome.wipe();
     var clear = new Clear('home-space');
     clear.wipe();
     clear.hide();

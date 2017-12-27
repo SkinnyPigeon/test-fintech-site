@@ -816,7 +816,7 @@
 	SearchView.prototype = {
 	
 	  show: function() {
-	    // this.clear();
+	    this.clear();
 	    var elementMaker = new ElementMaker();
 	    elementMaker.make( 'search-space', 'ul', 'directSearch' );
 	    elementMaker.makeText( 'directSearch', 'directSearch', 'Targetted Search', 'h4' );
@@ -852,7 +852,9 @@
 	  },
 	
 	  clear: function() {
-	    new Clear('search-space');
+	    var clear = new Clear('search-space');
+	    clear.wipe();
+	    clear.hide();
 	  },
 	
 	  targetSearch: function() {
@@ -18455,6 +18457,8 @@
 	  },
 	
 	  clear: function() {
+	    var clearHome = new Clear();
+	    clearHome.wipe();
 	    var clear = new Clear('home-space');
 	    clear.wipe();
 	    clear.hide();
