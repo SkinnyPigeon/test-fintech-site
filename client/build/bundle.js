@@ -18319,7 +18319,7 @@
 	    editButton.id = 'edit';
 	    editButton.src = '../css/images/edit.png';
 	    editButton.onclick = function() {
-	      this.clear( 'single-comment-space' );
+	      this.clear( 'edit-comment-space' );
 	      this.edit( this.comment.id );
 	    }.bind( this );
 	
