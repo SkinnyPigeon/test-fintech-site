@@ -32,12 +32,6 @@ NewView.prototype = {
     addressMaker.makeListItem( 'companyAddress', 'addressRegion', 'Region...' );
     addressMaker.makeListItem( 'companyAddress', 'addressPostCode', 'Post Code...' );
 
-    var dateMaker = new ElementMaker();
-    dateMaker.make( 'new-space', 'ul', 'lastContactDate' );
-    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
-
-    dateMaker.makeListItem( 'lastContactDate', 'lastContact', 'Last Contact...', 'date' );
-
     var detailMaker = new ElementMaker();
     detailMaker.make( 'new-space', 'ul', 'companyDetails' );
     detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
@@ -46,6 +40,12 @@ NewView.prototype = {
     detailMaker.makeListItem( 'companyDetails', 'techUsed', 'Tech Used...' );
     detailMaker.makeListItem( 'companyDetails', 'typeOfWork', 'Type Of Work Undertaken...' );
     detailMaker.makeListItem( 'companyDetails', 'preferredWork', 'Preferred Work...' );
+
+    var dateMaker = new ElementMaker();
+    dateMaker.make( 'new-space', 'ul', 'lastContactDate' );
+    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
+
+    dateMaker.makeListItem( 'lastContactDate', 'lastContact', 'Last Contact...', 'date' );
 
     var checklistMaker = new ElementMaker();
     checklistMaker.make( 'new-space', 'ul', 'companyChecklist' );

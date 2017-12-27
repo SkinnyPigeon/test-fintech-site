@@ -465,11 +465,6 @@
 	    addressMaker.edit( 'companyAddress', 'addressRegion', this.company.address_region );
 	    addressMaker.edit( 'companyAddress', 'addressPostCode', this.company.address_postcode );
 	
-	    var dateMaker = new ElementMaker();
-	    dateMaker.make( 'edit-space', 'ul', 'lastContactDate' );
-	    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
-	    dateMaker.edit( 'lastContactDate', 'lastContact', this.company.last_contact, 'date', 'Last Contact: ' );
-	
 	    var detailMaker = new ElementMaker();
 	    detailMaker.make( 'edit-space', 'ul', 'companyDetails' );
 	    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
@@ -478,6 +473,11 @@
 	    detailMaker.edit( 'companyDetails', 'techUsed', this.company.tech_used );
 	    detailMaker.edit( 'companyDetails', 'typeOfWork', this.company.type_of_work );
 	    detailMaker.edit( 'companyDetails', 'preferredWork', this.company.preferred_work );
+	
+	    var dateMaker = new ElementMaker();
+	    dateMaker.make( 'edit-space', 'ul', 'lastContactDate' );
+	    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
+	    dateMaker.edit( 'lastContactDate', 'lastContact', this.company.last_contact, 'date', 'Last Contact: ' );
 	
 	    var checklistMaker = new ElementMaker();
 	    checklistMaker.make( 'edit-space', 'ul', 'companyChecklist' );
@@ -634,12 +634,6 @@
 	    addressMaker.makeListItem( 'companyAddress', 'addressRegion', 'Region...' );
 	    addressMaker.makeListItem( 'companyAddress', 'addressPostCode', 'Post Code...' );
 	
-	    var dateMaker = new ElementMaker();
-	    dateMaker.make( 'new-space', 'ul', 'lastContactDate' );
-	    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
-	
-	    dateMaker.makeListItem( 'lastContactDate', 'lastContact', 'Last Contact...', 'date' );
-	
 	    var detailMaker = new ElementMaker();
 	    detailMaker.make( 'new-space', 'ul', 'companyDetails' );
 	    detailMaker.makeText( 'companyDetails', 'companyDetails', 'Company History', 'h4' );
@@ -648,6 +642,12 @@
 	    detailMaker.makeListItem( 'companyDetails', 'techUsed', 'Tech Used...' );
 	    detailMaker.makeListItem( 'companyDetails', 'typeOfWork', 'Type Of Work Undertaken...' );
 	    detailMaker.makeListItem( 'companyDetails', 'preferredWork', 'Preferred Work...' );
+	
+	    var dateMaker = new ElementMaker();
+	    dateMaker.make( 'new-space', 'ul', 'lastContactDate' );
+	    dateMaker.makeText( 'lastContactDate', 'lastContactDate', 'Last Contact Date', 'h4' );
+	
+	    dateMaker.makeListItem( 'lastContactDate', 'lastContact', 'Last Contact...', 'date' );
 	
 	    var checklistMaker = new ElementMaker();
 	    checklistMaker.make( 'new-space', 'ul', 'companyChecklist' );
