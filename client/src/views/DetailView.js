@@ -216,7 +216,10 @@ DetailView.prototype = {
     request.onload = () => {
       if( request.status === 200 ) {
         var companys = JSON.parse( request.responseText )
-        location.reload();
+        // location.reload();
+        // this.clearDetails();
+        // this.show();
+        this.getCompany( id );
       }
     }
     var data = {
@@ -255,6 +258,21 @@ DetailView.prototype = {
       }
     }
     request.send();
+  },
+
+  getCompany: function( id ) {
+    var request = new XMLHttpRequest();
+    request.open( 'GET', this.companyUrl + '/' + id );
+    request.setRequestHeader("Content-Type", "application/json")
+    request.onload = () => {
+      if( request.status === 200 ) {
+        var company = JSON.parse( request.responseText );
+        this.company = company;
+        this.clearDetails();
+        this.show();
+      }
+    }
+    request.send( null );
   },
 
   comment: function( id ) {
