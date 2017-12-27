@@ -38,12 +38,31 @@ ul#companyBasicDetails {
   min-width: 50%;
 }
 
+ul#companyBasicDetailsEdit {
+  float: left;
+  display: inline-block;
+  top: 0;
+  max-width: 50%;
+  min-width: 50%;
+}
+
 ul#companyAddress {
   float: left;
   clear: right;
 }
 
+ul#companyAddressEdit {
+  float: left;
+  clear: right;
+}
+
 ul#companyDetails {
+  float: left;
+  max-width: 50%;
+  min-width: 50%;
+}
+
+ul#companyDetailsEdit {
   float: left;
   max-width: 50%;
   min-width: 50%;
@@ -55,7 +74,17 @@ ul#lastContactDate {
   max-width: 10em;
 }
 
+ul#lastContactDateEdit {
+  float: left;
+  clear: right;
+  max-width: 10em;
+}
+
 ul#companyChecklist {
+  clear: both;
+}
+
+ul#companyChecklistEdit {
   clear: both;
 }
 
