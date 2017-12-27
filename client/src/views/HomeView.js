@@ -47,6 +47,7 @@ HomeView.prototype = {
   show: function() {
     this.clear();
     var homeSpace = document.getElementById( 'home-space' );
+    // homeSpace.style.display = 'block';
     var homeHeader = document.createElement( 'h3' );
     homeHeader.innerText = "Welcome to the Sopra Steria test FinTech DB"
     var homeText = document.createElement( 'h4' );
@@ -61,7 +62,7 @@ HomeView.prototype = {
   },
 
   clear: function() {
-    new Clear();
+    new Clear('home-space');
   },
 
   getCompanies: function() {

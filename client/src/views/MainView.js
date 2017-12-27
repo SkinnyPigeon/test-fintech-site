@@ -33,7 +33,7 @@ MainView.prototype = {
   },
 
   clear: function() {
-    new Clear();
+    new Clear('all-space');
   },
 
   showDetails: function( id ) {

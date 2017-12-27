@@ -15,6 +15,9 @@ DetailView.prototype = {
   show: function() {
     this.clear();
 
+    var detailSpace = document.getElementById( 'detail-space' );
+
+
     var basicMaker = new ElementMaker();
     basicMaker.make( 'detail-space', 'ul', 'companyBasicDetails' );
     basicMaker.makeText( 'companyBasicDetails', 'companyBasicDetails', 'Basic Details', 'h4' );
@@ -58,7 +61,6 @@ DetailView.prototype = {
     checklistMaker.makeList( this.company.are_they_interested, 'companyChecklist', 'Are they interested?' );
     checklistMaker.makeList( this.company.external_reference, 'companyChecklist', 'External Reference?' );
 
-    var detailSpace = document.getElementById( 'detail-space' );
 
     var editButton = document.createElement( 'img' );
     editButton.id = 'edit';
@@ -88,7 +90,7 @@ DetailView.prototype = {
   },
 
   clear: function() {
-    new Clear();
+    new Clear('detail-space');
   },
 
   edit: function( id ) {
