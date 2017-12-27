@@ -17,9 +17,11 @@ Clear.prototype = {
   },
 
   wipe: function() {
-    var spaceToWipe = document.getElementById( this.toShow );
-    while( spaceToWipe.hasChildNodes() ) {
-      spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+    for( var i = 0; i < this.spaces.length; i++ ) {
+      var spaceToWipe = document.getElementById( this.spaces[i] );
+      while( spaceToWipe.hasChildNodes() ) {
+        spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+      }
     }
   }
 }

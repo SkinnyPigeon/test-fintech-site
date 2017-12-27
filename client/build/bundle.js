@@ -95,7 +95,9 @@
 	  },
 	
 	  clear: function() {
-	    new Clear('all-space');
+	    var clear = new Clear('all-space');
+	    // clear.wipe();
+	    clear.hide();
 	  },
 	
 	  showDetails: function( id ) {
@@ -166,7 +168,6 @@
 	
 	    if( extraText ) {
 	      whatToMake.innerText = extraText + ": " + text;
-	      console.log( whatToMake.innerText );
 	    } else {
 	      whatToMake.innerText = text;
 	    }
@@ -368,9 +369,8 @@
 	DetailView.prototype = {
 	  show: function() {
 	    this.clear();
-	
+	    console.log( this.company );
 	    var detailSpace = document.getElementById( 'detail-space' );
-	
 	
 	    var basicMaker = new ElementMaker();
 	    basicMaker.make( 'detail-space', 'ul', 'companyBasicDetails' );
@@ -444,7 +444,9 @@
 	  },
 	
 	  clear: function() {
-	    new Clear('detail-space');
+	    var clear = new Clear('detail-space');
+	    // clear.wipe();
+	    clear.hide();
 	  },
 	
 	  edit: function( id ) {
@@ -615,7 +617,7 @@
 	
 	NewView.prototype = {
 	  show: function() {
-	    this.clear();
+	    // this.clear();
 	
 	    var basicMaker = new ElementMaker();
 	    basicMaker.make( 'new-space', 'ul', 'companyBasicDetails' );
@@ -671,7 +673,9 @@
 	
 	
 	  clear: function() {
-	    new Clear('new-space');
+	    var clear = new Clear('new-space');
+	    clear.wipe();
+	    clear.hide();
 	  },
 	
 	  gatherInfo: function() {
@@ -791,7 +795,7 @@
 	SearchView.prototype = {
 	
 	  show: function() {
-	    this.clear();
+	    // this.clear();
 	    var elementMaker = new ElementMaker();
 	    elementMaker.make( 'search-space', 'ul', 'directSearch' );
 	    elementMaker.makeText( 'directSearch', 'directSearch', 'Targetted Search', 'h4' );
@@ -18389,21 +18393,25 @@
 	
 	    var homeButton = elementGetter.getElement( 'home' );
 	    homeButton.onclick = function() {
+	      this.clear();
 	      this.getCompanies();
 	    }.bind( this );
 	
 	    var plusButton = elementGetter.getElement( 'add' );
 	    plusButton.onclick = function() {
+	      this.clear();
 	      this.newView();
 	    }.bind( this );
 	
 	    var listButton = elementGetter.getElement( 'list' );
 	    listButton.onclick = function() {
+	      this.clear();
 	      this.companyView();
 	    }.bind( this );
 	
 	    var searchButton = elementGetter.getElement( 'search' );
 	    searchButton.onclick = function() {
+	      this.clear();
 	      this.searchView();
 	    }.bind( this );
 	  },
@@ -18483,9 +18491,11 @@
 	  },
 	
 	  wipe: function() {
-	    var spaceToWipe = document.getElementById( this.toShow );
-	    while( spaceToWipe.hasChildNodes() ) {
-	      spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+	    for( var i = 0; i < this.spaces.length; i++ ) {
+	      var spaceToWipe = document.getElementById( this.spaces[i] );
+	      while( spaceToWipe.hasChildNodes() ) {
+	        spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+	      }
 	    }
 	  }
 	}

@@ -25,21 +25,25 @@ HomeView.prototype = {
 
     var homeButton = elementGetter.getElement( 'home' );
     homeButton.onclick = function() {
+      this.clear();
       this.getCompanies();
     }.bind( this );
 
     var plusButton = elementGetter.getElement( 'add' );
     plusButton.onclick = function() {
+      this.clear();
       this.newView();
     }.bind( this );
 
     var listButton = elementGetter.getElement( 'list' );
     listButton.onclick = function() {
+      this.clear();
       this.companyView();
     }.bind( this );
 
     var searchButton = elementGetter.getElement( 'search' );
     searchButton.onclick = function() {
+      this.clear();
       this.searchView();
     }.bind( this );
   },

@@ -11,7 +11,7 @@ var NewView = function() {
 
 NewView.prototype = {
   show: function() {
-    this.clear();
+    // this.clear();
 
     var basicMaker = new ElementMaker();
     basicMaker.make( 'new-space', 'ul', 'companyBasicDetails' );
@@ -67,7 +67,9 @@ NewView.prototype = {
 
 
   clear: function() {
-    new Clear('new-space');
+    var clear = new Clear('new-space');
+    clear.wipe();
+    clear.hide();
   },
 
   gatherInfo: function() {

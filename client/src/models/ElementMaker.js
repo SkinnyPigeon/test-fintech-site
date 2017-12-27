@@ -43,7 +43,6 @@ ElementMaker.prototype = {
 
     if( extraText ) {
       whatToMake.innerText = extraText + ": " + text;
-      console.log( whatToMake.innerText );
     } else {
       whatToMake.innerText = text;
     }

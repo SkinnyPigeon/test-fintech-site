@@ -33,7 +33,9 @@ MainView.prototype = {
   },
 
   clear: function() {
-    new Clear('all-space');
+    var clear = new Clear('all-space');
+    // clear.wipe();
+    clear.hide();
   },
 
   showDetails: function( id ) {

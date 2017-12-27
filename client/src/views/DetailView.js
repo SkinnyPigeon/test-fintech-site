@@ -14,9 +14,8 @@ var DetailView = function( company ) {
 DetailView.prototype = {
   show: function() {
     this.clear();
-
+    console.log( this.company );
     var detailSpace = document.getElementById( 'detail-space' );
-
 
     var basicMaker = new ElementMaker();
     basicMaker.make( 'detail-space', 'ul', 'companyBasicDetails' );
@@ -90,7 +89,9 @@ DetailView.prototype = {
   },
 
   clear: function() {
-    new Clear('detail-space');
+    var clear = new Clear('detail-space');
+    // clear.wipe();
+    clear.hide();
   },
 
   edit: function( id ) {
