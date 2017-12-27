@@ -11,6 +11,20 @@ body, html  {
   border-bottom: 1px solid black;
 }
 
+#nav-space {
+  margin-right: 1%;
+}
+
+ul#navList {
+  margin-top: 3.5%;
+  margin-bottom: 0;
+}
+
+img#logo {
+  margin-top: 10%;
+  margin-left: 5%;
+}
+
 #all-space ul:hover {
   font-weight: bold;
   cursor: pointer;
@@ -86,6 +100,23 @@ ul#companyChecklist {
 
 ul#companyChecklistEdit {
   clear: both;
+}
+
+ul#companyChecklistEdit p {
+  max-width: 20%;
+  min-width: 20%;
+  float: left;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  clear: left;
+}
+
+ul#companyChecklistEdit li {
+  margin-bottom: 0.5em;
+}
+
+#home-space {
+  text-align: center;
 }
 
 

@@ -431,6 +431,9 @@
 	    checklistMaker.makeList( this.company.are_they_interested, 'companyChecklist', 'Are they interested?' );
 	    checklistMaker.makeList( this.company.external_reference, 'companyChecklist', 'External Reference?' );
 	
+	    var buttonList = document.createElement( 'ul' );
+	
+	
 	    var backButton = document.createElement( 'img' );
 	    backButton.id = 'back';
 	    backButton.src = '../css/images/back.png';
@@ -459,10 +462,11 @@
 	      this.comment( this.company.id );
 	    }.bind( this );
 	
-	    detailSpace.appendChild( backButton );
-	    detailSpace.appendChild( editButton );
-	    detailSpace.appendChild( deleteButton );
-	    detailSpace.appendChild( commentButton );
+	    buttonList.appendChild( backButton );
+	    buttonList.appendChild( editButton );
+	    buttonList.appendChild( deleteButton );
+	    buttonList.appendChild( commentButton );
+	    detailSpace.appendChild( buttonList );
 	  },
 	
 	  clear: function() {
