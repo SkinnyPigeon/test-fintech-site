@@ -19,6 +19,7 @@ body {
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 50%;
+  background-attachment: fixed;
 }
 
 #nav-space {
