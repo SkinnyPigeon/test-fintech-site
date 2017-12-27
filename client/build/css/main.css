@@ -1,7 +1,9 @@
 body, html  {
   margin: 0;
   height: 100%;
-  font-family: 'Amatic SC', cursive;
+  font-family: 'Roboto', sans-serif;
+  color: #1D2B38;
+  background: #E8EDED;
 }
 
 #nav-bar {
@@ -92,13 +94,13 @@ ul#companyDetailsEdit {
 ul#lastContactDate {
   float: left;
   clear: right;
-  max-width: 10em;
+  max-width: 40%;
 }
 
 ul#lastContactDateEdit {
   float: left;
   clear: right;
-  max-width: 10em;
+  max-width: 40%;
 }
 
 ul#companyChecklist {

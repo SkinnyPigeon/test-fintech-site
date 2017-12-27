@@ -55,10 +55,10 @@ HomeView.prototype = {
     var homeSpace = document.getElementById( 'home-space' );
     var homeHeader = document.createElement( 'h3' );
     homeHeader.innerText = "Welcome to the Sopra Steria test FinTech DB"
-    var homeText = document.createElement( 'h4' );
+    var homeText = document.createElement( 'p' );
     homeText.innerText = "Please feel free to test out the different features and please report any bugs or issues to me"
 
-    var thanks = document.createElement( 'h4' );
+    var thanks = document.createElement( 'p' );
     thanks.innerText = "Thanks";
 
     homeSpace.appendChild( homeHeader );
