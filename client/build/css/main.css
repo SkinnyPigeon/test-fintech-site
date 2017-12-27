@@ -15,10 +15,10 @@ body, html  {
 }
 
 body {
-  background-image: url('./images/swirl.png');
+  background-image: url('./images/swish.png');
   background-repeat: no-repeat;
   background-position: bottom right;
-  background-size: 20%;
+  background-size: 50%;
 }
 
 #nav-space {
