@@ -59,7 +59,7 @@ HomeView.prototype = {
     homeText.innerText = "Please feel free to test out the different features and please report any bugs or issues to me"
 
     var thanks = document.createElement( 'p' );
-    thanks.innerText = "Thanks";
+    thanks.innerText = "Thanks - Euan";
 
     homeSpace.appendChild( homeHeader );
     homeSpace.appendChild( homeText );

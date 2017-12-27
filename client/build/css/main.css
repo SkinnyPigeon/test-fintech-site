@@ -13,12 +13,12 @@ body, html  {
   border-bottom: 1px solid black;
 }
 
-body {
+/*body {
   background-image: url('./images/swirl.png');
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 20%;
-}
+}*/
 
 #nav-space {
   margin-right: 1%;
@@ -271,7 +271,33 @@ ul:hover {
   cursor: pointer;
 }
 
+#red-line {
+  margin: 0;
+  bottom: 10px;
+  height: 52px;
+  min-width: 98%;
+  max-width: 98%;
+  border-bottom: 3px solid #DB1D2B;
+  border-right: 3px solid #DB1D2B;
+  -moz-transform: skew(-45deg);
+  -webkit-transform: skew(-45deg);
+  transform: skew(-45deg);
+  position: absolute;
+}
 
+#orange-line {
+  margin: 0;
+  bottom: 4px;
+  height: 50px;
+  min-width: 98%;
+  max-width: 98%;
+  border-bottom: 3px solid #F47216;
+  border-right: 3px solid #F47216;
+  -moz-transform: skew(-45deg);
+  -webkit-transform: skew(-45deg);
+  transform: skew(-45deg);
+  position: absolute;
+}
 
 /*Colors 
 Red - DB1D2B
