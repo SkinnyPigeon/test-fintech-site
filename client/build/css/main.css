@@ -140,6 +140,10 @@ ul#companyChecklist li {
   padding-left: 30px;
 }
 
+ul:hover {
+  cursor: pointer;
+}
+
 
 /*Images from Nav Bar*/
 
@@ -184,7 +188,8 @@ ul#companyChecklist li {
 }
 
 #targetButton {
-  max-width: 2.5em;
+  max-width: 2.3em;
+  padding-left: 35px;
 }
 
 #targetButton:hover {
@@ -192,7 +197,8 @@ ul#companyChecklist li {
 }
 
 #generalButton {
-  max-width: 2.5em;
+  max-width: 2.3em;
+  padding-left: 35px;
 }
 
 #generalButton:hover {
@@ -216,7 +222,8 @@ ul#companyChecklist li {
 }
 
 #submit {
-  max-width: 2.5em;
+  max-width: 2.3em;
+  padding-left: 35px;
 }
 
 #submit:hover {
