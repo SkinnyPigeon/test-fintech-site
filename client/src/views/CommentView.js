@@ -34,7 +34,6 @@ CommentView.prototype = {
   },
 
   show: function() {
-    console.log( this.comments );
     this.clear();
     var commentMaker = new ElementMaker();
     commentMaker.make( 'comment-space', 'ul', 'commentDetails' );
@@ -62,26 +61,26 @@ CommentView.prototype = {
   },
 
   showComments: function() {
-    // this.clear();
     var elementGetter = new ElementGetter();
     for( var i = 0; i < this.comments.length; i++ ) {
-      var elementMaker = new ElementMaker( );
-      elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
-      var comment = elementGetter.getElement( this.comments[i].id );
-      comment.onclick = function( e ) {
-        this.showComment( e.target.parentNode.id );
-      }.bind( this );
-      var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
-      var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
-      var br = document.createElement('br');
-      var brSpace = document.getElementById( 'comment-space' );
-      brSpace.appendChild( br );
+      if( this.comments[i].author !== "" ) {
+        var elementMaker = new ElementMaker( );
+        elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
+        var comment = elementGetter.getElement( this.comments[i].id );
+        comment.onclick = function( e ) {
+          this.showComment( e.target.parentNode.id );
+        }.bind( this );
+        var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
+        var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
+        var br = document.createElement('br');
+        var brSpace = document.getElementById( 'comment-space' );
+        brSpace.appendChild( br );
+      }
     }
-
   },
 
   clear: function() {
-    var clearAll = new Clear();
+    var clearAll = new Clear( 'warn-space' );
     clearAll.wipe();
     var clear = new Clear( 'comment-space' );
     clear.wipe();
@@ -90,10 +89,8 @@ CommentView.prototype = {
 
   gatherInfo: function() {
     var elementGetter = new ElementGetter();
-
     var author = elementGetter.getElementValue( 'author' );
     var text = elementGetter.getElementValue( 'text' );
-
     if(( !author ) || ( !text )) {
       this.displayWarning( author, text );
       return;
@@ -102,11 +99,9 @@ CommentView.prototype = {
   },
 
   addCommentToDB: function( author, text, id ) {
-
     var request = new XMLHttpRequest();
     request.open( 'POST', this.commentUrl);
     request.setRequestHeader("Content-Type", "application/json");
-
     request.onload = () => {
       if( request.status === 201 ) {
         var comments = JSON.parse( request.responseText )
@@ -145,6 +140,7 @@ CommentView.prototype = {
       textWarning.innerText = "Please add a comment";
       warnSpace.appendChild( textWarning );
     }
+    this.show();
   }
 }
 

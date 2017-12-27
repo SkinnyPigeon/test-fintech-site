@@ -106,13 +106,6 @@
 	    for( var i = 0; i < this.companies.length; i++ ) {
 	      if( this.companies[i].id === parseInt( id )) {
 	        var detailView = new DetailView( this.companies[i] );
-	        // var space = document.getElementById( 'extra-space' );
-	        // var button = document.createElement( 'button' );
-	        // button.innerText = "AHJSDKHASKDS";
-	        // button.onclick = function() {
-	        //   this.companies[i] = detailView.returnCompany();
-	        // }
-	        // space.appendChild( button );
 	      }
 	    }
 	  },
@@ -18170,7 +18163,6 @@
 	  },
 	
 	  show: function() {
-	    console.log( this.comments );
 	    this.clear();
 	    var commentMaker = new ElementMaker();
 	    commentMaker.make( 'comment-space', 'ul', 'commentDetails' );
@@ -18198,26 +18190,26 @@
 	  },
 	
 	  showComments: function() {
-	    // this.clear();
 	    var elementGetter = new ElementGetter();
 	    for( var i = 0; i < this.comments.length; i++ ) {
-	      var elementMaker = new ElementMaker( );
-	      elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
-	      var comment = elementGetter.getElement( this.comments[i].id );
-	      comment.onclick = function( e ) {
-	        this.showComment( e.target.parentNode.id );
-	      }.bind( this );
-	      var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
-	      var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
-	      var br = document.createElement('br');
-	      var brSpace = document.getElementById( 'comment-space' );
-	      brSpace.appendChild( br );
+	      if( this.comments[i].author !== "" ) {
+	        var elementMaker = new ElementMaker( );
+	        elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
+	        var comment = elementGetter.getElement( this.comments[i].id );
+	        comment.onclick = function( e ) {
+	          this.showComment( e.target.parentNode.id );
+	        }.bind( this );
+	        var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
+	        var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
+	        var br = document.createElement('br');
+	        var brSpace = document.getElementById( 'comment-space' );
+	        brSpace.appendChild( br );
+	      }
 	    }
-	
 	  },
 	
 	  clear: function() {
-	    var clearAll = new Clear();
+	    var clearAll = new Clear( 'warn-space' );
 	    clearAll.wipe();
 	    var clear = new Clear( 'comment-space' );
 	    clear.wipe();
@@ -18226,10 +18218,8 @@
 	
 	  gatherInfo: function() {
 	    var elementGetter = new ElementGetter();
-	
 	    var author = elementGetter.getElementValue( 'author' );
 	    var text = elementGetter.getElementValue( 'text' );
-	
 	    if(( !author ) || ( !text )) {
 	      this.displayWarning( author, text );
 	      return;
@@ -18238,11 +18228,9 @@
 	  },
 	
 	  addCommentToDB: function( author, text, id ) {
-	
 	    var request = new XMLHttpRequest();
 	    request.open( 'POST', this.commentUrl);
 	    request.setRequestHeader("Content-Type", "application/json");
-	
 	    request.onload = () => {
 	      if( request.status === 201 ) {
 	        var comments = JSON.parse( request.responseText )
@@ -18281,6 +18269,7 @@
 	      textWarning.innerText = "Please add a comment";
 	      warnSpace.appendChild( textWarning );
 	    }
+	    this.show();
 	  }
 	}
 	
@@ -18304,7 +18293,7 @@
 	DetailCommentView.prototype = {
 	
 	  show: function() {
-	    this.clear( 'single-comment-space' );
+	    this.clearComment( 'single-comment-space' );
 	
 	    var commentMaker = new ElementMaker();
 	    commentMaker.make( 'single-comment-space', 'ul', 'singleCommentDetails' );
@@ -18315,11 +18304,17 @@
 	
 	    var commentSpace = document.getElementById( 'single-comment-space' );
 	
+	    var backButton = document.createElement( 'img' );
+	    backButton.id = 'back';
+	    backButton.src = '../css/images/back.png';
+	    backButton.onclick = function() {
+	      this.back();
+	    }.bind( this );
+	
 	    var editButton = document.createElement( 'img' );
 	    editButton.id = 'edit';
 	    editButton.src = '../css/images/edit.png';
 	    editButton.onclick = function() {
-	      this.clear( 'edit-comment-space' );
 	      this.edit( this.comment.id );
 	    }.bind( this );
 	
@@ -18330,23 +18325,35 @@
 	      this.delete( this.comment.id );
 	    }.bind( this );
 	
+	    commentSpace.appendChild( backButton );
 	    commentSpace.appendChild( editButton );
 	    commentSpace.appendChild( deleteButton );
 	  },
 	
-	  clear: function( space ) {
+	  clearComment: function( space ) {
+	    var clearSpace = new Clear( 'comment-space' );
+	    clearSpace.wipe();
+	    clearSpace.hide();
 	    var clear = new Clear( space );
 	    clear.hide();
-	    clear.wipe();
+	    // clear.wipe();
+	  },
+	
+	  back: function() {
+	    var clear = new Clear( 'comment-space' );
+	    clear.hide();
 	  },
 	
 	  edit: function( id ) {
+	    var clear = new Clear( 'edit-comment-space' );
+	    clear.hide();
+	    console.log( id )
 	    var commentEdit = new ElementMaker();
 	    commentEdit.make( 'edit-comment-space', 'ul', 'editCommentDetails' );
 	    commentEdit.makeText( 'editCommentDetails', 'editCommentDetails', 'Edit Comment', 'h4' );
 	
-	    commentEdit.edit( 'editCommentDetails', 'author', this.comment.author );
-	    commentEdit.edit( 'editCommentDetails', 'text', this.comment.text );
+	    commentEdit.edit( 'editCommentDetails', 'authorEdit', this.comment.author );
+	    commentEdit.edit( 'editCommentDetails', 'textEdit', this.comment.text );
 	
 	    var editSpace = document.getElementById( 'edit-comment-space' );
 	
@@ -18354,7 +18361,6 @@
 	    submitButton.id = 'submit';
 	    submitButton.src = '../css/images/tick.png';
 	    submitButton.onclick = function() {
-	      this.clear( 'edit-comment-space' );
 	      this.gatherInfo( id );
 	    }.bind( this )
 	
@@ -18362,7 +18368,7 @@
 	    cancelButton.id = 'cancel';
 	    cancelButton.src = '../css/images/cancel.png';
 	    cancelButton.onclick = function() {
-	      this.clear( 'edit-comment-space' );
+	      this.clearComment( 'edit-comment-space' );
 	      this.show();
 	    }.bind( this );
 	
@@ -18372,10 +18378,9 @@
 	  },
 	
 	  gatherInfo: function( id ) {
-	    console.log( id );
 	    var elementGetter = new ElementGetter();
-	    var author = elementGetter.getElementValue( 'author' );
-	    var text = elementGetter.getElementValue( 'text' );
+	    var author = elementGetter.getElementValue( 'authorEdit' );
+	    var text = elementGetter.getElementValue( 'textEdit' );
 	    this.updateDB( id, author, text );
 	  },
 	
@@ -18387,6 +18392,7 @@
 	      if( request.status === 200 ) {
 	        var comment = JSON.parse( request.responseText )
 	        this.comment = comment;
+	        this.clearComment( 'edit-comment-space' );
 	        this.show();
 	      }
 	    }
@@ -18414,7 +18420,7 @@
 	  },
 	
 	  displayDeleted: function() {
-	    this.clear();
+	    this.clearComment();
 	
 	    var deleteSpace = document.getElementById( 'comment-space' );
 	    var deleteMessage = document.createElement( 'h3' );

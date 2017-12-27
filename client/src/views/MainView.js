@@ -44,13 +44,6 @@ MainView.prototype = {
     for( var i = 0; i < this.companies.length; i++ ) {
       if( this.companies[i].id === parseInt( id )) {
         var detailView = new DetailView( this.companies[i] );
-        // var space = document.getElementById( 'extra-space' );
-        // var button = document.createElement( 'button' );
-        // button.innerText = "AHJSDKHASKDS";
-        // button.onclick = function() {
-        //   this.companies[i] = detailView.returnCompany();
-        // }
-        // space.appendChild( button );
       }
     }
   },
