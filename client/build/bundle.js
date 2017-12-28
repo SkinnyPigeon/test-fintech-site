@@ -44,7 +44,6 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var MainView = __webpack_require__( 1 );
 	var HomeView = __webpack_require__( 13 );
 	
 	window.onload = function() {
@@ -52,7 +51,6 @@
 	}
 	
 	var main = function() {
-	  // var mainView = new MainView();
 	  var homeView = new HomeView();
 	}
 
