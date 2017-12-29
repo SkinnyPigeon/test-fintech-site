@@ -1210,18 +1210,22 @@
 	    submitButton.onclick = function() {
 	      this.gatherInfo();
 	    }.bind( this );
-	    document.addEventListener( 'keypress', function(e) {
+	    document.addEventListener( 'keypress', function added(e) {
 	      if( e.key === 'Enter' ) {
+	        document.removeEventListener( 'keypress', added );
 	        this.gatherInfo();
 	      }
-	    }.bind( this ))
+	    }.bind( this ));
 	    this.div.appendChild( submitButton );
 	  },
 	
 	
 	  clear: function() {
+	    var clearAll = new Clear();
+	    clearAll.wipe();
 	    var clear = new Clear('new-space');
 	    clear.hide();
+	    clear.wipe();
 	  },
 	
 	  gatherInfo: function() {
@@ -1262,7 +1266,7 @@
 	      if( request.status === 201 ) {
 	        var companys = JSON.parse( request.responseText )
 	      }
-	      this.resetForm();
+	      this.show();
 	    }
 	    var data = {
 	      company: {
@@ -1375,7 +1379,12 @@
 	
 	    searchSpace.appendChild( generalButton );
 	
-	    document.addEventListener( 'keypress', this.removeListener );
+	    document.addEventListener( 'keypress', function added(e) {
+	      if( e.key === 'Enter' ) {
+	        document.removeEventListener( 'keypress', added );
+	        this.checkSearch();
+	      }
+	    }.bind( this ));
 	  },
 	
 	  clear: function() {
@@ -1468,16 +1477,7 @@
 	    if( general ) {
 	      this.generalSearch();
 	    }
-	  },
-	
-	  removeListener: function(e) {
-	    if( e.key === 'Enter' ) {
-	      // this.checkSearch();
-	      console.log( e )
-	      document.removeEventListener( 'keypress', this.removeListener );
-	    }
 	  }
-	
 	}
 	
 	module.exports = SearchView;

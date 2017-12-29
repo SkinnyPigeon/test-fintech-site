@@ -62,18 +62,22 @@ NewView.prototype = {
     submitButton.onclick = function() {
       this.gatherInfo();
     }.bind( this );
-    document.addEventListener( 'keypress', function(e) {
+    document.addEventListener( 'keypress', function added(e) {
       if( e.key === 'Enter' ) {
+        document.removeEventListener( 'keypress', added );
         this.gatherInfo();
       }
-    }.bind( this ))
+    }.bind( this ));
     this.div.appendChild( submitButton );
   },
 
 
   clear: function() {
+    var clearAll = new Clear();
+    clearAll.wipe();
     var clear = new Clear('new-space');
     clear.hide();
+    clear.wipe();
   },
 
   gatherInfo: function() {
@@ -114,7 +118,7 @@ NewView.prototype = {
       if( request.status === 201 ) {
         var companys = JSON.parse( request.responseText )
       }
-      this.resetForm();
+      this.show();
     }
     var data = {
       company: {
