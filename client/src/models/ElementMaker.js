@@ -56,7 +56,6 @@ ElementMaker.prototype = {
 
     if( extraText ) {
       whatToMake.innerText = extraText + ": " + text;
-      console.log( whatToMake.innerText );
     } else {
       whatToMake.innerText = text;
     }
@@ -126,7 +125,7 @@ ElementMaker.prototype = {
     whatToMake.innerText = text;
     whereToPut.appendChild( whatToMake );
   }
-};
+}
 
 module.exports = ElementMaker;
 

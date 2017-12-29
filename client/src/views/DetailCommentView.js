@@ -66,7 +66,6 @@ DetailCommentView.prototype = {
   edit: function( id ) {
     var clear = new Clear( 'edit-comment-space' );
     clear.hide();
-    console.log( id )
     var commentEdit = new ElementMaker();
     commentEdit.make( 'edit-comment-space', 'ul', 'editCommentDetails' );
     commentEdit.makeText( 'editCommentDetails', 'editCommentDetails', 'Edit Comment', 'h4' );
@@ -177,7 +176,6 @@ DetailCommentView.prototype = {
     }
     request.send( JSON.stringify( data ));
   } 
-
 }
 
 module.exports = DetailCommentView;

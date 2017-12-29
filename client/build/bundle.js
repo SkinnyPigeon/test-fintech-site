@@ -224,7 +224,6 @@
 	
 	    if( extraText ) {
 	      whatToMake.innerText = extraText + ": " + text;
-	      console.log( whatToMake.innerText );
 	    } else {
 	      whatToMake.innerText = text;
 	    }
@@ -294,7 +293,7 @@
 	    whatToMake.innerText = text;
 	    whereToPut.appendChild( whatToMake );
 	  }
-	};
+	}
 	
 	module.exports = ElementMaker;
 	
@@ -319,7 +318,6 @@
 	
 	  getElementValue: function( id ) {
 	    var elementToGet = document.getElementById( id );
-	    console.log( elementToGet );
 	    if( elementToGet ) {
 	      var value = elementToGet.value;
 	      if( elementToGet.type === 'checkbox' ) {
@@ -457,7 +455,6 @@
 	
 	  show: function() {
 	    this.clear();
-	    console.log( this.companies );
 	    var elementGetter = new ElementGetter();
 	
 	    for( var i = 0; i < this.companies.length; i++ ) {
@@ -532,7 +529,6 @@
 	DetailView.prototype = {
 	  show: function() {
 	    this.clear();
-	    console.log( this.company );
 	    var detailSpace = document.getElementById( 'detail-space' );
 	
 	    var basicMaker = new ElementMaker();
@@ -636,7 +632,6 @@
 	  edit: function( id ) {
 	    var clear = new Clear( 'edit-space' );
 	    clear.hide();
-	    console.log( this.company );
 	
 	    var basicMaker = new ElementMaker();
 	    basicMaker.make( 'edit-space', 'ul', 'companyBasicDetailsEdit' );
@@ -702,7 +697,6 @@
 	  },
 	
 	  gatherInfo: function( id ) {
-	    console.log( id );
 	    var elementGetter = new ElementGetter();
 	
 	    var name = elementGetter.getElementValue( 'name' );
@@ -796,12 +790,7 @@
 	
 	  comment: function( id ) {
 	    var comments = new CommentView( id );
-	  },
-	
-	  // returnCompany: function() {
-	  //   return this.company;
-	  // }
-	
+	  }
 	}
 	
 	module.exports = DetailView;
@@ -1031,7 +1020,6 @@
 	  edit: function( id ) {
 	    var clear = new Clear( 'edit-comment-space' );
 	    clear.hide();
-	    console.log( id )
 	    var commentEdit = new ElementMaker();
 	    commentEdit.make( 'edit-comment-space', 'ul', 'editCommentDetails' );
 	    commentEdit.makeText( 'editCommentDetails', 'editCommentDetails', 'Edit Comment', 'h4' );
@@ -1142,7 +1130,6 @@
 	    }
 	    request.send( JSON.stringify( data ));
 	  } 
-	
 	}
 	
 	module.exports = DetailCommentView;
@@ -1215,12 +1202,7 @@
 	    submitButton.onclick = function() {
 	      this.gatherInfo();
 	    }.bind( this );
-	    // document.addEventListener( 'keypress', function added(e) {
-	    //   if( e.key === 'Enter' ) {
-	    //     document.removeEventListener( 'keypress', added );
-	    //     this.gatherInfo();
-	    //   }
-	    // }.bind( this ));
+	
 	    this.div.appendChild( submitButton );
 	  },
 	
@@ -1317,6 +1299,7 @@
 	  this.companies = companies;
 	  this.resultIndexes = [];
 	  this.resultCompanies = [];
+	  
 	  this.show();
 	}
 	
@@ -1355,21 +1338,7 @@
 	      this.generalSearch();
 	    }.bind( this );
 	
-	
-	
-	
 	    searchSpace.appendChild( generalButton );
-	    // document.getElementById( 'generalButton' ).addEventListener( 'keypress', function(e) {
-	    //   console.log(e )
-	    // });
-	
-	    // general.addEventListener( 'keypress', function added(e) {
-	    //   console.log( e)
-	      // if( e.key === 'Enter' ) {
-	      //   general.getElementById( 'generalButton' ).removeEventListener( 'keypress', added );
-	      //   this.checkSearch();
-	      // }
-	    // });
 	  },
 	
 	  clear: function() {
@@ -18593,7 +18562,6 @@
 	
 	  show: function() {
 	    this.clear();
-	    console.log( this.companies );
 	    var elementGetter = new ElementGetter();
 	
 	    for( var i = 0; i < this.companies.length; i++ ) {
@@ -18622,7 +18590,6 @@
 	      }
 	    }
 	  }
-	
 	}
 	
 	module.exports = ResultsView;

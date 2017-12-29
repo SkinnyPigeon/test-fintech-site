@@ -14,7 +14,6 @@ var DetailView = function( company ) {
 DetailView.prototype = {
   show: function() {
     this.clear();
-    console.log( this.company );
     var detailSpace = document.getElementById( 'detail-space' );
 
     var basicMaker = new ElementMaker();
@@ -118,7 +117,6 @@ DetailView.prototype = {
   edit: function( id ) {
     var clear = new Clear( 'edit-space' );
     clear.hide();
-    console.log( this.company );
 
     var basicMaker = new ElementMaker();
     basicMaker.make( 'edit-space', 'ul', 'companyBasicDetailsEdit' );
@@ -184,7 +182,6 @@ DetailView.prototype = {
   },
 
   gatherInfo: function( id ) {
-    console.log( id );
     var elementGetter = new ElementGetter();
 
     var name = elementGetter.getElementValue( 'name' );
@@ -278,12 +275,7 @@ DetailView.prototype = {
 
   comment: function( id ) {
     var comments = new CommentView( id );
-  },
-
-  // returnCompany: function() {
-  //   return this.company;
-  // }
-
+  }
 }
 
 module.exports = DetailView;

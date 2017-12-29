@@ -13,7 +13,6 @@ ResultsView.prototype = {
 
   show: function() {
     this.clear();
-    console.log( this.companies );
     var elementGetter = new ElementGetter();
 
     for( var i = 0; i < this.companies.length; i++ ) {
@@ -42,7 +41,6 @@ ResultsView.prototype = {
       }
     }
   }
-
 }
 
 module.exports = ResultsView;

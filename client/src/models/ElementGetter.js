@@ -11,7 +11,6 @@ ElementGetter.prototype = {
 
   getElementValue: function( id ) {
     var elementToGet = document.getElementById( id );
-    console.log( elementToGet );
     if( elementToGet ) {
       var value = elementToGet.value;
       if( elementToGet.type === 'checkbox' ) {
