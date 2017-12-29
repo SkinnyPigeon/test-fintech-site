@@ -1215,12 +1215,12 @@
 	    submitButton.onclick = function() {
 	      this.gatherInfo();
 	    }.bind( this );
-	    document.addEventListener( 'keypress', function added(e) {
-	      if( e.key === 'Enter' ) {
-	        document.removeEventListener( 'keypress', added );
-	        this.gatherInfo();
-	      }
-	    }.bind( this ));
+	    // document.addEventListener( 'keypress', function added(e) {
+	    //   if( e.key === 'Enter' ) {
+	    //     document.removeEventListener( 'keypress', added );
+	    //     this.gatherInfo();
+	    //   }
+	    // }.bind( this ));
 	    this.div.appendChild( submitButton );
 	  },
 	
@@ -1356,16 +1356,20 @@
 	    }.bind( this );
 	
 	
+	
+	
 	    searchSpace.appendChild( generalButton );
-	    var general = document.getElementById( 'generalButton' );
-	    console.log( general )
-	    general.addEventListener( 'keypress', function added(e) {
-	      console.log( e)
+	    // document.getElementById( 'generalButton' ).addEventListener( 'keypress', function(e) {
+	    //   console.log(e )
+	    // });
+	
+	    // general.addEventListener( 'keypress', function added(e) {
+	    //   console.log( e)
 	      // if( e.key === 'Enter' ) {
 	      //   general.getElementById( 'generalButton' ).removeEventListener( 'keypress', added );
 	      //   this.checkSearch();
 	      // }
-	    });
+	    // });
 	  },
 	
 	  clear: function() {

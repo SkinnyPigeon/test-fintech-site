@@ -62,12 +62,12 @@ NewView.prototype = {
     submitButton.onclick = function() {
       this.gatherInfo();
     }.bind( this );
-    document.addEventListener( 'keypress', function added(e) {
-      if( e.key === 'Enter' ) {
-        document.removeEventListener( 'keypress', added );
-        this.gatherInfo();
-      }
-    }.bind( this ));
+    // document.addEventListener( 'keypress', function added(e) {
+    //   if( e.key === 'Enter' ) {
+    //     document.removeEventListener( 'keypress', added );
+    //     this.gatherInfo();
+    //   }
+    // }.bind( this ));
     this.div.appendChild( submitButton );
   },
 
