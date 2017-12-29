@@ -143,34 +143,7 @@ NewView.prototype = {
       }
     }
     request.send( JSON.stringify( data ));
-  },
-
-  resetForm: function() {
-    var elementGetter = new ElementGetter();
-
-    elementGetter.resetElement( 'name' );
-    elementGetter.resetElement( 'phone' );
-    elementGetter.resetElement( 'email' );
-    elementGetter.resetElement( 'contact' );
-
-    elementGetter.resetElement( 'addressLine1' );
-    elementGetter.resetElement( 'addressLine2' );
-    elementGetter.resetElement( 'addressCity' );
-    elementGetter.resetElement( 'addressRegion' );
-    elementGetter.resetElement( 'addressPostCode' );
-
-    elementGetter.resetElement( 'lastContact' );
-    elementGetter.resetElement( 'pastWork' );
-    elementGetter.resetElement( 'techUsed' );
-    elementGetter.resetElement( 'typeOfWork' );
-    elementGetter.resetElement( 'preferredWork' );
-
-    elementGetter.resetElement( 'haveWeMet' );
-    elementGetter.resetElement( 'haveWeSpoken' );
-    elementGetter.resetElement( 'areTheyInterested' );
-    elementGetter.resetElement( 'externalReference' );
   }
-
 }
 
 module.exports = NewView;
