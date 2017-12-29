@@ -49,6 +49,12 @@ SearchView.prototype = {
     }.bind( this );
 
     searchSpace.appendChild( generalButton );
+
+    document.addEventListener( 'keypress', function(e) {
+      if( e.key === 'Enter' ) {
+        this.checkSearch();
+      }
+    }.bind( this ))
   },
 
   clear: function() {
@@ -65,7 +71,7 @@ SearchView.prototype = {
     var city = elementGetter.getElementValue( 'city' );
     var tech = elementGetter.getElementValue( 'tech' );
 
-    var nameArray = name.toUpperCase().split(/[' ,-]+/);
+    var nameArray = name.toUpperCase().split(/[' ,-/]+/);
     for( var i = 0; i < this.companies.length; i++ ) {
       var nameToCheck = this.companies[i].name.toUpperCase().split(/[' ,-/]+/);
       var results = _.intersection( nameArray, nameToCheck );
@@ -74,7 +80,7 @@ SearchView.prototype = {
       }
     }
 
-    var cityArray = city.toUpperCase().split(/[' ,/]+/);
+    var cityArray = city.toUpperCase().split(/[' ,-/]+/);
     for( var i = 0; i < this.companies.length; i++ ) {
       var cityToCheck = this.companies[i].address_city.toUpperCase().split(/[' ,-/]+/);
       var results = _.intersection( cityArray, cityToCheck );
@@ -83,7 +89,7 @@ SearchView.prototype = {
       }
     }
 
-    var techArray = tech.toUpperCase().split(/[' ,]+/);
+    var techArray = tech.toUpperCase().split(/[' ,-/]+/);
     for( var i = 0; i < this.companies.length; i++ ) {
       var techToCheck = this.companies[i].tech_used.toUpperCase().split(/[' ,-/]+/);
       var results = _.intersection( techArray, techToCheck );
@@ -101,13 +107,15 @@ SearchView.prototype = {
   },
 
   generalSearch: function() {
+    this.resultCompanies = [];
+
     var elementGetter = new ElementGetter();
     var general = elementGetter.getElementValue( 'general' );
-    var generalArray = general.toUpperCase().split(/[' ,]+/);
+    var generalArray = general.toUpperCase().split(/[' ,-/]+/);
     for( i = 0; i < this.companies.length; i++ ) {
       for( value in this.companies[i] ) {
         var words = String( this.companies[i][value] );
-        var wordsToCheck = words.toUpperCase().split(/[' ,]+/);
+        var wordsToCheck = words.toUpperCase().split(/[' ,-/]+/);
         var results = _.intersection( generalArray, wordsToCheck );
         if( results.length > 0 ) {
           this.resultIndexes.push( i );
@@ -123,6 +131,22 @@ SearchView.prototype = {
 
   showResults: function() {
     var results = new ResultsView( this.resultCompanies );
+  },
+
+  checkSearch: function() {
+    var elementGetter = new ElementGetter();
+
+    var name = elementGetter.getElementValue( 'name' );
+    var city = elementGetter.getElementValue( 'city' );
+    var tech = elementGetter.getElementValue( 'tech' );
+    var general = elementGetter.getElementValue( 'general' );
+
+    if( name || city || tech ) {
+      this.targetSearch();
+    }
+    if( general ) {
+      this.generalSearch();
+    }
   }
 
 }
