@@ -1111,6 +1111,7 @@
 	  },
 	
 	  undo: function() {
+	    // Just realised this isn't implemented 
 	    var request = new XMLHttpRequest();
 	    request.open( 'POST', this.commentUrl);
 	    request.setRequestHeader("Content-Type", "application/json");
