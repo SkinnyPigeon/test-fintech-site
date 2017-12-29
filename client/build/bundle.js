@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var HomeView = __webpack_require__( 13 );
+	var HomeView = __webpack_require__( 1 );
 	
 	window.onload = function() {
 	  main();
@@ -60,52 +60,78 @@
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
+	var Clear = __webpack_require__( 4 );
 	
-	var NavView = __webpack_require__( 4 );
-	var DetailView = __webpack_require__( 5 );
-	var NewView = __webpack_require__( 6 );
-	var SearchView = __webpack_require__( 7 );
+	var NavView = __webpack_require__( 5 );
+	var MainView = __webpack_require__( 6 );
+	var DetailView = __webpack_require__( 7 );
+	var NewView = __webpack_require__( 10 );
+	var SearchView = __webpack_require__( 11 );
 	
-	var MainView = function( companies ) {
-	  this.companies = companies;
+	var HomeView = function() {
+	  this.div = document.getElementById( 'all-space' );
 	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
+	  this.companies = [];
 	
+	  this.displayNav();
 	  this.show();
+	  this.getCompanies();
 	}
 	
-	MainView.prototype = {
+	HomeView.prototype = {
+	
+	  displayNav: function() {
+	    var nav = new NavView();
+	    var elementGetter = new ElementGetter();
+	
+	    var homeButton = elementGetter.getElement( 'home' );
+	    homeButton.onclick = function() {
+	      this.clear();
+	      this.show();
+	    }.bind( this );
+	
+	    var plusButton = elementGetter.getElement( 'add' );
+	    plusButton.onclick = function() {
+	      this.clear();
+	      this.newView();
+	    }.bind( this );
+	
+	    var listButton = elementGetter.getElement( 'list' );
+	    listButton.onclick = function() {
+	      this.clear();
+	      this.getCompanies();
+	      this.companyView();
+	    }.bind( this );
+	
+	    var searchButton = elementGetter.getElement( 'search' );
+	    searchButton.onclick = function() {
+	      this.clear();
+	      this.searchView();
+	    }.bind( this );
+	  },
 	
 	  show: function() {
 	    this.clear();
-	    console.log( this.companies );
-	    var elementGetter = new ElementGetter();
+	    var homeSpace = document.getElementById( 'home-space' );
+	    var homeHeader = document.createElement( 'h3' );
+	    homeHeader.innerText = "Welcome to the Sopra Steria test FinTech DB"
+	    var homeText = document.createElement( 'p' );
+	    homeText.innerText = "Please feel free to test out the different features and please report any bugs or issues to me"
 	
-	    for( var i = 0; i < this.companies.length; i++ ) {
-	      var elementMaker = new ElementMaker( );
-	      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
-	      var company = elementGetter.getElement( this.companies[i].id );
-	      company.onclick = function( e ) {
-	        this.showDetails( e.target.parentNode.id );
-	      }.bind( this );
-	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
-	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
-	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
-	    }
+	    var thanks = document.createElement( 'p' );
+	    thanks.innerText = "Thanks - Euan";
+	
+	    homeSpace.appendChild( homeHeader );
+	    homeSpace.appendChild( homeText );
+	    homeSpace.appendChild( thanks );
 	  },
 	
 	  clear: function() {
-	    var clear = new Clear('all-space');
-	    clear.hide();
+	    var clearHome = new Clear();
+	    clearHome.wipe();
+	    var clear = new Clear('home-space');
 	    clear.wipe();
-	  },
-	
-	  showDetails: function( id ) {
-	    for( var i = 0; i < this.companies.length; i++ ) {
-	      if( this.companies[i].id === parseInt( id )) {
-	        var detailView = new DetailView( this.companies[i] );
-	      }
-	    }
+	    clear.hide();
 	  },
 	
 	  getCompanies: function() {
@@ -116,7 +142,6 @@
 	      if( request.status === 200 ) {
 	        var companies = JSON.parse( request.responseText );
 	        this.companies = companies;
-	        this.show();
 	      }
 	    }
 	    request.send( null );
@@ -128,10 +153,14 @@
 	
 	  searchView: function() {
 	    var searchView = new SearchView( this.companies );
+	  },
+	
+	  companyView: function() {
+	    var companyView = new MainView( this.companies );
 	  }
 	}
 	
-	module.exports = MainView;
+	module.exports = HomeView;
 
 /***/ },
 /* 2 */
@@ -313,6 +342,42 @@
 
 /***/ },
 /* 4 */
+/***/ function(module, exports) {
+
+	var Clear = function( toShow ) {
+	  this.toShow = toShow;
+	  this.spaces = [ "new-space", "all-space", "detail-space", "search-space", "edit-space","comment-space", "home-space", "edit-comment-space", "single-comment-space", "warn-space" ];
+	}
+	
+	Clear.prototype = {
+	  hide: function() {
+	
+	    for( var i = 0; i < this.spaces.length; i++ ) {
+	      var spaceToHide = document.getElementById( this.spaces[i] );
+	      spaceToHide.style.display = 'none'
+	    }
+	
+	    var spaceToShow = document.getElementById( this.toShow );
+	    spaceToShow.style.display = 'block';
+	
+	  },
+	
+	  wipe: function() {
+	    for( var i = 0; i < this.spaces.length; i++ ) {
+	      if( this.spaces[i] !== this.toShow ) {
+	        var spaceToWipe = document.getElementById( this.spaces[i] );
+	        while( spaceToWipe.hasChildNodes() ) {
+	          spaceToWipe.removeChild( spaceToWipe.lastChild ); 
+	        }
+	      }
+	    }
+	  }
+	}
+	
+	module.exports = Clear;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ElementMaker = __webpack_require__( 2 );
@@ -364,14 +429,93 @@
 	module.exports = NavView;
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
+	var Clear = __webpack_require__( 4 );
 	
-	var CommentView = __webpack_require__( 11 );
+	var NavView = __webpack_require__( 5 );
+	var DetailView = __webpack_require__( 7 );
+	var NewView = __webpack_require__( 10 );
+	var SearchView = __webpack_require__( 11 );
+	
+	var MainView = function( companies ) {
+	  this.companies = companies;
+	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
+	
+	  this.show();
+	}
+	
+	MainView.prototype = {
+	
+	  show: function() {
+	    this.clear();
+	    console.log( this.companies );
+	    var elementGetter = new ElementGetter();
+	
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var elementMaker = new ElementMaker( );
+	      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
+	      var company = elementGetter.getElement( this.companies[i].id );
+	      company.onclick = function( e ) {
+	        this.showDetails( e.target.parentNode.id );
+	      }.bind( this );
+	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
+	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
+	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
+	    }
+	  },
+	
+	  clear: function() {
+	    var clear = new Clear('all-space');
+	    clear.hide();
+	    clear.wipe();
+	  },
+	
+	  showDetails: function( id ) {
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      if( this.companies[i].id === parseInt( id )) {
+	        var detailView = new DetailView( this.companies[i] );
+	      }
+	    }
+	  },
+	
+	  getCompanies: function() {
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.companyUrl );
+	    request.setRequestHeader("Content-Type", "application/json")
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var companies = JSON.parse( request.responseText );
+	        this.companies = companies;
+	        this.show();
+	      }
+	    }
+	    request.send( null );
+	  },
+	
+	  newView: function() {
+	    var newView = new NewView();
+	  },
+	
+	  searchView: function() {
+	    var searchView = new SearchView( this.companies );
+	  }
+	}
+	
+	module.exports = MainView;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ElementMaker = __webpack_require__( 2 );
+	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 4 );
+	
+	var CommentView = __webpack_require__( 8 );
 	
 	var DetailView = function( company ) {
 	  this.company = company;
@@ -659,12 +803,352 @@
 
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
+	var Clear = __webpack_require__( 4 );
+	
+	var DetailCommentView = __webpack_require__( 9 );
+	
+	var CommentView = function( id ) {
+	  this.id = id;
+	  this.comments = [];
+	  this.commentUrl = "https://fintech-db-test.herokuapp.com/comments";
+	
+	  this.getComments(id);
+	}
+	
+	CommentView.prototype = {
+	  getComments: function(id) {
+	    this.comments = [];
+	
+	    var request = new XMLHttpRequest();
+	    request.open( 'GET', this.commentUrl );
+	    request.setRequestHeader("Content-Type", "application/json")
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var comments = JSON.parse( request.responseText );
+	        for( var i = 0; i < comments.length; i++ ) {
+	          if( comments[i].company_id === id ) {
+	            this.comments.push( comments[i] );
+	          }
+	        }
+	        this.show();
+	      }
+	    }
+	    request.send( null );
+	  },
+	
+	  show: function() {
+	    this.clear();
+	    var commentMaker = new ElementMaker();
+	    commentMaker.make( 'comment-space', 'ul', 'commentDetails' );
+	    commentMaker.makeText( 'commentDetails', 'commentDetails', 'Enter Comments', 'h4' );
+	
+	    commentMaker.makeListItem(  'commentDetails', 'author', 'Author...'  );
+	    commentMaker.makeListItem( 'commentDetails', 'text', 'Comment...' );
+	
+	    var elementGetter = new ElementGetter();
+	    var text = elementGetter.getElement( 'text' );
+	    text.type = 'textarea';
+	
+	    var commentSpace = document.getElementById( 'comment-space' );
+	
+	    var submitButton = document.createElement( 'img' );
+	    submitButton.id = 'submit';
+	    submitButton.src = '../css/images/tick.png';
+	    submitButton.onclick = function() {
+	      this.gatherInfo( this.id );
+	    }.bind( this )
+	
+	    commentSpace.appendChild( submitButton );
+	
+	    this.showComments();
+	  },
+	
+	  showComments: function() {
+	    var elementGetter = new ElementGetter();
+	    for( var i = 0; i < this.comments.length; i++ ) {
+	      if( this.comments[i].author !== "" ) {
+	        var elementMaker = new ElementMaker( );
+	        elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
+	        var comment = elementGetter.getElement( this.comments[i].id );
+	        comment.onclick = function( e ) {
+	          this.showComment( e.target.parentNode.id );
+	        }.bind( this );
+	        var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
+	        var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
+	        var br = document.createElement('br');
+	        var brSpace = document.getElementById( 'comment-space' );
+	        brSpace.appendChild( br );
+	      }
+	    }
+	  },
+	
+	  clear: function() {
+	    var clearAll = new Clear( 'warn-space' );
+	    clearAll.wipe();
+	    var clear = new Clear( 'comment-space' );
+	    clear.wipe();
+	    clear.hide();
+	  },
+	
+	  gatherInfo: function() {
+	    var elementGetter = new ElementGetter();
+	    var author = elementGetter.getElementValue( 'author' );
+	    var text = elementGetter.getElementValue( 'text' );
+	    if(( !author ) || ( !text )) {
+	      this.displayWarning( author, text );
+	      return;
+	    }
+	    this.addCommentToDB( author, text, this.id );
+	  },
+	
+	  addCommentToDB: function( author, text, id ) {
+	    var request = new XMLHttpRequest();
+	    request.open( 'POST', this.commentUrl);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = () => {
+	      if( request.status === 201 ) {
+	        var comments = JSON.parse( request.responseText )
+	        this.getComments( id );
+	      }
+	    }
+	    var data = {
+	      comment: {
+	        author: author, 
+	        text: text, 
+	        company_id: id
+	      }
+	    }
+	    request.send( JSON.stringify( data ));
+	  },
+	
+	  showComment: function( id ) {
+	    for( var i = 0; i < this.comments.length; i++ ) {
+	      if( this.comments[i].id === parseInt( id )) {
+	        var detailCommentView = new DetailCommentView( this.comments[i] );
+	      }
+	    }
+	  },
+	
+	  displayWarning: function( author, text ) {
+	    var warnSpace = document.getElementById( "warn-space" );
+	    warnSpace.id = "warn-space";
+	    warnSpace.innerText = "";
+	    if( !author ) {
+	      var authorWarning = document.createElement( "p" );
+	      authorWarning.innerText = "Please add an author";
+	      warnSpace.appendChild( authorWarning );
+	    }
+	    if( !text ) {
+	      var textWarning = document.createElement( "p" );
+	      textWarning.innerText = "Please add a comment";
+	      warnSpace.appendChild( textWarning );
+	    }
+	    this.show();
+	  }
+	}
+	
+	module.exports = CommentView;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ElementMaker = __webpack_require__( 2 );
+	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 4 );
+	
+	var DetailCommentView = function( comment ) {
+	  this.comment = comment;
+	  this.commentUrl = "https://fintech-db-test.herokuapp.com/comments";
+	
+	  this.show();
+	}
+	
+	DetailCommentView.prototype = {
+	
+	  show: function() {
+	    this.clearComment( 'single-comment-space' );
+	
+	    var commentMaker = new ElementMaker();
+	    commentMaker.make( 'single-comment-space', 'ul', 'singleCommentDetails' );
+	    commentMaker.makeText( 'singleCommentDetails', 'singleCommentDetails', 'Comment', 'h4' );
+	
+	    commentMaker.makeList( this.comment.author, 'singleCommentDetails', 'Author' );
+	    commentMaker.makeList( this.comment.text, 'singleCommentDetails', 'Comment');
+	
+	    var commentSpace = document.getElementById( 'single-comment-space' );
+	
+	    var backButton = document.createElement( 'img' );
+	    backButton.id = 'back';
+	    backButton.src = '../css/images/back.png';
+	    backButton.onclick = function() {
+	      this.back();
+	    }.bind( this );
+	
+	    var editButton = document.createElement( 'img' );
+	    editButton.id = 'edit';
+	    editButton.src = '../css/images/edit.png';
+	    editButton.onclick = function() {
+	      this.edit( this.comment.id );
+	    }.bind( this );
+	
+	    var deleteButton = document.createElement( 'img' );
+	    deleteButton.id = 'delete';
+	    deleteButton.src = '../css/images/delete.png';
+	    deleteButton.onclick = function() {
+	      this.delete( this.comment.id );
+	    }.bind( this );
+	
+	    commentSpace.appendChild( backButton );
+	    commentSpace.appendChild( editButton );
+	    commentSpace.appendChild( deleteButton );
+	  },
+	
+	  clearComment: function( space ) {
+	    var clearSpace = new Clear( 'comment-space' );
+	    clearSpace.wipe();
+	    clearSpace.hide();
+	    var clear = new Clear( space );
+	    clear.hide();
+	    // clear.wipe();
+	  },
+	
+	  back: function() {
+	    var clear = new Clear( 'comment-space' );
+	    clear.hide();
+	  },
+	
+	  edit: function( id ) {
+	    var clear = new Clear( 'edit-comment-space' );
+	    clear.hide();
+	    console.log( id )
+	    var commentEdit = new ElementMaker();
+	    commentEdit.make( 'edit-comment-space', 'ul', 'editCommentDetails' );
+	    commentEdit.makeText( 'editCommentDetails', 'editCommentDetails', 'Edit Comment', 'h4' );
+	
+	    commentEdit.edit( 'editCommentDetails', 'authorEdit', this.comment.author );
+	    commentEdit.edit( 'editCommentDetails', 'textEdit', this.comment.text );
+	
+	    var editSpace = document.getElementById( 'edit-comment-space' );
+	
+	    var submitButton = document.createElement( 'img' );
+	    submitButton.id = 'submit';
+	    submitButton.src = '../css/images/tick.png';
+	    submitButton.onclick = function() {
+	      this.gatherInfo( id );
+	    }.bind( this )
+	
+	    var cancelButton = document.createElement( 'img' );
+	    cancelButton.id = 'cancel';
+	    cancelButton.src = '../css/images/cancel.png';
+	    cancelButton.onclick = function() {
+	      this.clearComment( 'edit-comment-space' );
+	      this.show();
+	    }.bind( this );
+	
+	    editSpace.appendChild( submitButton );
+	    editSpace.appendChild( cancelButton );
+	
+	  },
+	
+	  gatherInfo: function( id ) {
+	    var elementGetter = new ElementGetter();
+	    var author = elementGetter.getElementValue( 'authorEdit' );
+	    var text = elementGetter.getElementValue( 'textEdit' );
+	    this.updateDB( id, author, text );
+	  },
+	
+	  updateDB: function( id, author, text ) {
+	    var request = new XMLHttpRequest();
+	    request.open( 'PUT', this.commentUrl + '/' + id );
+	    request.setRequestHeader( "Content-type", "application/json" );
+	    request.onload = () => {
+	      if( request.status === 200 ) {
+	        var comment = JSON.parse( request.responseText )
+	        this.comment = comment;
+	        this.clearComment( 'edit-comment-space' );
+	        this.show();
+	      }
+	    }
+	    var data = {
+	      comment: {
+	        author: author, 
+	        text: text, 
+	        id: id
+	      }
+	    }
+	    request.send( JSON.stringify( data ));
+	  },
+	
+	
+	  delete: function(id) {
+	    var request = new XMLHttpRequest();
+	    request.open( 'DELETE', this.commentUrl + '/' + id);
+	    request.setRequestHeader("Content-Type", "application/json");
+	    request.onload = () => {
+	      if( request.status === 204 ) {
+	        this.displayDeleted();
+	      }
+	    }
+	    request.send();
+	  },
+	
+	  displayDeleted: function() {
+	    this.clearComment();
+	
+	    var deleteSpace = document.getElementById( 'comment-space' );
+	    var deleteMessage = document.createElement( 'h3' );
+	    deleteMessage.id = 'deleteMessage';
+	    deleteMessage.innerText = 'Comment Deleted. Click below to undo';
+	
+	    var undo = document.createElement( 'img' );
+	    undo.id = 'undo';
+	    undo.src = '../css/images/undo.png';
+	    undo.onclick = function() {
+	      this.undo();
+	    }.bind( this );
+	
+	    deleteSpace.appendChild( deleteMessage );
+	    deleteSpace.appendChild( undo );
+	  },
+	
+	  undo: function() {
+	    var request = new XMLHttpRequest();
+	    request.open( 'POST', this.commentUrl);
+	    request.setRequestHeader("Content-Type", "application/json");
+	
+	    request.onload = () => {
+	      if( request.status === 201 ) {
+	        var comments = JSON.parse( request.responseText )
+	        this.show();
+	      }
+	    }
+	    var data = {
+	      comment: {
+	        author: this.comment.author, 
+	        text: this.comment.text, 
+	        company_id: this.comment.company_id
+	      }
+	    }
+	    request.send( JSON.stringify( data ));
+	  } 
+	
+	}
+	
+	module.exports = DetailCommentView;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ElementMaker = __webpack_require__( 2 );
+	var ElementGetter = __webpack_require__( 3 );
+	var Clear = __webpack_require__( 4 );
 	
 	var NewView = function() {
 	  this.div = document.getElementById( 'new-space' );
@@ -836,16 +1320,16 @@
 	module.exports = NewView;
 
 /***/ },
-/* 7 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ElementMaker = __webpack_require__( 2 );
 	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
+	var Clear = __webpack_require__( 4 );
 	
-	var _ = __webpack_require__( 9 );
+	var _ = __webpack_require__( 12 );
 	
-	var ResultsView = __webpack_require__( 8 );
+	var ResultsView = __webpack_require__( 14 );
 	
 	var SearchView = function( companies ) {
 	  this.companies = companies;
@@ -891,11 +1375,7 @@
 	
 	    searchSpace.appendChild( generalButton );
 	
-	    document.addEventListener( 'keypress', function(e) {
-	      if( e.key === 'Enter' ) {
-	        this.checkSearch();
-	      }
-	    }.bind( this ))
+	    document.addEventListener( 'keypress', this.removeListener );
 	  },
 	
 	  clear: function() {
@@ -988,6 +1468,14 @@
 	    if( general ) {
 	      this.generalSearch();
 	    }
+	  },
+	
+	  removeListener: function(e) {
+	    if( e.key === 'Enter' ) {
+	      // this.checkSearch();
+	      console.log( e )
+	      document.removeEventListener( 'keypress', this.removeListener );
+	    }
 	  }
 	
 	}
@@ -995,60 +1483,7 @@
 	module.exports = SearchView;
 
 /***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ElementGetter = __webpack_require__( 3 );
-	var ElementMaker = __webpack_require__( 2 );
-	var Clear = __webpack_require__( 14 );
-	
-	var DetailView = __webpack_require__( 5 );
-	
-	var ResultsView = function( companies ) {
-	  this.companies = companies;
-	  this.show();
-	}
-	
-	ResultsView.prototype = {
-	
-	  show: function() {
-	    this.clear();
-	    console.log( this.companies );
-	    var elementGetter = new ElementGetter();
-	
-	    for( var i = 0; i < this.companies.length; i++ ) {
-	      var elementMaker = new ElementMaker( );
-	      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
-	      var company = elementGetter.getElement( this.companies[i].id );
-	      company.onclick = function( e ) {
-	        this.showDetails( e.target.parentNode.id );
-	      }.bind( this );
-	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
-	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
-	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
-	    }
-	  },
-	  
-	  clear: function() {
-	    var clear = new Clear( 'all-space' );
-	    clear.wipe();
-	    clear.hide();
-	  },
-	
-	  showDetails: function( id ) {
-	    for( var i = 0; i < this.companies.length; i++ ) {
-	      if( this.companies[i].id === parseInt( id )) {
-	        var detailView = new DetailView( this.companies[i] );
-	      }
-	    }
-	  }
-	
-	}
-	
-	module.exports = ResultsView;
-
-/***/ },
-/* 9 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -18136,10 +18571,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(10)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(13)(module)))
 
 /***/ },
-/* 10 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -18155,488 +18590,57 @@
 
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ElementMaker = __webpack_require__( 2 );
-	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
-	
-	var DetailCommentView = __webpack_require__( 12 );
-	
-	var CommentView = function( id ) {
-	  this.id = id;
-	  this.comments = [];
-	  this.commentUrl = "https://fintech-db-test.herokuapp.com/comments";
-	
-	  this.getComments(id);
-	}
-	
-	CommentView.prototype = {
-	  getComments: function(id) {
-	    this.comments = [];
-	
-	    var request = new XMLHttpRequest();
-	    request.open( 'GET', this.commentUrl );
-	    request.setRequestHeader("Content-Type", "application/json")
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var comments = JSON.parse( request.responseText );
-	        for( var i = 0; i < comments.length; i++ ) {
-	          if( comments[i].company_id === id ) {
-	            this.comments.push( comments[i] );
-	          }
-	        }
-	        this.show();
-	      }
-	    }
-	    request.send( null );
-	  },
-	
-	  show: function() {
-	    this.clear();
-	    var commentMaker = new ElementMaker();
-	    commentMaker.make( 'comment-space', 'ul', 'commentDetails' );
-	    commentMaker.makeText( 'commentDetails', 'commentDetails', 'Enter Comments', 'h4' );
-	
-	    commentMaker.makeListItem(  'commentDetails', 'author', 'Author...'  );
-	    commentMaker.makeListItem( 'commentDetails', 'text', 'Comment...' );
-	
-	    var elementGetter = new ElementGetter();
-	    var text = elementGetter.getElement( 'text' );
-	    text.type = 'textarea';
-	
-	    var commentSpace = document.getElementById( 'comment-space' );
-	
-	    var submitButton = document.createElement( 'img' );
-	    submitButton.id = 'submit';
-	    submitButton.src = '../css/images/tick.png';
-	    submitButton.onclick = function() {
-	      this.gatherInfo( this.id );
-	    }.bind( this )
-	
-	    commentSpace.appendChild( submitButton );
-	
-	    this.showComments();
-	  },
-	
-	  showComments: function() {
-	    var elementGetter = new ElementGetter();
-	    for( var i = 0; i < this.comments.length; i++ ) {
-	      if( this.comments[i].author !== "" ) {
-	        var elementMaker = new ElementMaker( );
-	        elementMaker.make( 'comment-space', 'ul', this.comments[i].id );
-	        var comment = elementGetter.getElement( this.comments[i].id );
-	        comment.onclick = function( e ) {
-	          this.showComment( e.target.parentNode.id );
-	        }.bind( this );
-	        var commentAuthor = elementMaker.makeHeavyList( this.comments[i].author, this.comments[i].id );
-	        var commentText = elementMaker.makeList( this.comments[i].text, this.comments[i].id );
-	        var br = document.createElement('br');
-	        var brSpace = document.getElementById( 'comment-space' );
-	        brSpace.appendChild( br );
-	      }
-	    }
-	  },
-	
-	  clear: function() {
-	    var clearAll = new Clear( 'warn-space' );
-	    clearAll.wipe();
-	    var clear = new Clear( 'comment-space' );
-	    clear.wipe();
-	    clear.hide();
-	  },
-	
-	  gatherInfo: function() {
-	    var elementGetter = new ElementGetter();
-	    var author = elementGetter.getElementValue( 'author' );
-	    var text = elementGetter.getElementValue( 'text' );
-	    if(( !author ) || ( !text )) {
-	      this.displayWarning( author, text );
-	      return;
-	    }
-	    this.addCommentToDB( author, text, this.id );
-	  },
-	
-	  addCommentToDB: function( author, text, id ) {
-	    var request = new XMLHttpRequest();
-	    request.open( 'POST', this.commentUrl);
-	    request.setRequestHeader("Content-Type", "application/json");
-	    request.onload = () => {
-	      if( request.status === 201 ) {
-	        var comments = JSON.parse( request.responseText )
-	        this.getComments( id );
-	      }
-	    }
-	    var data = {
-	      comment: {
-	        author: author, 
-	        text: text, 
-	        company_id: id
-	      }
-	    }
-	    request.send( JSON.stringify( data ));
-	  },
-	
-	  showComment: function( id ) {
-	    for( var i = 0; i < this.comments.length; i++ ) {
-	      if( this.comments[i].id === parseInt( id )) {
-	        var detailCommentView = new DetailCommentView( this.comments[i] );
-	      }
-	    }
-	  },
-	
-	  displayWarning: function( author, text ) {
-	    var warnSpace = document.getElementById( "warn-space" );
-	    warnSpace.id = "warn-space";
-	    warnSpace.innerText = "";
-	    if( !author ) {
-	      var authorWarning = document.createElement( "p" );
-	      authorWarning.innerText = "Please add an author";
-	      warnSpace.appendChild( authorWarning );
-	    }
-	    if( !text ) {
-	      var textWarning = document.createElement( "p" );
-	      textWarning.innerText = "Please add a comment";
-	      warnSpace.appendChild( textWarning );
-	    }
-	    this.show();
-	  }
-	}
-	
-	module.exports = CommentView;
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ElementMaker = __webpack_require__( 2 );
-	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
-	
-	var DetailCommentView = function( comment ) {
-	  this.comment = comment;
-	  this.commentUrl = "https://fintech-db-test.herokuapp.com/comments";
-	
-	  this.show();
-	}
-	
-	DetailCommentView.prototype = {
-	
-	  show: function() {
-	    this.clearComment( 'single-comment-space' );
-	
-	    var commentMaker = new ElementMaker();
-	    commentMaker.make( 'single-comment-space', 'ul', 'singleCommentDetails' );
-	    commentMaker.makeText( 'singleCommentDetails', 'singleCommentDetails', 'Comment', 'h4' );
-	
-	    commentMaker.makeList( this.comment.author, 'singleCommentDetails', 'Author' );
-	    commentMaker.makeList( this.comment.text, 'singleCommentDetails', 'Comment');
-	
-	    var commentSpace = document.getElementById( 'single-comment-space' );
-	
-	    var backButton = document.createElement( 'img' );
-	    backButton.id = 'back';
-	    backButton.src = '../css/images/back.png';
-	    backButton.onclick = function() {
-	      this.back();
-	    }.bind( this );
-	
-	    var editButton = document.createElement( 'img' );
-	    editButton.id = 'edit';
-	    editButton.src = '../css/images/edit.png';
-	    editButton.onclick = function() {
-	      this.edit( this.comment.id );
-	    }.bind( this );
-	
-	    var deleteButton = document.createElement( 'img' );
-	    deleteButton.id = 'delete';
-	    deleteButton.src = '../css/images/delete.png';
-	    deleteButton.onclick = function() {
-	      this.delete( this.comment.id );
-	    }.bind( this );
-	
-	    commentSpace.appendChild( backButton );
-	    commentSpace.appendChild( editButton );
-	    commentSpace.appendChild( deleteButton );
-	  },
-	
-	  clearComment: function( space ) {
-	    var clearSpace = new Clear( 'comment-space' );
-	    clearSpace.wipe();
-	    clearSpace.hide();
-	    var clear = new Clear( space );
-	    clear.hide();
-	    // clear.wipe();
-	  },
-	
-	  back: function() {
-	    var clear = new Clear( 'comment-space' );
-	    clear.hide();
-	  },
-	
-	  edit: function( id ) {
-	    var clear = new Clear( 'edit-comment-space' );
-	    clear.hide();
-	    console.log( id )
-	    var commentEdit = new ElementMaker();
-	    commentEdit.make( 'edit-comment-space', 'ul', 'editCommentDetails' );
-	    commentEdit.makeText( 'editCommentDetails', 'editCommentDetails', 'Edit Comment', 'h4' );
-	
-	    commentEdit.edit( 'editCommentDetails', 'authorEdit', this.comment.author );
-	    commentEdit.edit( 'editCommentDetails', 'textEdit', this.comment.text );
-	
-	    var editSpace = document.getElementById( 'edit-comment-space' );
-	
-	    var submitButton = document.createElement( 'img' );
-	    submitButton.id = 'submit';
-	    submitButton.src = '../css/images/tick.png';
-	    submitButton.onclick = function() {
-	      this.gatherInfo( id );
-	    }.bind( this )
-	
-	    var cancelButton = document.createElement( 'img' );
-	    cancelButton.id = 'cancel';
-	    cancelButton.src = '../css/images/cancel.png';
-	    cancelButton.onclick = function() {
-	      this.clearComment( 'edit-comment-space' );
-	      this.show();
-	    }.bind( this );
-	
-	    editSpace.appendChild( submitButton );
-	    editSpace.appendChild( cancelButton );
-	
-	  },
-	
-	  gatherInfo: function( id ) {
-	    var elementGetter = new ElementGetter();
-	    var author = elementGetter.getElementValue( 'authorEdit' );
-	    var text = elementGetter.getElementValue( 'textEdit' );
-	    this.updateDB( id, author, text );
-	  },
-	
-	  updateDB: function( id, author, text ) {
-	    var request = new XMLHttpRequest();
-	    request.open( 'PUT', this.commentUrl + '/' + id );
-	    request.setRequestHeader( "Content-type", "application/json" );
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var comment = JSON.parse( request.responseText )
-	        this.comment = comment;
-	        this.clearComment( 'edit-comment-space' );
-	        this.show();
-	      }
-	    }
-	    var data = {
-	      comment: {
-	        author: author, 
-	        text: text, 
-	        id: id
-	      }
-	    }
-	    request.send( JSON.stringify( data ));
-	  },
-	
-	
-	  delete: function(id) {
-	    var request = new XMLHttpRequest();
-	    request.open( 'DELETE', this.commentUrl + '/' + id);
-	    request.setRequestHeader("Content-Type", "application/json");
-	    request.onload = () => {
-	      if( request.status === 204 ) {
-	        this.displayDeleted();
-	      }
-	    }
-	    request.send();
-	  },
-	
-	  displayDeleted: function() {
-	    this.clearComment();
-	
-	    var deleteSpace = document.getElementById( 'comment-space' );
-	    var deleteMessage = document.createElement( 'h3' );
-	    deleteMessage.id = 'deleteMessage';
-	    deleteMessage.innerText = 'Comment Deleted. Click below to undo';
-	
-	    var undo = document.createElement( 'img' );
-	    undo.id = 'undo';
-	    undo.src = '../css/images/undo.png';
-	    undo.onclick = function() {
-	      this.undo();
-	    }.bind( this );
-	
-	    deleteSpace.appendChild( deleteMessage );
-	    deleteSpace.appendChild( undo );
-	  },
-	
-	  undo: function() {
-	    var request = new XMLHttpRequest();
-	    request.open( 'POST', this.commentUrl);
-	    request.setRequestHeader("Content-Type", "application/json");
-	
-	    request.onload = () => {
-	      if( request.status === 201 ) {
-	        var comments = JSON.parse( request.responseText )
-	        this.show();
-	      }
-	    }
-	    var data = {
-	      comment: {
-	        author: this.comment.author, 
-	        text: this.comment.text, 
-	        company_id: this.comment.company_id
-	      }
-	    }
-	    request.send( JSON.stringify( data ));
-	  } 
-	
-	}
-	
-	module.exports = DetailCommentView;
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ElementMaker = __webpack_require__( 2 );
-	var ElementGetter = __webpack_require__( 3 );
-	var Clear = __webpack_require__( 14 );
-	
-	var NavView = __webpack_require__( 4 );
-	var MainView = __webpack_require__( 1 );
-	var DetailView = __webpack_require__( 5 );
-	var NewView = __webpack_require__( 6 );
-	var SearchView = __webpack_require__( 7 );
-	
-	var HomeView = function() {
-	  this.div = document.getElementById( 'all-space' );
-	  this.companyUrl = "https://fintech-db-test.herokuapp.com/companys";
-	  this.companies = [];
-	
-	  this.displayNav();
-	  this.show();
-	  this.getCompanies();
-	}
-	
-	HomeView.prototype = {
-	
-	  displayNav: function() {
-	    var nav = new NavView();
-	    var elementGetter = new ElementGetter();
-	
-	    var homeButton = elementGetter.getElement( 'home' );
-	    homeButton.onclick = function() {
-	      this.clear();
-	      this.show();
-	    }.bind( this );
-	
-	    var plusButton = elementGetter.getElement( 'add' );
-	    plusButton.onclick = function() {
-	      this.clear();
-	      this.newView();
-	    }.bind( this );
-	
-	    var listButton = elementGetter.getElement( 'list' );
-	    listButton.onclick = function() {
-	      this.clear();
-	      this.getCompanies();
-	      this.companyView();
-	    }.bind( this );
-	
-	    var searchButton = elementGetter.getElement( 'search' );
-	    searchButton.onclick = function() {
-	      this.clear();
-	      this.searchView();
-	    }.bind( this );
-	  },
-	
-	  show: function() {
-	    this.clear();
-	    var homeSpace = document.getElementById( 'home-space' );
-	    var homeHeader = document.createElement( 'h3' );
-	    homeHeader.innerText = "Welcome to the Sopra Steria test FinTech DB"
-	    var homeText = document.createElement( 'p' );
-	    homeText.innerText = "Please feel free to test out the different features and please report any bugs or issues to me"
-	
-	    var thanks = document.createElement( 'p' );
-	    thanks.innerText = "Thanks - Euan";
-	
-	    homeSpace.appendChild( homeHeader );
-	    homeSpace.appendChild( homeText );
-	    homeSpace.appendChild( thanks );
-	  },
-	
-	  clear: function() {
-	    var clearHome = new Clear();
-	    clearHome.wipe();
-	    var clear = new Clear('home-space');
-	    clear.wipe();
-	    clear.hide();
-	  },
-	
-	  getCompanies: function() {
-	    var request = new XMLHttpRequest();
-	    request.open( 'GET', this.companyUrl );
-	    request.setRequestHeader("Content-Type", "application/json")
-	    request.onload = () => {
-	      if( request.status === 200 ) {
-	        var companies = JSON.parse( request.responseText );
-	        this.companies = companies;
-	      }
-	    }
-	    request.send( null );
-	  },
-	
-	  newView: function() {
-	    var newView = new NewView();
-	  },
-	
-	  searchView: function() {
-	    var searchView = new SearchView( this.companies );
-	  },
-	
-	  companyView: function() {
-	    var companyView = new MainView( this.companies );
-	  }
-	}
-	
-	module.exports = HomeView;
-
-/***/ },
 /* 14 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var Clear = function( toShow ) {
-	  this.toShow = toShow;
-	  this.spaces = [ "new-space", "all-space", "detail-space", "search-space", "edit-space","comment-space", "home-space", "edit-comment-space", "single-comment-space", "warn-space" ];
+	var ElementGetter = __webpack_require__( 3 );
+	var ElementMaker = __webpack_require__( 2 );
+	var Clear = __webpack_require__( 4 );
+	
+	var DetailView = __webpack_require__( 7 );
+	
+	var ResultsView = function( companies ) {
+	  this.companies = companies;
+	  this.show();
 	}
 	
-	Clear.prototype = {
-	  hide: function() {
+	ResultsView.prototype = {
 	
-	    for( var i = 0; i < this.spaces.length; i++ ) {
-	      var spaceToHide = document.getElementById( this.spaces[i] );
-	      spaceToHide.style.display = 'none'
+	  show: function() {
+	    this.clear();
+	    console.log( this.companies );
+	    var elementGetter = new ElementGetter();
+	
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      var elementMaker = new ElementMaker( );
+	      elementMaker.make( 'all-space', 'ul', this.companies[i].id );
+	      var company = elementGetter.getElement( this.companies[i].id );
+	      company.onclick = function( e ) {
+	        this.showDetails( e.target.parentNode.id );
+	      }.bind( this );
+	      var companyName = elementMaker.makeList( this.companies[i].name, this.companies[i].id );
+	      var companyPhone = elementMaker.makeList( this.companies[i].phone, this.companies[i].id );
+	      var companyEmail = elementMaker.makeList( this.companies[i].email, this.companies[i].id );
 	    }
-	
-	    var spaceToShow = document.getElementById( this.toShow );
-	    spaceToShow.style.display = 'block';
-	
+	  },
+	  
+	  clear: function() {
+	    var clear = new Clear( 'all-space' );
+	    clear.wipe();
+	    clear.hide();
 	  },
 	
-	  wipe: function() {
-	    for( var i = 0; i < this.spaces.length; i++ ) {
-	      if( this.spaces[i] !== this.toShow ) {
-	        var spaceToWipe = document.getElementById( this.spaces[i] );
-	        while( spaceToWipe.hasChildNodes() ) {
-	          spaceToWipe.removeChild( spaceToWipe.lastChild ); 
-	        }
+	  showDetails: function( id ) {
+	    for( var i = 0; i < this.companies.length; i++ ) {
+	      if( this.companies[i].id === parseInt( id )) {
+	        var detailView = new DetailView( this.companies[i] );
 	      }
 	    }
 	  }
+	
 	}
 	
-	module.exports = Clear;
+	module.exports = ResultsView;
 
 /***/ }
 /******/ ]);

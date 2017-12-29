@@ -50,11 +50,7 @@ SearchView.prototype = {
 
     searchSpace.appendChild( generalButton );
 
-    document.addEventListener( 'keypress', function(e) {
-      if( e.key === 'Enter' ) {
-        this.checkSearch();
-      }
-    }.bind( this ))
+    document.addEventListener( 'keypress', this.removeListener );
   },
 
   clear: function() {
@@ -146,6 +142,14 @@ SearchView.prototype = {
     }
     if( general ) {
       this.generalSearch();
+    }
+  },
+
+  removeListener: function(e) {
+    if( e.key === 'Enter' ) {
+      // this.checkSearch();
+      console.log( e )
+      document.removeEventListener( 'keypress', this.removeListener );
     }
   }
 
