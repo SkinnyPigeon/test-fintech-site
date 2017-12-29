@@ -11,11 +11,16 @@ ElementGetter.prototype = {
 
   getElementValue: function( id ) {
     var elementToGet = document.getElementById( id );
-    var value = elementToGet.value;
-    if( elementToGet.type === 'checkbox' ) {
-      value = elementToGet.checked
+    console.log( elementToGet );
+    if( elementToGet ) {
+      var value = elementToGet.value;
+      if( elementToGet.type === 'checkbox' ) {
+        value = elementToGet.checked
+      }
+      return value;
+    } else {
+      return null;
     }
-    return value;
   },
 
   resetElement: function( id ) {

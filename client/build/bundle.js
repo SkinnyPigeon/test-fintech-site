@@ -319,11 +319,16 @@
 	
 	  getElementValue: function( id ) {
 	    var elementToGet = document.getElementById( id );
-	    var value = elementToGet.value;
-	    if( elementToGet.type === 'checkbox' ) {
-	      value = elementToGet.checked
+	    console.log( elementToGet );
+	    if( elementToGet ) {
+	      var value = elementToGet.value;
+	      if( elementToGet.type === 'checkbox' ) {
+	        value = elementToGet.checked
+	      }
+	      return value;
+	    } else {
+	      return null;
 	    }
-	    return value;
 	  },
 	
 	  resetElement: function( id ) {
@@ -1350,14 +1355,17 @@
 	      this.generalSearch();
 	    }.bind( this );
 	
-	    searchSpace.appendChild( generalButton );
 	
-	    document.addEventListener( 'keypress', function added(e) {
-	      if( e.key === 'Enter' ) {
-	        document.removeEventListener( 'keypress', added );
-	        this.checkSearch();
-	      }
-	    }.bind( this ));
+	    searchSpace.appendChild( generalButton );
+	    var general = document.getElementById( 'generalButton' );
+	    console.log( general )
+	    general.addEventListener( 'keypress', function added(e) {
+	      console.log( e)
+	      // if( e.key === 'Enter' ) {
+	      //   general.getElementById( 'generalButton' ).removeEventListener( 'keypress', added );
+	      //   this.checkSearch();
+	      // }
+	    });
 	  },
 	
 	  clear: function() {
