@@ -724,8 +724,13 @@
 	    submitButton.id = 'submit';
 	    submitButton.src = '../css/images/tick.png';
 	    submitButton.onclick = function() {
-	      this.gatherInfo( id );
-	    }.bind( this )
+	      this.gatherInfo();
+	    }.bind( this );
+	    document.addEventListener( 'keypress', function(e) {
+	      if( e.key === 'Enter' ) {
+	        this.gatherInfo();
+	      }
+	    }.bind( this ))
 	    this.div.appendChild( submitButton );
 	  },
 	

@@ -1,6 +1,6 @@
 To do:
 
-__*Models*__
+**Models**
 
 **Element Maker**
   - It's a bit messy. Nice idea however needs more work
@@ -33,6 +33,7 @@ __*Views*__
 
 **Delete**
   - I should put an undo on the DetailView like the one for the comments 
+  - Need to fix the undo of the comments one :(
 
 **Error handling**
   - Need someway of displaying warnings and messages
